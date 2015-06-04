@@ -1,0 +1,9 @@
+Package: epanetReader
+Type: Package
+Title: Read Epanet files into R
+Version: 0.1.4
+Date: 2015-06-04
+Author: Bradley J. Eck
+Maintainer: Bradley Eck <bradley.eck@ie.ibm.com>
+Description: Read text files in Epanet's .inp and .rpt formats into R
+License: MIT + file LICENSE 
