@@ -110,10 +110,10 @@ Net1.rpt by running Epanet from the command line. Note that the report section
 of the .inp file should contain the following lines in order to generate output
 readable by this package.   
 
->[REPORT]
->Page 0
->Links All
->Nodes All 
+>[REPORT]   
+>Page 0  
+>Links All   
+>Nodes All    
 
 On windows, calling the epanet executable epanet2d runs the simulation. 
 ```
