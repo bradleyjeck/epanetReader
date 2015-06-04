@@ -59,8 +59,7 @@ A basic network plot is also available
 ```R
 >plot(n1)
 ```
-![Net 1 plot](https://github.com/bradleyjeck/epanetReader/img/Net1inp.png) 
-
+![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1inp.png)
 
 The read.inp function returns an object with structure similar to the .inp file
 itself. A section in the .inp file corresponds to a named entry in the list.
