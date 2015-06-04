@@ -172,7 +172,7 @@ object created from the .inp file is a required argument to make the plot.
 ```R
 plot( n1r, n1)
 ```
-![Net 1 plot](https://github.com/bradleyjeck/epanetReader/img/Net1rpt.png) 
+![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
 
 In contrast to the treatment of .inp files described above, data from .rpt
 files is stored using a slightly different structure than the .rpt file.  The
