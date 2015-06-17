@@ -21,8 +21,8 @@ So far the package is only available on GitHub. The plan is to eventually submit
 
 ### GitHub
 
-> install.packages("devtools")
-> devtools::install_github("bradleyjeck/epanetReader")
+> install.packages("devtools")   
+> devtools::install_github("bradleyjeck/epanetReader")   
 
 ## Getting Started 
 

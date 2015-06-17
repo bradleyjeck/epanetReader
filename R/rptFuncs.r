@@ -75,12 +75,28 @@
   imax <- length(sect)
   
   #figure out what is reported
-  measvars <- unlist(strsplit( gsub( "^\\s+", "", sect[3] ), "\\s+"))
+#  measvars <- unlist(strsplit( gsub( "^\\s+", "", sect[3] ), "\\s+"))
+#  idvarAndUnits <- unlist(strsplit( gsub("^\\s+", "", sect[4]) , "\\s+"))
+#  columnNames <- c( idvarAndUnits[1], measvars, "note" ) 
 
-  idvarAndUnits <- unlist(strsplit( gsub("^\\s+", "", sect[4]) , "\\s+"))
-  
-  columnNames <- c( idvarAndUnits[1], measvars, "note" ) 
-  
+   # Take column headings from labels. Sometimes first column is labeled
+   # in two rows, sometimes in 1.  See tests. 
+   headerRow1 <- unlist(strsplit( gsub("^\\s+", "", sect[3] ), "\\s+"))
+   lh1 <- length( headerRow1 )
+   headerRow2 <- unlist(strsplit( gsub("^\\s+", "", sect[4] ), "\\s+"))
+   lh2 <- length( headerRow2) 
+
+
+   if( lh1 ==  lh2 ){
+     columnNames <- c( headerRow1, "note" ) 
+   } else if( lh2 == ( lh1 + 1 ) ) {
+     columnNames <- c( headerRow2[1], headerRow1, "note" )
+   } else {
+     warning("unexpected header format in rpt file, check results")
+     columnNames <- c( headerRow2[1], headerRow1, "note" )
+   }
+
+ 
   # make the section a data frame 
   df <- read.table( text = sect[6:imax], col.names=columnNames,
                     strip.white = TRUE, fill = TRUE,

@@ -30,3 +30,54 @@ test_that("testing binBreaker",{
 		 expect_true ( class(binBreaker(vals2, 3)) == "list", "function returns even with NA inpus ") 
 		  
 		})
+
+
+test_that("two line heading for ID works",{
+          
+          #some sample input
+aFewLines <- c(          
+"Node Results at 0:00 Hrs: ",
+"  ---------------------------------------------------------------------- ",
+"  Node                Demand      Head  Pressure   Quality               ",
+"  ID                     GPM        ft       psi      mg/L               ",
+"  ---------------------------------------------------------------------- ",
+"  10                    0.00   1004.35    127.54      0.50               ",
+"  11                  150.00    985.23    119.26      0.50               ",
+"  12                  150.00    970.07    117.02      0.50               ",
+"  13                  100.00    968.87    118.67      0.50               ",
+"  21                  150.00    971.55    117.66      0.50               ",
+"  22                  200.00    969.08    118.76      0.50               " )
+
+df <- .section2df(aFewLines)
+
+expect_equal( names(df)[1], expected = "Node") 
+expect_equal( names(df)[5], expected = "Quality") 
+
+        })
+
+
+test_that("one line heading for ID works",{
+
+          #some sample input
+aFewLines <- c(          
+"Node Results at 0:00:00 hrs:  ",
+"  -------------------------------------------------------- ",
+"                     Demand      Head  Pressure  Chlorine  ",
+"  Node                  gpm        ft       psi      mg/L  ",
+"  -------------------------------------------------------- ",
+"  10                    0.00   1004.35    127.54      0.50               ",
+"  11                  150.00    985.23    119.26      0.50               ",
+"  12                  150.00    970.07    117.02      0.50               ",
+"  13                  100.00    968.87    118.67      0.50               ",
+"  21                  150.00    971.55    117.66      0.50               ",
+"  22                  200.00    969.08    118.76      0.50               " )
+
+df <- .section2df(aFewLines)
+
+expect_equal( names(df)[1], expected = "Node") 
+expect_equal( names(df)[5], expected = "Chlorine") 
+
+        })
+
+
+
