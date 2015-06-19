@@ -17,7 +17,7 @@ source("../R/expandedLinkTable-s3.r")
 context("expandedlinkTable s3 object")
 test_that("expanedLinkTable works for Net1",
 		{
-			Net1 <- read.inp( "Net1.inp")
+			Net1 <- suppressWarnings(read.inp( "Net1.inp"))
 			
 			# pipes 
 			ept <- expandedLinkTable( Net1$Pipes, Net1$Coordinates)
@@ -33,5 +33,3 @@ test_that("expanedLinkTable works for Net1",
 			
 		}
 )
-
-test_that("plot handles NA function",{})

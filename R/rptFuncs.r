@@ -146,3 +146,48 @@ binBreaker <- function( x, nbin){
 	return( list( Breaks = brkpts4cut, Labels = labs4legend))
 		
 } 
+
+
+
+checkRptFile <- function( allLines ){
+  # check rpt file format 
+   
+   # look for new page character in the file 
+   hasPageBreaks <-  as.logical(   max( grepl("\f", allLines) ) )
+
+   if( hasPageBreaks ) {
+      msg <- paste( " Page breaks not allowed in rpt file.\n",
+                    "Put the line 'Page 0' in the [REPORT] section of\n",
+                    "the .inp file and generate the .rpt file again.\n")
+     stop( msg ) 
+   }
+
+
+   # look for node results and link results 
+   hasNodeResults <- as.logical( max( grepl("Node Results", allLines)))
+   hasLinkResults <- as.logical( max( grepl("Link Results", allLines)))
+
+   if( hasNodeResults == FALSE ){
+  
+     msg <- paste(" Node results not found in .rpt file. \n",
+                  "Add the line 'Nodes All' to the [REPORT] section of the .inp file.")
+     warning(msg)
+   }
+
+   if( hasLinkResults == FALSE ){
+  
+     msg <- paste(" Link results not found in .rpt file. \n",
+                  "Add the line 'Links All' to the [REPORT] section of the .inp file.")
+     warning(msg)
+   }
+
+
+   if( ( hasNodeResults == FALSE )& 
+       ( hasLinkResults == FALSE )  ){
+       
+       # no results to read, give error 
+       stop("No results to read")
+
+   }
+
+}

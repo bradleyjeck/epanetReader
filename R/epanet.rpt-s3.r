@@ -29,6 +29,8 @@ read.rpt <- function( rptFile ){
 epanet.rpt <- function( rptFile){
   # read all the lines in the file 
   allLines <- readLines(rptFile)
+  checkRptFile( allLines ) 
+
   lengthOfAllLines <- length( allLines)
   
   resLines <- grep("Results", allLines)

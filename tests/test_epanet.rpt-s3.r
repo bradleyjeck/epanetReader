@@ -5,7 +5,6 @@
 #  Author: Bradley J Eck 
 #
 #******************************************
-
 #  File: rptFuncs_tests.r
 #
 #  By: bradley.eck@ie.ibm.com
@@ -47,8 +46,36 @@ test_that("Net2.rpt reads correctly",{
 
 
 test_that("Net3.rpt reads",{
-			Net3res <- read.rpt("Net3.rpt")
+			expect_warning(read.rpt("Net3.rpt"), "Node results not found")
 		})
+
+
+context("read.rpt error checking")
+
+test_that("page breaks give an error",{
+
+  expect_error( read.rpt("Net1-pagebrks.rpt"), "Page breaks not allowed") 	
+
+})
+
+test_that("missing both node and link results gives error",{
+
+  expect_error( suppressWarnings( read.rpt("Net1-noResult.rpt") ) )
+
+})
+
+test_that("missing node results gives warning",{
+
+  expect_warning(  read.rpt("Net1-noNodes.rpt") ,  "Node results not found" )
+
+})
+
+test_that("missing link results gives warning",{
+
+  expect_warning( read.rpt("Net1-noLinks.rpt"), "Link results not found") 
+
+})
+
 
 #test_that("SB25-det-max-dmd.rpt reads",{
 #			sb25res <- read.rpt("SB25-det-max-dmd.rpt")
@@ -81,7 +108,7 @@ test_that("Net2.rpt summary is ok",{
 #		})
 
 test_that("Net3.rpt summary is ok",{
-			Net3res <- read.rpt("Net3.rpt")
+			Net3res <- suppressWarnings( read.rpt("Net3.rpt") )
 			sn3 <- summary(Net3res)
 			expect_output(print(sn3), "0 time steps")
 			expect_output(print(sn3), "25 time steps")
@@ -94,7 +121,7 @@ context("plotting simulation results")
 test_that("plot args for Net1.rpt",{
 			
 			Net1res <- read.rpt("Net1.rpt")
-			inp <- read.inp("Net1.inp")
+			inp <- suppressWarnings( read.inp("Net1.inp"))
 			
 			expect_error(plot(Net1res,inp,juncQty="junk"), "juncQty not present in nodeResults")
 			expect_error(plot(Net1res,inp,linkQty="junk"), "linkQty not present in linkResults")
@@ -104,3 +131,6 @@ test_that("plot args for Net1.rpt",{
 			plot(Net1res,inp)
 			
 		})
+
+
+
