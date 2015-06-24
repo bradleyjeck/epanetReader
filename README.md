@@ -239,7 +239,7 @@ qplot( data= n1r$nodeResults,
        facets = ~Node, xlab = "Hour")  
 ```
 
-![Net 1 Cl plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1Cl.png)
+![Net 1 Cl plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1cl.png)
 
 ### Animation
 The animation package is useful for creating a video from successive plots. 
