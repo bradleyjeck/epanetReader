@@ -4,7 +4,7 @@ epanetReader is an R package for reading water network simulation data in
 Epanet's .inp and .rpt formats into R.  Some basic summary information and
 plots are also provided.   
 
-Epanet is a highly popular tool for water network simulation. It can difficult
+Epanet is a highly popular tool for water network simulation. It can be difficult
 to access network information for subsequent analysis and visualization. This
 is a real strength of R however, and there many tools already existing in R to
 support analysis and visualization.  
@@ -26,7 +26,7 @@ So far the package is only available on GitHub. The plan is to eventually submit
 
 ## Getting Started 
 
-# Network files 
+### Network files 
 
 Read network information from an .inp file with a similar syntax as the popular read.table or read.csv functions.  
 
@@ -103,7 +103,7 @@ the node ID is stored as a character rather than an integer or factor.
                     Max.   :710.0   Max.   :200.0                 
 ```
 
-## Simulation Results 
+### Simulation Results 
 
 Results of the network simulation specified in Net.inp may be stored in
 Net1.rpt by running Epanet from the command line. Note that the report section
@@ -225,9 +225,40 @@ info make visualizing the results easier.
   2                  766.18    970.00     52.00      1.00  Tank
 ```
 
-## More Advanced Usage  
+## Usage with other packages  
 
+### ggplot2
+The ggplot2 package makes it easy to create complex graphics by allowing users
+to describe the plot in terms of the data. Continuing the Net1 example Here we
+plot chlorine concentration over time at each node in the network.  
 
+```R
+library(ggplot2)
+qplot( data= n1r$nodeResults,  
+       x = timeInSeconds/3600, y = Chlorine, 
+       facets = ~Node, xlab = "Hour")  
+```
+
+![Net 1 Cl plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1Cl.png)
+
+### Animation
+The animation package is useful for creating a video from successive plots. 
+
+```R
+# example with animation package 
+library(animation)
+
+#unique time stamps
+ts <- unique((n1r$nodeResults$Timestamp))
+imax <- length(ts)
+
+# generate animation of plots at each time step
+saveHTML(
+  for( i in 1:imax){
+    plot(n1r, n1, Timestep = ts[i]) 
+  }
+)
+```
 ## References 
 
 Rossman, L. A. (2000) [Epanet 2 users manual](http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf).
