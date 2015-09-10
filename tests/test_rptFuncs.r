@@ -1,6 +1,6 @@
 #************************************
 #
-#  (C) Copyright IBM Corp. 2014
+#  (C) Copyright IBM Corp. 2015
 #
 #  Author: Bradley J Eck
 #
@@ -50,7 +50,7 @@ aFewLines <- c(
 
 df <- .section2df(aFewLines)
 
-expect_equal( names(df)[1], expected = "Node") 
+expect_equal( names(df)[1], expected = "ID") 
 expect_equal( names(df)[5], expected = "Quality") 
 
         })
@@ -74,10 +74,29 @@ aFewLines <- c(
 
 df <- .section2df(aFewLines)
 
-expect_equal( names(df)[1], expected = "Node") 
+expect_equal( names(df)[1], expected = "ID") 
 expect_equal( names(df)[5], expected = "Chlorine") 
 
         })
 
 
-
+test_that("IDs are characters",{
+		
+			## Manually input due to complexity of reading and breaking into sections
+			aFewLines <- c(          
+					"Node Results at 0:00:00 hrs:  ",
+					"  -------------------------------------------------------- ",
+					"                     Demand      Head  Pressure  Chlorine  ",
+					"  Node                  gpm        ft       psi      mg/L  ",
+					"  -------------------------------------------------------- ",
+					"  10                    0.00   1004.35    127.54      0.50               ",
+					"  11                  150.00    985.23    119.26      0.50               ",
+					"  12                  150.00    970.07    117.02      0.50               ",
+					"  13                  100.00    968.87    118.67      0.50               ",
+					"  21                  150.00    971.55    117.66      0.50               ",
+					"  22                  200.00    969.08    118.76      0.50               " )
+			
+			df <- .section2df(aFewLines)
+			
+			expect_true(class(df$ID) == "character")
+		})

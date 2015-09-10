@@ -2,12 +2,12 @@
 % Please edit documentation in R/epanet.inp-s3.r
 \name{summary.epanet.inp}
 \alias{summary.epanet.inp}
-\title{Summary Method for water.networks}
+\title{Summary Method for epanet.inp}
 \usage{
 \method{summary}{epanet.inp}(object, ...)
 }
 \arguments{
-\item{object}{of class 'water.network'}
+\item{object}{of class epanet.inp}
 
 \item{...}{futher arguments}
 }

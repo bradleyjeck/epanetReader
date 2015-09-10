@@ -2,15 +2,15 @@
 % Please edit documentation in R/epanet.inp-s3.r
 \name{plot.epanet.inp}
 \alias{plot.epanet.inp}
-\title{Plot Method for Water network}
+\title{Plot Method for epanet.inp}
 \usage{
 \method{plot}{epanet.inp}(x, plot.junctions = TRUE,
   legend.locn = "topright", ...)
 }
 \arguments{
-\item{x}{object of class 'water.network'}
+\item{x}{object of class epanet.inp}
 
-\item{plot.junctions}{logical indicating whether plot junctions}
+\item{plot.junctions}{logical indicating whether to plot junctions}
 
 \item{legend.locn}{character string passed to legend() specifying
 the location of the legend on the plot}

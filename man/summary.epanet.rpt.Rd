@@ -2,7 +2,7 @@
 % Please edit documentation in R/epanet.rpt-s3.r
 \name{summary.epanet.rpt}
 \alias{summary.epanet.rpt}
-\title{Summary of Water Network Simulation Results}
+\title{Summary of Epanet Simulation Results}
 \usage{
 \method{summary}{epanet.rpt}(object, ...)
 }

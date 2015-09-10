@@ -17,12 +17,8 @@ packages.
 
 ## Installation 
 
-So far the package is only available on GitHub. The plan is to eventually submit to CRAN. 
-
-### GitHub
-
-> install.packages("devtools")   
-> devtools::install_github("bradleyjeck/epanetReader")   
+* the latest released version: install.packages("epanetReader")
+* the development version: devtools::install_github("bradleyjeck/epanetReader")   
 
 ## Getting Started 
 
@@ -189,7 +185,7 @@ Entries in the epanet.rpt object (list) created by read.rpt() are found using th
 Results for a chosen time period can be retrieved using the subset function.
 ```R
 > subset(n1r$nodeResults, Timestamp == "0:00:00")
-   Node   Demand    Head Pressure Chlorine      note Timestamp timeInSeconds  nodeType
+     ID   Demand    Head Pressure Chlorine      note Timestamp timeInSeconds  nodeType
 1    10     0.00 1004.35   127.54      0.5             0:00:00             0  Junction
 2    11   150.00  985.23   119.26      0.5             0:00:00             0  Junction
 3    12   150.00  970.07   117.02      0.5             0:00:00             0  Junction

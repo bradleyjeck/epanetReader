@@ -13,17 +13,19 @@
 
 \item{inp}{epanet.inp object associated with x}
 
-\item{Timestep}{string indicating the time at which to plot}
+\item{Timestep}{string indicating the time to plot}
 
-\item{juncQty}{string specifying which column of node results table
-to plot for junctions}
+\item{juncQty}{string specifying which column of x$nodeResults
+(Demand, Head, Pressure, Chlorine, etc.)
+to show by circle size at network junctions}
 
-\item{linkQty}{string specifying which column of link results table
-to plot}
+\item{linkQty}{string specifying which column of x$linkResults
+(Flow, Velocity, Headloss)
+to show by line width on network links}
 
-\item{legend1.locn}{placement of legend for network elements}
+\item{legend1.locn}{string passed to legend() for placing legend of network elements}
 
-\item{legend2.locn}{placement of legend for junction and link quantities}
+\item{legend2.locn}{string passed to legend() for placing legend of junction and link quantities}
 
 \item{...}{further arguments passed to plot}
 }
@@ -31,7 +33,8 @@ to plot}
 Plots simulation results for a single time step in map form
 }
 \details{
-juncQty is scaled over only junction result types.  linkQty is
-        scaled over all of the link types
+juncQty plots and values for Junctions only; Tanks and Reservoirs are not included.
+         In contrast, linkQty is scaled over all of the link types: Pipes, Pumps & Valves.
+         These choices aim at a map showing demand at junctions and velocity in links.
 }
 

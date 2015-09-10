@@ -19,16 +19,16 @@
 #'
 #' @aliases epanet.inp
 #' @export
-#' @param inpFile path to the .inp file to read
+#' @param file the name of the file to read 
 #' @details 
 #' This function reads a text file in Epanet's .inp format 
-#' and returns an S3 object which is a list with entries for 
-#' sections of the .inp file.  Sections of the .inp file which are implemented 
+#' and returns an S3 object with entries for 
+#' sections of the .inp file.  Sections of the .inp file that are implemented 
 #' appear in the Value section.
 #' 
-#' ID fields are read "as is" and stored as characters not factors.
+#' ID fields are stored as characters not factors or integers.
 #'        
-#' Sections which are absent from the .inp file are NULL in the list.
+#' Sections that are absent from the .inp file are NULL in the list.
 #' 
 #' Columns of data.frames use the headings exported by 
 #' the Epanet GUI. 
@@ -42,12 +42,22 @@
 #'          according to the default behavior in R.  So if the .inp file has a pattern "1"
 #'          this pattern will appear as element `1` in the list that is returned. A warning is issued in this case. 
 #' 
-#' @return Returns an epanet.inp s3 object which is a list with 
-#' the following elements:
+#' @return Returns an epanet.inp S3 object with 
+#' elements of the following names and types corresponding to sections
+#' of the .inp file. Sections missing from the .inp file have a value of NULL.
 #' \item{Title}{character}
 #' \item{Junctions}{data.frame}
 #' \item{Tanks}{data.frame}
-#' 
+#' \item{Reservoirs}{data.frame}
+#' \item{Pipes}{data.frame}
+#' \item{Pumps}{data.frame}
+#' \item{Valves}{data.frame}
+#' \item{Patterns}{list}
+#' \item{Curves}{list}
+#' \item{Energy}{character}
+#' \item{Times}{character}
+#' \item{Options}{list}
+#' \item{Coordinates}{data.frame}
 #' 
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 #' 
@@ -56,21 +66,23 @@
 #' @examples
 #' # path to Net1.inp example file included with this package
 #' inp <- file.path( find.package("epanetReader"), "extdata","Net1.inp") 
+#' 
+#' #read the network file into R
 #' n1 <- read.inp(inp)
 #' summary(n1)
 #' names(n1)
 #' summary(n1$Junctions)
 #' summary(n1$Pipes)
 #' plot(n1) 
-read.inp <- function (inpFile ){
+read.inp <- function (file ){
  
-  return(  epanet.inp( inpFile ) )
+  return(  epanet.inp( file ) )
   
 }
 
-epanet.inp <- function( inpFile ){
+epanet.inp <- function( file ){
 	
-	allLines <- readLines( inpFile )
+	allLines <- readLines( file )
   
   # read in all the sections  
   titl <- TITLE( allLines )
@@ -118,13 +130,13 @@ epanet.inp <- function( inpFile ){
 }
 
 
-#' Summary Method for water.networks
+#' Summary Method for epanet.inp
 #'
 #' Summarizes the network by printing the Title of the
 #' network and the number of each type of elements.
 #'
 #' @export
-#' @param object of class 'water.network'
+#' @param object of class epanet.inp
 #' @param ... futher arguments
 summary.epanet.inp <- function( object, ... ){
  
@@ -160,7 +172,7 @@ plotInpLinks <- function(x){
   #  Pipes  
   ############# 
   if( is.null( x$Pipes) == FALSE ){
-    plot( expandedLinkTable( x$Pipes, x$Coordinates ),
+    graphics::plot( expandedLinkTable( x$Pipes, x$Coordinates ),
           add = TRUE,  
           label = FALSE ) 
   }
@@ -171,10 +183,10 @@ plotInpLinks <- function(x){
   ############# 
   if( is.null( x$Pumps )  == FALSE ){
 	  ept <-  expandedLinkTable( x$Pumps, x$Coordinates )
-	  plot( ept,
+	  graphics::plot( ept,
 			  add = TRUE,  
 			  label = FALSE) 
-	  points( ept$midx, ept$midy, pch = 8 ) 
+	  graphics::points( ept$midx, ept$midy, pch = 8 ) 
   }
 
   
@@ -183,22 +195,24 @@ plotInpLinks <- function(x){
   ############# 
   if( is.null( x$Valves )   == FALSE ){
 	  evt <- expandedLinkTable(x$Valves, x$Coordinates)
-	  plot( evt,
+	  graphics::plot( evt,
 			  add = TRUE,  
 			  label = FALSE) 
 	  
-	  points( evt$midx, evt$midy, pch = 25 ,
+	  graphics::points( evt$midx, evt$midy, pch = 25 ,
 			  bg="black", col = "black" )  
   }
 }
 
-#' plot node elements 
+#' Plot Node Elements 
 #'
 #' Adds node elements from epanet.inp object to an existing plot
 #' 
 #' @export 
 #' @param x epanet.inp object
 #' @param plot.junctions logical indicating whether to plot junctions 
+#' @details  Tanks and Reservoirs are shown using plot characters (pch)
+#'           16 and 15. Junctions, if plotted, appear as pch ="."
 plotInpNodes <- function( x, plot.junctions){
   ############# 
   #  Junctions 
@@ -208,7 +222,7 @@ plotInpNodes <- function( x, plot.junctions){
     jpts <- merge( x = x$Junctions, by.x = "ID", all.x = TRUE,
                    y = x$Coordinates, by.y = "Node" )
 
-    points( jpts$X.coord, jpts$Y.coord, pch = "." )
+    graphics::points( jpts$X.coord, jpts$Y.coord, pch = "." )
 
   }
 
@@ -218,7 +232,7 @@ plotInpNodes <- function( x, plot.junctions){
   if( is.null ( x$Tanks ) == FALSE ){
     tpts <- merge( x = x$Tanks, by.x = "ID", all.x = TRUE,
                    y = x$Coordinates, by.y = "Node" )
-    points( tpts$X.coord, tpts$Y.coord, pch = 16, col='black' )
+    graphics::points( tpts$X.coord, tpts$Y.coord, pch = 16, col='black' )
   }
 
   ##############
@@ -227,33 +241,36 @@ plotInpNodes <- function( x, plot.junctions){
   if( is.null( x$Reservoirs) == FALSE ){
     rpts <- merge( x = x$Reservoirs, by.x = "ID", all.x = TRUE,
                    y = x$Coordinates, by.y = "Node" )
-    points( rpts$X.coord, rpts$Y.coord, pch = 15, col='black' )
+    graphics::points( rpts$X.coord, rpts$Y.coord, pch = 15, col='black' )
   }
 }
 
 
-#' Plot inp Legend
+#' Plot Legend of Network Elements
 #' 
-#' Add a legend to an existing plot 
+#' Add legend of network elements to the active plot 
 #' 
-#' @param legend.locn passed to legend() 
+#' @param legend.locn keyword for location of legend. See details of legend()
+#'        function.
+#' @details
+#' Uses plot characters 16, 15, 8 and 25 for Tanks, Reservoirs, Pumps and Valves. 
 #' @export  
-plotInpLegend <- function(legend.locn){
+plotElementsLegend <- function(legend.locn) {
 	
-  legend( legend.locn, bty = 'n',
+  graphics::legend( legend.locn, bty = 'n',
           c("Tanks", "Reservoirs", "Pumps", "Valves"),
          pch = c(16, 15, 8, 25),
          pt.bg = 'black',
          col = 'black')
 }
 
-#' Plot Method for Water network
+#' Plot Method for epanet.inp 
 #' 
 #' Make a plot of the network using base graphics
 #' 
 #' @export
-#' @param x object of class 'water.network'
-#' @param plot.junctions logical indicating whether plot junctions
+#' @param x object of class epanet.inp 
+#' @param plot.junctions logical indicating whether to plot junctions
 #' @param legend.locn character string passed to legend() specifying
 #'        the location of the legend on the plot 
 #' @param ... other arguments passed to plot()
@@ -273,7 +290,7 @@ plot.epanet.inp <- function( x,
 
   
   # create blank plot 
-  plot( range(x$Coordinates$X),
+  graphics::plot( range(x$Coordinates$X),
         range(x$Coordinates$Y),
         type = 'n',
         xlab = "", xaxt = 'n',
@@ -283,7 +300,7 @@ plot.epanet.inp <- function( x,
   
   plotInpNodes(x, plot.junctions)
 
-  plotInpLegend(legend.locn) 
+  plotElementsLegend(legend.locn) 
   
 }
 

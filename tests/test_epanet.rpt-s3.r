@@ -31,11 +31,11 @@ Net1res <- read.rpt("Net1.rpt")
             expect_that( class(Net1res$nodeResults), equals("data.frame"))
 		
 			# get the value of P in node 22 for timestep 1:00
-			p <- subset(Net1res$nodeResults, Timestamp == "1:00:00" & Node == 22, select = Pressure)
+			p <- subset(Net1res$nodeResults, Timestamp == "1:00:00" & ID == "22", select = Pressure)
 			expect_that( as.numeric(p), equals(120.07)  )
 			
 			# flow in pump 9 at 24 hrs 
-			q <- subset( Net1res$linkResults, Timestamp =="24:00:00" & Link == 9, select = Flow)
+			q <- subset( Net1res$linkResults, Timestamp =="24:00:00" & ID == "9", select = Flow)
 			expect_that(as.numeric(q), equals(1892.24))
 })
 
@@ -133,4 +133,24 @@ test_that("plot args for Net1.rpt",{
 		})
 
 
+context("IDs are characters in rpt")
 
+test_that("node IDs are characters",{
+		
+			# Net 1 
+			rpt <- read.rpt("Net1.rpt")
+			expect_true( class(rpt$nodeResults$ID) == "character")
+		
+			# Net 2
+			rpt <- read.rpt("Net2.rpt")
+			expect_true( class(rpt$nodeResults$ID) == "character")
+		   
+			
+		})
+
+test_that("link IDs are characters ",{
+			# Net 3
+			rpt <- suppressWarnings(read.rpt("Net3.rpt"))
+			expect_true( class(rpt$linkResults$ID) == "character")
+			
+		}) 

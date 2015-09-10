@@ -11,8 +11,11 @@ expandedLinkTable(Links, Coordinates)
 
 \item{Coordinates}{table of epanet.inp}
 }
+\value{
+an expandedLinkTable object
+}
 \description{
-Add coordinates of nodes to data frame
-of pipes, pumps, or valves from an epanet.inp object
+Create an expandedLinkTable object by adding node coordinates to a
+data frame of pipes, pumps, or valves.
 }
 

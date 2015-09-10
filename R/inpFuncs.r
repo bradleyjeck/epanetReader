@@ -112,7 +112,7 @@
   } else { 
   
     # convert the data into a data frame 
-    df <- read.table( text= sect, as.is = TRUE, 
+    df <- utils::read.table( text= sect, as.is = TRUE, 
                       fill = TRUE, header = FALSE)  
     
     return( df )
@@ -400,7 +400,9 @@ tag <- "\\[OPTIONS\\]"
 #' Epanet Default Options
 #' 
 #'  A list of Epanet's default options
-#' 
+#'
+#' @details Provides a named list in the form of OPTION = default_value where the 
+#' values are taken from pages 152-154 of the manual.
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 #' http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
 #' @export 
@@ -620,3 +622,5 @@ TITLE <- function( allLines ){
   sect <- .inpSection2char(tag,allLines)
   return( sect )
 }
+
+

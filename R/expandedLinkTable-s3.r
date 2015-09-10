@@ -18,12 +18,13 @@
 
 #' Expanded Link Table
 #' 
-#' Add coordinates of nodes to data frame 
-#' of pipes, pumps, or valves from an epanet.inp object 
+#' Create an expandedLinkTable object by adding node coordinates to a 
+#' data frame of pipes, pumps, or valves.  
 #'
 #' @export
 #' @param Links data frame of Pipes, Pumps or Valves of from epanet.inp 
 #' @param Coordinates table of epanet.inp
+#' @return an expandedLinkTable object 
 expandedLinkTable <- function( Links, Coordinates ){
 
   # handle a missing table 
@@ -59,30 +60,34 @@ expandedLinkTable <- function( Links, Coordinates ){
 #' 
 #' @export
 #' @param x object of type expandedLinkTable
-#' @param add logical indicating whether to add this plot to an existing one 
+#' @param add logical indicating whether to add to the currently active plot.  
+#'        add=FALSE creates a new plot.
 #' @param label logical indicating if the links should be labeled at the mid points
 #' @param linewidths passed to lwd argument in segments()
-#' @param ... further arguments passed to plot
+#' @param ... further arguments passed to segments() 
+#' @details 
+#' links are drawn using segments() 
+#'
 plot.expandedLinkTable <- function(x, add=FALSE, label=FALSE, linewidths = 3, ...){
   
     if( add == FALSE ){
       # generate a blank plot first 
-      plot( range( c(x$x1, x$x2) ),
+      graphics::plot( range( c(x$x1, x$x2) ),
             range( c(x$y1, x$y2) ),
             type = 'n',
             xlab = "", xaxt = 'n',
-            ylab = "", yaxt = 'n',
-			...)
+            ylab = "", yaxt = 'n'
+			)
       
     } 
+    
     # just put the segments out there 
-	
-    segments( x0 = x$x1, y0 = x$y1,
+    graphics::segments( x0 = x$x1, y0 = x$y1,
               x1 = x$x2, y1 = x$y2,
-			  lwd = linewidths  )  
+			  lwd = linewidths, ... )  
                
 	
     if( label == TRUE ){
-      text( x$midx, x$midy, x$ID)
+      graphics::text( x$midx, x$midy, x$ID)
     }
 }

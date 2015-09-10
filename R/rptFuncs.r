@@ -74,11 +74,6 @@
 
   imax <- length(sect)
   
-  #figure out what is reported
-#  measvars <- unlist(strsplit( gsub( "^\\s+", "", sect[3] ), "\\s+"))
-#  idvarAndUnits <- unlist(strsplit( gsub("^\\s+", "", sect[4]) , "\\s+"))
-#  columnNames <- c( idvarAndUnits[1], measvars, "note" ) 
-
    # Take column headings from labels. Sometimes first column is labeled
    # in two rows, sometimes in 1.  See tests. 
    headerRow1 <- unlist(strsplit( gsub("^\\s+", "", sect[3] ), "\\s+"))
@@ -96,11 +91,23 @@
      columnNames <- c( headerRow2[1], headerRow1, "note" )
    }
 
- 
+   # name the first column "ID" rather than
+   # "Node" or "Link"  to be consistent with inp objects
+	columnNames[1] <- "ID"
+   
+  # set colClasses, everything is numeric execpt fist 
+	# and last column
+	lcn <- length( columnNames)
+  cc <- rep("numeric", lcn )
+  cc[1] <- "character"  # for ID column 
+  cc[lcn] <- "character" # for note column 
+  
+   
   # make the section a data frame 
-  df <- read.table( text = sect[6:imax], col.names=columnNames,
-                    strip.white = TRUE, fill = TRUE,
-                    header = FALSE, as.is = TRUE )
+  df <- utils::read.table( text = sect[6:imax], 
+		  col.names=columnNames,
+		  colClasses = cc, 
+		  strip.white = TRUE, fill = TRUE, header = FALSE )
   
   # now add the time info to the table 
   stamp <- .getTimeStamp( sect[1] )  
@@ -120,11 +127,11 @@
 #' and range labels based on sample max and min  
 #' 
 #' @param x vector to find cuts for 
-#' @param nbin  number of bins 
+#' @param nbin number of bins 
 #' @return list with elements Breaks and Labels
 #' @details 
-#' helpful in plot making plots 
-#' Labels use the acutal max and min rather than +/- 1% used by cut() 
+#' Helpful in making labels use the acutal max and min rather than
+#' the +/- 1% cut() uses by default. 
 binBreaker <- function( x, nbin){
 	
     xmax <- max(x, na.rm = TRUE )

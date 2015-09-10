@@ -2,7 +2,7 @@
 % Please edit documentation in R/epanet.inp-s3.r
 \name{plotInpNodes}
 \alias{plotInpNodes}
-\title{plot node elements}
+\title{Plot Node Elements}
 \usage{
 plotInpNodes(x, plot.junctions)
 }
@@ -13,5 +13,9 @@ plotInpNodes(x, plot.junctions)
 }
 \description{
 Adds node elements from epanet.inp object to an existing plot
+}
+\details{
+Tanks and Reservoirs are shown using plot characters (pch)
+          16 and 15. Junctions, if plotted, appear as pch ="."
 }
 

@@ -6,10 +6,10 @@
 #
 #*************************************
 
-#' Read text files from EPANET into R
+#' Read text files from Epanet into R
 #' 
 #'  \pkg{epanetReader} is a package for reading water network information
-#' and simulation results in EPANET's .inp
+#' and simulation results in Epanet's .inp
 #' and .rpt files into R.  See functions \link{read.inp} and
 #' \link{read.rpt} for some examples. 
 #' 

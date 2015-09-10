@@ -5,30 +5,41 @@
 \alias{read.inp}
 \title{Read .inp file}
 \usage{
-read.inp(inpFile)
+read.inp(file)
 }
 \arguments{
-\item{inpFile}{path to the .inp file to read}
+\item{file}{the name of the file to read}
 }
 \value{
-Returns an epanet.inp s3 object which is a list with
-the following elements:
+Returns an epanet.inp S3 object with
+elements of the following names and types corresponding to sections
+of the .inp file. Sections missing from the .inp file have a value of NULL.
 \item{Title}{character}
 \item{Junctions}{data.frame}
 \item{Tanks}{data.frame}
+\item{Reservoirs}{data.frame}
+\item{Pipes}{data.frame}
+\item{Pumps}{data.frame}
+\item{Valves}{data.frame}
+\item{Patterns}{list}
+\item{Curves}{list}
+\item{Energy}{character}
+\item{Times}{character}
+\item{Options}{list}
+\item{Coordinates}{data.frame}
 }
 \description{
 Read an Epanet .inp file into R
 }
 \details{
 This function reads a text file in Epanet's .inp format
-and returns an S3 object which is a list with entries for
-sections of the .inp file.  Sections of the .inp file which are implemented
+and returns an S3 object with entries for
+sections of the .inp file.  Sections of the .inp file that are implemented
 appear in the Value section.
 
-ID fields are read "as is" and stored as characters not factors.
+ID fields are stored as characters not factors or integers.
 
-Sections which are absent from the .inp file are NULL in the list.
+Sections that are absent from the .inp file are NULL in the list.
 
 Columns of data.frames use the headings exported by
 the Epanet GUI.
@@ -45,6 +56,8 @@ In the [PATTERNS] and [CURVES] sections, integers used as names of list elements
 \examples{
 # path to Net1.inp example file included with this package
 inp <- file.path( find.package("epanetReader"), "extdata","Net1.inp")
+
+#read the network file into R
 n1 <- read.inp(inp)
 summary(n1)
 names(n1)

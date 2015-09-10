@@ -77,3 +77,7 @@ test_that("Net3 summary",{
 			expect_output(print(n3s),"Junctions\\s+92")
 			expect_output(print(n3s),"Pumps\\s+2")
 		})
+
+
+
+

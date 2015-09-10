@@ -12,23 +12,56 @@
 #' reads an Epanet .rpt file into R
 #' 
 #' @export 
-#' @param rptFile the file to read
-#' @return a list of data frames 
+#' @param file the name of the file to read
+#' @return Returns an epanet.rpt S3 object with two data.frame elements. 
 #'
+#' \item{nodeResults}{data.frame}
+#' \item{linkResults}{data.frame}
+
 #' @details add lines "Page 0", "Links All" and "Nodes All" to the
 #'  [REPORT] section of the .inp file to output info to read in
 #' with this function
+#'
+#' In contrast to the treatment of .inp files, data from .rpt
+#' files is stored using a slightly different structure than the .rpt file.  The
+#' function returns an object (list) with a data.frame for node results and
+#' data.frame for link results.  These two data frames contain results from all
+#' the time periods to facilitate time series plots. 
+#' 
+#'
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 # http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
-read.rpt <- function( rptFile ){
+#'
+#' @examples
+#' # path to Net1.rpt example file included with this package
+#' rpt <- file.path( find.package("epanetReader"), "extdata","Net1.rpt") 
+#' n1r <- read.rpt(rpt)
+#' summary(n1r)
+#' names(n1r)
+#'
+#' 
+#' #Results for a chosen time period can be retrieved using the subset function.
+#' subset(n1r$nodeResults, Timestamp == "0:00:00")
+#' 
+#' # time series plot for a nodal value
+#' plot( Chlorine ~ timeInSeconds,  
+#'       data = subset(n1r$nodeResults, ID == "22"))    
+#'
+#' # Plotting the epanet.rpt object itself gives a map.
+#' # Note that the object created from the .inp file is required.
+#' inp <- file.path( find.package("epanetReader"), "extdata","Net1.inp") 
+#' n1 <- read.inp(inp)
+#' plot( n1r, n1)
+
+read.rpt <- function( file ){
  
-  return( epanet.rpt(rptFile))	
+  return( epanet.rpt(file))	
 }
 
 
-epanet.rpt <- function( rptFile){
+epanet.rpt <- function( file){
   # read all the lines in the file 
-  allLines <- readLines(rptFile)
+  allLines <- readLines(file)
   checkRptFile( allLines ) 
 
   lengthOfAllLines <- length( allLines)
@@ -116,7 +149,7 @@ epanet.rpt <- function( rptFile){
 
 
 
-#' Summary of Water Network Simulation Results
+#' Summary of Epanet Simulation Results
 #'
 #' Provides a basic sumary of simulation results 
 #'
@@ -261,7 +294,7 @@ print.summary.epanet.rpt <- function(x,...){
 		  # link results for this timestep		  
 		  lqty <- subset( rpt$linkResults,
 				  Timestamp == Timestep, 
-				  select = c( "Link", linkQty ) )
+				  select = c( "ID", linkQty ) )
 		  
 	  }
 	  
@@ -303,7 +336,7 @@ print.summary.epanet.rpt <- function(x,...){
 		  # silence R CMD check
 		  Timestamp <- NULL
 		  # extract desired results 
-		  juncqty <- subset(rpt$nodeResults, Timestamp == Timestep, select=c("Node", juncQty))
+		  juncqty <- subset(rpt$nodeResults, Timestamp == Timestep, select=c("ID", juncQty))
 	  }	  
     
 	  return( juncqty)
@@ -331,10 +364,10 @@ print.summary.epanet.rpt <- function(x,...){
 		    
 			# add bin info to table 
 			# could write merge.expandedLinkTable() but prolly not worth it 
-			ept2 <- merge( x = ept, by.x = "ID", y = lqty, by.y = "Link")
+			ept2 <- merge( x = ept, by.x = "ID", y = lqty, by.y = "ID")
 	
 			# plot the segments 
-			segments( x0 = ept2$x1, y0 = ept2$y1,
+			graphics::segments( x0 = ept2$x1, y0 = ept2$y1,
 		              x1 = ept2$x2, y1 = ept2$y2,
 					 lwd = ept2$bin   )  
 		}
@@ -348,14 +381,14 @@ print.summary.epanet.rpt <- function(x,...){
 			
 			# add bin info to table 
 			# could write merge.expandedLinkTable() but prolly not worth it 
-			ept2 <- merge( x = ept, by.x = "ID", y = lqty, by.y = "Link")
+			ept2 <- merge( x = ept, by.x = "ID", y = lqty, by.y = "ID")
 	
 			# plot the segments 
-			segments( x0 = ept2$x1, y0 = ept2$y1,
+			graphics::segments( x0 = ept2$x1, y0 = ept2$y1,
 		              x1 = ept2$x2, y1 = ept2$y2,
 					 lwd = ept2$bin   )  
 			
-			points( ept$midx, ept$midy, pch = 8 ) 
+			graphics::points( ept$midx, ept$midy, pch = 8 ) 
 		}
 		
 		
@@ -369,18 +402,14 @@ print.summary.epanet.rpt <- function(x,...){
 			ept2 <- merge( x = ept, by.x = "ID", y = lqty, by.y = "Link")
 	
 			# plot the segments 
-			segments( x0 = ept2$x1, y0 = ept2$y1,
+			graphics::segments( x0 = ept2$x1, y0 = ept2$y1,
 		              x1 = ept2$x2, y1 = ept2$y2,
 					 lwd = ept2$bin   )  
 			
-			points( evt$midx, evt$midy, pch = 25 ,
+			graphics::points( evt$midx, evt$midy, pch = 25 ,
 					bg="black", col = "black" )  
 		}
-		
-		
 	}
-	
-	
 }
 
 #' @param ndqty
@@ -402,9 +431,9 @@ print.summary.epanet.rpt <- function(x,...){
 		
 		# add desired results too junc table w coordinates 
 		jpts <- merge( x = jpts, by.x = "ID", all.x = TRUE,
-				y = ndqty, by.y = "Node")
+				y = ndqty, by.y = "ID")
 		
-		points( jpts$X.coord, jpts$Y.coord, pch = 21, bg = 'gray',  
+		graphics::points( jpts$X.coord, jpts$Y.coord, pch = 21, bg = 'gray',  
 				cex = jpts$bin )  
 	}
 }
@@ -449,7 +478,7 @@ print.summary.epanet.rpt <- function(x,...){
 
 	
 	# now actually plot the legend 
-	legend( legend2.locn, bty  = 'n', ncol =2 ,
+    graphics::legend( legend2.locn, bty  = 'n', ncol =2 ,
 			legend=c(juncNums, linkNums) ,
 			title = paste(juncTitle, linkTitle, sep = "   ") ,
 			title.adj = 0.5,
@@ -469,16 +498,19 @@ print.summary.epanet.rpt <- function(x,...){
 #' @export
 #' @param x  epanet.rpt object 
 #' @param inp epanet.inp object associated with x
-#' @param Timestep string indicating the time at which to plot 
-#' @param juncQty string specifying which column of node results table
-#'                to plot for junctions 
-#' @param linkQty string specifying which column of link results table 
-#'                to plot 
-#' @param legend1.locn placement of legend for network elements
-#' @param legend2.locn placement of legend for junction and link quantities
+#' @param Timestep string indicating the time to plot 
+#' @param juncQty string specifying which column of x$nodeResults
+#'                (Demand, Head, Pressure, Chlorine, etc.) 
+#'                to show by circle size at network junctions  
+#' @param linkQty string specifying which column of x$linkResults  
+#'                (Flow, Velocity, Headloss)
+#'                to show by line width on network links  
+#' @param legend1.locn string passed to legend() for placing legend of network elements
+#' @param legend2.locn string passed to legend() for placing legend of junction and link quantities
 #' @param ... further arguments passed to plot 
-#' @details juncQty is scaled over only junction result types.  linkQty is
-#'         scaled over all of the link types 
+#' @details juncQty plots and values for Junctions only; Tanks and Reservoirs are not included.
+#'          In contrast, linkQty is scaled over all of the link types: Pipes, Pumps & Valves.
+#'          These choices aim at a map showing demand at junctions and velocity in links.  
 plot.epanet.rpt <- function( x,
 		inp,
 		Timestep = "0:00:00",
@@ -529,8 +561,8 @@ plot.epanet.rpt <- function( x,
 	}
 	
 	# create blank plot 
-	par( mar = c(1,1,1,1))
-	plot( range(inp$Coordinates$X.coord),
+    graphics::par( mar = c(1,1,1,1))
+	graphics::plot( range(inp$Coordinates$X.coord),
 			range(inp$Coordinates$Y.coord),
 			type = 'n',
 			xlab = "", xaxt = 'n',
@@ -543,10 +575,8 @@ plot.epanet.rpt <- function( x,
    .plotRptNodes(ndqty,inp)
    
   # legend 1 just to define symbols 
-  plotInpLegend(legend1.locn)
+  plotElementsLegend(legend1.locn)
  
   .plotRptLegend(juncQty, juncBinfo, linkQty, linkBinfo, legend2.locn)
-  
-
 }
 

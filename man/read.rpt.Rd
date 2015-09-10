@@ -4,13 +4,16 @@
 \alias{read.rpt}
 \title{Read .rpt file}
 \usage{
-read.rpt(rptFile)
+read.rpt(file)
 }
 \arguments{
-\item{rptFile}{the file to read}
+\item{file}{the name of the file to read}
 }
 \value{
-a list of data frames
+Returns an epanet.rpt S3 object with two data.frame elements.
+
+\item{nodeResults}{data.frame}
+\item{linkResults}{data.frame}
 }
 \description{
 reads an Epanet .rpt file into R
@@ -19,6 +22,33 @@ reads an Epanet .rpt file into R
 add lines "Page 0", "Links All" and "Nodes All" to the
  [REPORT] section of the .inp file to output info to read in
 with this function
+
+In contrast to the treatment of .inp files, data from .rpt
+files is stored using a slightly different structure than the .rpt file.  The
+function returns an object (list) with a data.frame for node results and
+data.frame for link results.  These two data frames contain results from all
+the time periods to facilitate time series plots.
+}
+\examples{
+# path to Net1.rpt example file included with this package
+rpt <- file.path( find.package("epanetReader"), "extdata","Net1.rpt")
+n1r <- read.rpt(rpt)
+summary(n1r)
+names(n1r)
+
+
+#Results for a chosen time period can be retrieved using the subset function.
+subset(n1r$nodeResults, Timestamp == "0:00:00")
+
+# time series plot for a nodal value
+plot( Chlorine ~ timeInSeconds,
+      data = subset(n1r$nodeResults, ID == "22"))
+
+# Plotting the epanet.rpt object itself gives a map.
+# Note that the object created from the .inp file is required.
+inp <- file.path( find.package("epanetReader"), "extdata","Net1.inp")
+n1 <- read.inp(inp)
+plot( n1r, n1)
 }
 \references{
 Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.

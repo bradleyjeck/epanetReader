@@ -19,7 +19,7 @@ Generate break points for use with cut()
 and range labels based on sample max and min
 }
 \details{
-helpful in plot making plots
-Labels use the acutal max and min rather than +/- 1% used by cut()
+Helpful in making labels use the acutal max and min rather than
+the +/- 1% cut() uses by default.
 }
 

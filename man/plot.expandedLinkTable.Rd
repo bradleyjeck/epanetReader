@@ -10,15 +10,19 @@
 \arguments{
 \item{x}{object of type expandedLinkTable}
 
-\item{add}{logical indicating whether to add this plot to an existing one}
+\item{add}{logical indicating whether to add to the currently active plot.
+add=FALSE creates a new plot.}
 
 \item{label}{logical indicating if the links should be labeled at the mid points}
 
 \item{linewidths}{passed to lwd argument in segments()}
 
-\item{...}{further arguments passed to plot}
+\item{...}{further arguments passed to segments()}
 }
 \description{
 plot an expanded link table
+}
+\details{
+links are drawn using segments()
 }
 

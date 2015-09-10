@@ -1,13 +1,12 @@
 #******************************************
 #
-#  (C) Copyright IBM Corp. 2014
+#  (C) Copyright IBM Corp. 2015
 #
 #  Author: Bradley J Eck 
 #
 #******************************************
 
 #  File: inpFuncs_tests.r
-#  By:  bradley.eck@ie.ibm.com
 #  Purpose: test reading of .inp files 
 
 source("../R/inpFuncs.r")
@@ -40,11 +39,23 @@ test_that("Net2 JUNCTIONS table",
 #         })
 
 
+test_that("IDs are character",{
+
+			# Net 1
+          jt <- JUNCTIONS(readLines("Net1.inp"))
+          expect_true( class(jt$ID) == "character")
+		  # Net 2
+		  jt <- JUNCTIONS(readLines("Net2.inp"))
+          expect_true( class(jt$ID) == "character")
+	  })
+
+
 test_that("Net3 RESERVOIRSs table",
 { 
           res <- RESERVOIRS(readLines("Net3.inp"))
           expect_that(class(res), equals("data.frame"))
           expect_that(res$Pattern[1], equals(NA))
+		  expect_true( class(res$ID) == "character")
 })
 
 #test_that("anytown RESERVOIRSs table",
@@ -282,3 +293,12 @@ test_that("COORDINATES is null",{
          t <- COORDINATES(readLines("empty.inp"))
          expect_that(t, equals(NULL))
         })
+
+
+context("IDs in inp sections are character")
+
+test_that(" junction IDs are char",{
+			
+			junc <- JUNCTIONS(readLines("Net1.inp"))
+		    expect_true( class(junc$ID) == "character")	
+		})
