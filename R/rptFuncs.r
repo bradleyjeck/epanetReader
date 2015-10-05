@@ -51,22 +51,31 @@
 }
 
 .timeStampToSeconds <- function( stamp ){
- 
-  tokens <- unlist(strsplit(stamp,":"))
 
-  if( length(tokens) != 3 ){
-    stop(paste("need to implement converstion for stamp", stamp ))
-  }
-  
-  hours <- tokens[1]
-  minutes <- tokens[2]
-  seconds <- tokens[3]
-  
-  totalSeconds <- as.integer(seconds) + 
-                  as.integer(minutes) * 60 + 
-                  as.integer(hours) * 3600
-  
-  return( totalSeconds ) 
+	
+	tokens <- unlist(strsplit(stamp,":"))
+	
+	if( length(tokens) < 2 ){
+		stop(paste("don't have interpretation for stamp", stamp ))
+	}
+	if( length(tokens)  > 3 ){
+		stop(paste("don't have interpretation for stamp", stamp ))
+	}
+	
+	
+	hours <- tokens[1]
+	minutes <- tokens[2]
+	
+	totalSeconds <- as.integer(hours) * 3600 + 
+			        as.integer(minutes) * 60 
+	
+	if( length( tokens)  == 3 ){ 
+		
+		seconds <- tokens[3]
+		totalSeconds <- totalSeconds +  as.integer(seconds) 
+	}
+	
+	return( totalSeconds ) 
 }
 
 .section2df <- function( sect ){
