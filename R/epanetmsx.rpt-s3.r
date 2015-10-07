@@ -14,9 +14,9 @@
 
 
 
-#' Read .rpt file
+#' Read msx results 
 #' 
-#' reads an Epanet .rpt file into R
+#' reads an Epanet-msx .rpt file into R
 #' 
 #' @export 
 #' @param file the name of the file to read
@@ -26,8 +26,6 @@
 #' \item{linkResults}{data.frame}
 epanetmsx.rpt <- function( file ) {
 # this based heavily on the epanet.rpt function
-	source("../R/rptFuncs.r")
-file <- "example.rpt"
 	
   # read all the lines in the file 
   allLines <- readLines(file)

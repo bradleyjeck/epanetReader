@@ -21,24 +21,28 @@ test_that( "getID func works",{
 })
 
 
-test_that("msxSection2df works",{
+test_that("msxSection2df",{
 			
 			
-		 sect <-c(	
-			" <<< Node D >>>                              ", 
-			"                                             ", 
-			" Time            AS5       AStot       NH2CL ", 
-			" hr:min         UG/L        UG/L        MG/L ", 
-			" -------  ----------  ----------  ---------- ", 
-			"    0:00        0.00        0.00        0.00 ", 
-			"    2:00        0.00        0.00        0.00 ", 
-			"    4:00        0.00        0.00        0.00 ", 
-			"    6:00        0.00        0.00        0.00 ", 
-			"    8:00        0.00        0.00        0.00 ", 
-			"   10:00        0.00        0.00        0.00 " )
-
-	
-	expect_equal("data.frame", class(msxSection2df( sect )) )
+			sect <-c(	
+					" <<< Node D >>>                              ", 
+					"                                             ", 
+					" Time            AS5       AStot       NH2CL ", 
+					" hr:min         UG/L        UG/L        MG/L ", 
+					" -------  ----------  ----------  ---------- ", 
+					"    0:00        0.00        0.00        0.00 ", 
+					"    2:00        0.00        0.00        0.00 ", 
+					"    4:00        0.00        0.00        0.00 ", 
+					"    6:00        0.00        0.00        0.00 ", 
+					"    8:00        0.00        0.00        0.00 ", 
+					"   10:00        0.00        0.00        0.00 " )
+		
+			
+		    df <- msxSection2df( sect )	
+		 	
+			expect_equal("data.frame", class(df) )
+			
+			expect_equal("integer", class(df$timeInSeconds))
 			
 			
 		})

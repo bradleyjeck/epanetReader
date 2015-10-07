@@ -33,7 +33,8 @@ msxSection2df <- function( sect ){
   
   
   # convert that stamp into sections 
-  time_secs <-  .timeStampToSeconds(df$Time)
+  time_secs <-  sapply(df$Time, .timeStampToSeconds )
+  
   df$timeInSeconds <- time_secs
   
    # Make a new first column "ID" rather than

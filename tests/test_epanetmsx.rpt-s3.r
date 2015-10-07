@@ -7,17 +7,18 @@
 #
 #************************************
 
-
+source("../R/msxFuncs.r")
+source("../R/rptFuncs.r")
 source("../R/epanetmsx.rpt-s3.r")
 
 test_that( "epanetmsx.rpt-s3 reads",{
 			
+			mr <- epanetmsx.rpt( "example.rpt")
+			expect_equal("epanetmsx.rpt", class(mr))
+})
+
+test_that( "timeInSeconds ",{
 			
 			mr <- epanetmsx.rpt( "example.rpt")
-			
-			expect_true("epanetmsx.rpt", class(mr))
-			
-			
-			
-			
-		})
+			expect_equal("integer", class(mr$nodeResults$timeInSeconds))
+})

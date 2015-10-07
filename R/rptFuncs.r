@@ -52,7 +52,6 @@
 
 .timeStampToSeconds <- function( stamp ){
 
-	
 	tokens <- unlist(strsplit(stamp,":"))
 	
 	if( length(tokens) < 2 ){
@@ -65,17 +64,28 @@
 	
 	hours <- tokens[1]
 	minutes <- tokens[2]
+
+	m <- as.integer(minutes)
+	if( m > 59){
+		stop(paste0("invalid minutes in ", stamp))
+	}
+	
 	
 	totalSeconds <- as.integer(hours) * 3600 + 
-			        as.integer(minutes) * 60 
+			        m * 60 
 	
 	if( length( tokens)  == 3 ){ 
 		
 		seconds <- tokens[3]
+		s <- as.integer(seconds)
+		if( s > 59){
+			stop(paste0("invalid seconds in ", stamp))
+		}
+		
 		totalSeconds <- totalSeconds +  as.integer(seconds) 
 	}
 	
-	return( totalSeconds ) 
+	return( as.integer(totalSeconds) ) 
 }
 
 .section2df <- function( sect ){
