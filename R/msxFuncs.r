@@ -30,16 +30,22 @@ msxSection2df <- function( sect ){
 		  col.names=columnNames,
 		  colClasses = cc, 
 		  strip.white = TRUE, fill = TRUE, header = FALSE )
-  
+
+  # put an id column
+   df$ID <- getID(sect[1])
+	
+   # move it to the first col 
+   df <- df[ , c('ID', columnNames)]	
   
   # convert that stamp into sections 
   time_secs <-  sapply(df$Time, .timeStampToSeconds )
   
   df$timeInSeconds <- time_secs
   
-   # Make a new first column "ID" rather than
+   # Make a new column "ID" rather than
    # "Node" or "Link"  to be consistent with inp objects
-   df$ID <- getID(sect[1])
+   
+   
 
 	return( df ) 
 }
@@ -57,4 +63,15 @@ getID <-function( marker ){
 	ID <- gsub("\\s", "", m4)
 	
 	return(ID)
+}
+
+getTitle <-function( allLines ) {
+
+# it's between ********   and <<<< 
+  
+  stars <- grep("\\*{3,}", allLines) 
+  i <- max(stars) + 2 
+  title <- allLines[i] 
+  return(title) 
+
 }

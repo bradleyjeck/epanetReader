@@ -43,9 +43,15 @@ test_that("msxSection2df",{
 			expect_equal("data.frame", class(df) )
 			
 			expect_equal("integer", class(df$timeInSeconds))
-			
-			
+			expect_equal("ID", names(df)[1])
 		})
 			
 			
-	
+test_that("getTitle",{
+
+
+       t <- getTitle( readLines("example.rpt"))
+       actual <- grepl("Arsenic Oxidation/Adsorption Example", t) 
+       expect_true(actual) 
+
+        })    
