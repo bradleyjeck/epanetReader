@@ -55,3 +55,10 @@ test_that("getTitle",{
        expect_true(actual) 
 
         })    
+
+test_that(" no title is null",{
+			
+			t <- getTitle( readLines("example-noTitle.rpt"))
+			expect_true(is.null(t))
+			
+		})

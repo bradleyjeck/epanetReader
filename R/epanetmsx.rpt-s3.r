@@ -11,7 +11,12 @@
 # and node results
 # 
 
-
+read.msxprt <-function( file ){
+	
+	mro <- epanetmsx.rpt(file)
+	return( mro)
+	
+}
 
 
 #' Read msx results 
@@ -107,30 +112,43 @@ summary.epanetmsx.rpt <- function( object, ...){
   
   # unique node IDs 
   uni <- unique(object$nodeResults$ID)
-
-  # node result names
-  nrn <- names(object$nodeResults) 
-
-  # node result summary over species  
-  jmax <- length(nrn) - 1 
-  nrs <- summary( object$nodeResults[,3:jmax])
-
-  # time info for nodes 
-  nodeTimeRangeSecs <- range(object$nodeResults$timeInSeconds)
-  nodeDeltaT <- mean(diff( object$nodeResults$timeInSeconds) )
-
+  if( length(uni) > 0 ){
+	  # node result names
+	  nrn <- names(object$nodeResults) 
+	  
+	  # node result summary over species  
+	  jmax <- length(nrn) - 1 
+	  nrs <- summary( object$nodeResults[,3:jmax])
+	  
+	  # time info for nodes 
+	  nodeTimeRangeSecs <- range(object$nodeResults$timeInSeconds)
+	  nodeDeltaT <- mean(diff( object$nodeResults$timeInSeconds) )
+	  
+  } else {
+	  # no node results 
+	  nodeTimeRangeSecs <- NULL
+	  nodeDeltaT <- NULL
+	  nrs <- NULL 
+	  
+  }
 
   ###############
   # link results
   ###############
 
   uli <- unique(object$linkResults$ID)
-  lrn <- names(object$linkResults) 
-  jmax <- length(lrn) - 1 
-  lrs <- summary( object$linkResults[,3:jmax])
-  linkTimeRangeSecs <- range(object$linkResults$timeInSeconds)
-  linkDeltaT <- mean(diff( object$linkResults$timeInSeconds) )
- 
+  if( length(uli) > 0 ){
+	  lrn <- names(object$linkResults) 
+	  jmax <- length(lrn) - 1 
+	  lrs <- summary( object$linkResults[,3:jmax])
+	  linkTimeRangeSecs <- range(object$linkResults$timeInSeconds)
+	  linkDeltaT <- mean(diff( object$linkResults$timeInSeconds) )
+  } else {
+	  # no links 
+	  linkTimeRangeSecs <- NULL
+	  linkDeltaT <- NULL 
+	  lrs <- NULL 
+  }
   
   
   # collect into an object 

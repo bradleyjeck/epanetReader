@@ -72,6 +72,11 @@ getTitle <-function( allLines ) {
   stars <- grep("\\*{3,}", allLines) 
   i <- max(stars) + 2 
   title <- allLines[i] 
+  
+  hasTitle <- grepl("[A-Za-z]", title)
+  if( hasTitle == FALSE){
+	  title <- NULL
+  } 
   return(title) 
 
 }
