@@ -64,10 +64,14 @@ test_that(" no title works ",{
 test_that(" plot works" ,{
 			
 			x <- epanetmsx.rpt( "example.rpt")
-			windows()
 			plot(x)
-			fail("handle specifiying which nodes to plot")
-			
+                 plot(x,Nodes = 'C')
+                 plot(x,Nodes = 'C', Links = NULL )  
+                 plot(x,Nodes = NULL, Links = '5' )  		
+})
+
+test_that("plot works for another case",{
+   fail("add another case here") 
 })
 
 

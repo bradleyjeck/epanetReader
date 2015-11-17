@@ -215,8 +215,8 @@ print.summary.epanetmsx.rpt <- function(x,...){
 #' 
 #' @export 
 #' @param x epanetmsx.rpt object
-#' @param ... 
-#' 
+#' @param Nodes vector of node IDs to plot, 'all' to plot all of them or NULL to plot none 
+#' @param Links vector of link IDs to plot, 'all' to plot all of them or NULL to plot none 
 #' @details Creates a matrix of plots where each entry
 #' plots the timeseries of one species. Each row of the plotted matrix
 #' corresponds to a node or link.  The order
@@ -225,8 +225,35 @@ plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
 	
 	# decide on the size of the matrix of plots
 	sx <- summary(x)
+
+	# number of nodes to plot
+      if( is.null(Nodes[1])){
+        # don't plot any nodes 
+        nntp <- 0 
+
+	} else if( grepl("all", Nodes[1], ignore.case = TRUE) )  { 
+	   nntp <- sx$numNodes
+	   NodeIDs <- sx$uniqueNodeIDs
+	} else {
+	   nntp <- length(Nodes)
+	   NodeIDs <- Nodes 
+        }  
+
+	# number of links to plot
+      if( is.null(Links[1] )){
+        # don't plot any links 
+        nltp <- 0 
+
+	} else if( grepl("all", Links[1], ignore.case = TRUE) ) { 
+	   nltp <- sx$numLinks
+	   LinkIDs <- sx$uniqueLinkIDs
+	} else {
+	   nltp <- length(Links)
+	   LinkIDs <- Links 
+        }  
+	
 	# number of rows in plot matrix  
-	pnr <- sx$numNodes + sx$numLinks
+	pnr <- nntp + nltp 
 	
 	# number of node species
 	nns <- dim(sx$nodeResSmry)[2]
@@ -235,19 +262,17 @@ plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
 	# number of cols in plot matrix 
 	pnc <- max( nns, nls)
 	
-    # create the matrix of plots 
+        # create the matrix of plots 
 	par( mfrow = c( pnr, pnc), las = 1, mar = c(3,3,2,1) )
 
 	
 	# loop through the nodes
-	if( sx$numNodes > 0 ){
+	if( nntp > 0 ){
 		
-		
-		
-		for( i in 1:sx$numNodes){
+		for( i in 1:nntp ){
 			
 			#epanetID of the node
-			epanetID <- sx$uniqueNodeIDs[i]
+			epanetID <- NodeIDs[i]
 			
 			for( j in 1:nns){
 				species <- sx$nodeSpecies[j] 
@@ -255,7 +280,7 @@ plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
 				# data to plot 
 				dtp <- subset( x$nodeResults, ID == epanetID, select = c('timeInSeconds',species))
 				
-				plot( dtp$timeInSeconds / 3600, dtp[,2], xlab ="", ylab="")
+				plot( dtp$timeInSeconds / 3600, dtp[,2], xlab ="", ylab="" )
 				title( line = 2, xlab = 'Time (hour)', ylab = species ) 
 				title( main = paste("Node", epanetID), line = 0.5)
 				 
@@ -272,10 +297,10 @@ plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
 	}
 	
 	# loop through the links 
-	if( sx$numLinks > 0){
-		for( i in 1:sx$numLinks){
+	if( nltp > 0){
+		for( i in 1:nltp){
 			
-			epanetID <- sx$uniqueLinkIDs[i]
+			epanetID <- LinkIDs[i]
 			
 			# loop over species 
 			for( j in 1:nls){
@@ -283,8 +308,7 @@ plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
 				
 				#data to plot 
 				dtp <- subset( x$linkResults, ID == epanetID, select = c('timeInSeconds', species))
-				plot( dtp$timeInSeconds / 3600, dtp[,2], 
-						xlab = '', ylab = '' ) 
+				plot( dtp$timeInSeconds / 3600, dtp[,2], xlab = '', ylab = '' )
 				title( line = 2, xlab = 'Time (hour)', ylab = species ) 
 				title( main = paste("Link", epanetID), line = 0.5)
 				
