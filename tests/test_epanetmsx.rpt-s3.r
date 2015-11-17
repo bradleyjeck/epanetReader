@@ -62,7 +62,12 @@ test_that(" no title works ",{
 })
 
 test_that(" plot works" ,{
-          fail()
+			
+			x <- epanetmsx.rpt( "example.rpt")
+			windows()
+			plot(x)
+			fail("handle specifiying which nodes to plot")
+			
 })
 
 

@@ -11,7 +11,7 @@
 # and node results
 # 
 
-read.msxprt <-function( file ){
+read.msxrpt <-function( file ){
 	
 	mro <- epanetmsx.rpt(file)
 	return( mro)
@@ -118,7 +118,11 @@ summary.epanetmsx.rpt <- function( object, ...){
 	  
 	  # node result summary over species  
 	  jmax <- length(nrn) - 1 
-	  nrs <- summary( object$nodeResults[,3:jmax])
+	  # species results
+	  nsr <- object$nodeResults[,3:jmax]
+	  # species names
+	  nds <- names(nsr)	
+	  nrs <- summary(nsr )
 	  
 	  # time info for nodes 
 	  nodeTimeRangeSecs <- range(object$nodeResults$timeInSeconds)
@@ -129,6 +133,7 @@ summary.epanetmsx.rpt <- function( object, ...){
 	  nodeTimeRangeSecs <- NULL
 	  nodeDeltaT <- NULL
 	  nrs <- NULL 
+	  nds <- NULL 
 	  
   }
 
@@ -140,7 +145,9 @@ summary.epanetmsx.rpt <- function( object, ...){
   if( length(uli) > 0 ){
 	  lrn <- names(object$linkResults) 
 	  jmax <- length(lrn) - 1 
-	  lrs <- summary( object$linkResults[,3:jmax])
+	  lsr <- object$linkResults[,3:jmax]
+	  lks <- names(lsr)
+	  lrs <- summary(lsr )
 	  linkTimeRangeSecs <- range(object$linkResults$timeInSeconds)
 	  linkDeltaT <- mean(diff( object$linkResults$timeInSeconds) )
   } else {
@@ -148,6 +155,7 @@ summary.epanetmsx.rpt <- function( object, ...){
 	  linkTimeRangeSecs <- NULL
 	  linkDeltaT <- NULL 
 	  lrs <- NULL 
+	  lks <- NULL 
   }
   
   
@@ -156,12 +164,14 @@ summary.epanetmsx.rpt <- function( object, ...){
                       #nodes 
                       numNodes = length( uni ), 
                       uniqueNodeIDs = uni,
+					  nodeSpecies = nds,
                       nodeTimeRangeInSeconds = nodeTimeRangeSecs,
                       nodeTimestep = nodeDeltaT,
                       nodeResSmry = nrs,
                       #links
                       numLinks = length( uli ),
                       uniqueLinkIDs = uli,
+					  linkSpecies = lks,
                       linkTimeRangeInSeconds = linkTimeRangeSecs,
                       linkTimestep = linkDeltaT,
                       linkResSmry = lrs ) 
@@ -196,3 +206,97 @@ print.summary.epanetmsx.rpt <- function(x,...){
   print( x$linkResSmry)
 
 }
+
+
+
+#' Plot method for epanetmsx.rpt
+#' 
+#' Create plot matrix of Epanet-msx results 
+#' 
+#' @export 
+#' @param x epanetmsx.rpt object
+#' @param ... 
+#' 
+#' @details Creates a matrix of plots where each entry
+#' plots the timeseries of one species. Each row of the plotted matrix
+#' corresponds to a node or link.  The order
+#' of species for the columns is taken from the order in the file
+plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
+	
+	# decide on the size of the matrix of plots
+	sx <- summary(x)
+	# number of rows in plot matrix  
+	pnr <- sx$numNodes + sx$numLinks
+	
+	# number of node species
+	nns <- dim(sx$nodeResSmry)[2]
+	# number of link species 
+	nls <- dim(sx$linkResSmry)[2]
+	# number of cols in plot matrix 
+	pnc <- max( nns, nls)
+	
+    # create the matrix of plots 
+	par( mfrow = c( pnr, pnc), las = 1, mar = c(3,3,2,1) )
+
+	
+	# loop through the nodes
+	if( sx$numNodes > 0 ){
+		
+		
+		
+		for( i in 1:sx$numNodes){
+			
+			#epanetID of the node
+			epanetID <- sx$uniqueNodeIDs[i]
+			
+			for( j in 1:nns){
+				species <- sx$nodeSpecies[j] 
+				
+				# data to plot 
+				dtp <- subset( x$nodeResults, ID == epanetID, select = c('timeInSeconds',species))
+				
+				plot( dtp$timeInSeconds / 3600, dtp[,2], xlab ="", ylab="")
+				title( line = 2, xlab = 'Time (hour)', ylab = species ) 
+				title( main = paste("Node", epanetID), line = 0.5)
+				 
+				
+				# need to insert some blank plots to fill the end of the row 
+				if( (nns < nls) & (j == nns) ){
+					nb <- nls - nns 
+					for( k in 1:nb){
+						plot.new()
+					}
+				}
+			}
+		}
+	}
+	
+	# loop through the links 
+	if( sx$numLinks > 0){
+		for( i in 1:sx$numLinks){
+			
+			epanetID <- sx$uniqueLinkIDs[i]
+			
+			# loop over species 
+			for( j in 1:nls){
+				species <- sx$linkSpecies[j]
+				
+				#data to plot 
+				dtp <- subset( x$linkResults, ID == epanetID, select = c('timeInSeconds', species))
+				plot( dtp$timeInSeconds / 3600, dtp[,2], 
+						xlab = '', ylab = '' ) 
+				title( line = 2, xlab = 'Time (hour)', ylab = species ) 
+				title( main = paste("Link", epanetID), line = 0.5)
+				
+				if( (nls < nns) & (j == nls) ){
+					# need to insert some blank plots to fill the end of the row 
+					nb <- nns - nls  
+					for( k in 1:nb){
+						plot.new()
+					}
+				}
+			}
+		}
+	}
+}
+
