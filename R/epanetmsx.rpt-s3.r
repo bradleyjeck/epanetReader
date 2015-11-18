@@ -256,15 +256,14 @@ plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
 	pnr <- nntp + nltp 
 	
 	# number of node species
-	nns <- dim(sx$nodeResSmry)[2]
+	nns <- length(sx$nodeSpecies)
 	# number of link species 
-	nls <- dim(sx$linkResSmry)[2]
+	nls <- length(sx$linkSpecies) 
 	# number of cols in plot matrix 
 	pnc <- max( nns, nls)
 	
         # create the matrix of plots 
-	par( mfrow = c( pnr, pnc), las = 1, mar = c(3,3,2,1) )
-
+	opar <- par( mfrow = c( pnr, pnc), mar = c(5.1,4.1,4.1,2.1) ) # mar = c(3,3,2,1) ) 
 	
 	# loop through the nodes
 	if( nntp > 0 ){
@@ -322,5 +321,8 @@ plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
 			}
 		}
 	}
+	
+	#return par to usual settings
+    par(opar)
 }
 

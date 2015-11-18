@@ -70,8 +70,9 @@ test_that(" plot works" ,{
                  plot(x,Nodes = NULL, Links = '5' )  		
 })
 
-test_that("plot works for another case",{
-   fail("add another case here") 
-})
+#test_that("plot works for another case",{
+#     x <- read.msxrpt("5deg.msxrpt")
+#	 plot(x)
+#})
 
 
