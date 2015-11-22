@@ -232,7 +232,7 @@ plot chlorine concentration over time at each node in the network.
 library(ggplot2)
 qplot( data= n1r$nodeResults,  
        x = timeInSeconds/3600, y = Chlorine, 
-       facets = ~Node, xlab = "Hour")  
+       facets = ~ID, xlab = "Hour")  
 ```
 
 ![Net 1 Cl plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1cl.png)

@@ -624,3 +624,22 @@ TITLE <- function( allLines ){
 }
 
 
+STATUS <- function( allLines ){
+	
+	tag <- "\\[STATUS]"
+    df <- .inpSection2df(tag, allLines )
+	
+	if( is.null( df ) ){
+		return( NULL )  
+	} else {   
+		# now process the column names according to what was input
+		names(df)[1] <- "ID"
+		df$ID <- as.character(df$ID)
+		
+		names(df)[2] <- "Status"
+
+		return(df)
+	}
+}
+
+
