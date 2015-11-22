@@ -52,6 +52,7 @@
 #' \item{Pipes}{data.frame}
 #' \item{Pumps}{data.frame}
 #' \item{Valves}{data.frame}
+#' \item{Status}{data.frame}
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
 #' \item{Energy}{character}
@@ -97,6 +98,7 @@ epanet.inp <- function( file ){
   crvs <- CURVES(allLines)
   #ctrl
   engy <- ENERGY(allLines)
+  stat <- STATUS(allLines)
   #emit
   #qlty
   #srcs
@@ -121,6 +123,7 @@ epanet.inp <- function( file ){
                Patterns = pats,
                Curves = crvs,
                Energy = engy,
+			   Status = stat,
                Times = tims,
                Options = opts,
                Coordinates = coor)               

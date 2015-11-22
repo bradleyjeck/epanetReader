@@ -211,6 +211,15 @@ test_that("title reads correctly",
 })
 
 
+test_that("[STATUS]  reads ok" ,{
+			
+	stat <- STATUS( readLines("Net3.inp"))
+	expect_that( stat[1,1], equals('10') )
+	expect_that( stat[1,2], equals("Closed"))
+			
+			
+		})
+
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {
