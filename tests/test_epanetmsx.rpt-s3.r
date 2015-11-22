@@ -71,8 +71,12 @@ test_that(" plot works" ,{
 })
 
 #test_that("plot works for another case",{
-#     x <- read.msxrpt("5deg.msxrpt")
-#	 plot(x)
+     x <- read.msxrpt("5deg.msxrpt")
+
+pairs(x$nodeResults[,3:8])
+x$nodeResults
+
+	 plot(x)
 #})
 
 

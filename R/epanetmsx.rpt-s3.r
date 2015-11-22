@@ -221,108 +221,99 @@ print.summary.epanetmsx.rpt <- function(x,...){
 #' plots the timeseries of one species. Each row of the plotted matrix
 #' corresponds to a node or link.  The order
 #' of species for the columns is taken from the order in the file
-plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = "All", ...){
-	
-	# decide on the size of the matrix of plots
-	sx <- summary(x)
+plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = NULL, ...){
 
-	# number of nodes to plot
-      if( is.null(Nodes[1])){
-        # don't plot any nodes 
-        nntp <- 0 
+  Nodes <- 'all'
+  Links <- NULL 
 
-	} else if( grepl("all", Nodes[1], ignore.case = TRUE) )  { 
-	   nntp <- sx$numNodes
-	   NodeIDs <- sx$uniqueNodeIDs
-	} else {
-	   nntp <- length(Nodes)
-	   NodeIDs <- Nodes 
-        }  
 
-	# number of links to plot
-      if( is.null(Links[1] )){
-        # don't plot any links 
-        nltp <- 0 
 
-	} else if( grepl("all", Links[1], ignore.case = TRUE) ) { 
-	   nltp <- sx$numLinks
-	   LinkIDs <- sx$uniqueLinkIDs
-	} else {
-	   nltp <- length(Links)
-	   LinkIDs <- Links 
-        }  
-	
-	# number of rows in plot matrix  
-	pnr <- nntp + nltp 
-	
-	# number of node species
-	nns <- length(sx$nodeSpecies)
-	# number of link species 
-	nls <- length(sx$linkSpecies) 
-	# number of cols in plot matrix 
-	pnc <- max( nns, nls)
-	
-        # create the matrix of plots 
-	opar <- par( mfrow = c( pnr, pnc), mar = c(5.1,4.1,4.1,2.1) ) # mar = c(3,3,2,1) ) 
-	
-	# loop through the nodes
-	if( nntp > 0 ){
-		
-		for( i in 1:nntp ){
-			
-			#epanetID of the node
-			epanetID <- NodeIDs[i]
-			
-			for( j in 1:nns){
-				species <- sx$nodeSpecies[j] 
-				
-				# data to plot 
-				dtp <- subset( x$nodeResults, ID == epanetID, select = c('timeInSeconds',species))
-				
-				plot( dtp$timeInSeconds / 3600, dtp[,2], xlab ="", ylab="" )
-				title( line = 2, xlab = 'Time (hour)', ylab = species ) 
-				title( main = paste("Node", epanetID), line = 0.5)
-				 
-				
-				# need to insert some blank plots to fill the end of the row 
-				if( (nns < nls) & (j == nns) ){
-					nb <- nls - nns 
-					for( k in 1:nb){
-						plot.new()
-					}
-				}
-			}
-		}
-	}
-	
-	# loop through the links 
-	if( nltp > 0){
-		for( i in 1:nltp){
-			
-			epanetID <- LinkIDs[i]
-			
-			# loop over species 
-			for( j in 1:nls){
-				species <- sx$linkSpecies[j]
-				
-				#data to plot 
-				dtp <- subset( x$linkResults, ID == epanetID, select = c('timeInSeconds', species))
-				plot( dtp$timeInSeconds / 3600, dtp[,2], xlab = '', ylab = '' )
-				title( line = 2, xlab = 'Time (hour)', ylab = species ) 
-				title( main = paste("Link", epanetID), line = 0.5)
-				
-				if( (nls < nns) & (j == nls) ){
-					# need to insert some blank plots to fill the end of the row 
-					nb <- nns - nls  
-					for( k in 1:nb){
-						plot.new()
-					}
-				}
-			}
-		}
-	}
-	
-	#return par to usual settings
-    par(opar)
+  # argument checking - either Nodes OR Links should be NULL 
+  nn <- is.null(Nodes)
+  ln <- is.null(Links) 
+  if( nn & ln ) stop("Nodes = NULL  & Links = NULL . . . nothing to plot")
+  if( (nn + ln )== 0 ) stop("one of the arguments Nodes OR Links must be NULL") 
+
+  # compute summary of input
+  sx <- summary(x) 
+
+  # plotting for nodes 
+#  if( nn == FALSE ){
+    # nodes are plotted, confirm we have node results 
+    if( is.null(x$nodeResults)){stop("no node results to plot")}
+    # plotted num cols 
+    if( grepl("all", Nodes[1], ignore.case = TRUE) )  { 
+	   
+	   IDs <- sx$uniqueNodeIDs
+         stp <- sx$nodeSpecies  
+
+    } else {
+	   
+	   IDs <- Nodes 
+         stp <- sx$nodeSpecies  
+    }
+
+    # get the data to plot
+
+    results <- x$nodeResults
+
+    # species to plot 
+    # number of species 
+    nrow <- length(stp)
+    ncol <- length(IDs) 
+
+    dtp <- results[ which( results$ID %in% IDs == TRUE ) , ] 
+
+    # create plot region 
+    par( mfrow = c( nrow, ncol), oma = c(5,5,5,5), mar = c(0,0,0,0) )
+    # widths for outer margin titles 
+    omd <- par('omd')
+    pltwid <- (omd[2] - omd[1]) / ncol
+
+
+    # loop through speices  
+    for( i in 1:nrow){ 
+   
+        species <- stp[i]
+        print( paste('species =', species)) 
+        yrange <- range( subset(dtp, select = species) ) 
+
+        # loop over nodes or links 
+        for( j in 1:ncol){ 
+            epanetID <- IDs[j]
+            dtp2 <- subset( dtp, ID == epanetID, select = c( 'timeInSeconds', species) ) 
+              
+           plot( dtp2$timeInSeconds / 3600, dtp2[,2], 
+                  xlab ='', ylab = '', ylim = yrange,
+                  xaxt= 'n', yaxt = 'n' )
+
+            # only add axes in certain cases 
+            if( i == 1 ){
+               axis( side = 3 )                              
+            } 
+            if( j == 1){
+               axis( side = 2 )  
+               title( ylab = species ) 
+            }
+            if( i == nrow ){
+               axis( side = 1) 
+               title( xlab = "Hour", 
+                      sub = paste("Node", epanetID) ) 
+            }
+            
+            if( j == ncol ) axis( side = 4) 
+         }
+     }
 }
+  
+
+
+
+
+
+ 
+
+
+
+
 
