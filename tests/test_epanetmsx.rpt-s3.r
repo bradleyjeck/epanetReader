@@ -79,4 +79,82 @@ x$nodeResults
 	 plot(x)
 #})
 
+test_that("sparklines plot of results"),{
+	
+     x <- read.msxrpt("5deg.msxrpt")
+	 sx <- summary(x)
+ 
+ nr <- 12
+ nc <- 16
+ 
+ nspec <- 5
 
+header <- c(1, unlist( lapply ( 2:(nspec+1), FUN = rep, times = 3 ) ) ) # param name takes up 3 columns 
+ki2j1 <- tail( header, 1 ) + 1  
+vals <- c(header, seq( from = ki2j1, by = 1, length.out = (nr-1) * nc ) )  
+ 
+ M <- matrix( data =vals, nrow = nr, ncol = nc, byrow = TRUE)
+ 
+
+#funcs that get re-used 
+	plotWord <- function(w, ...){
+	
+       if( is.numeric(w) ) {
+		   
+		   w <- format( w, digits = 2)
+	   } 
+ 
+		plot(c(0,1),c(0,1), type = 'n', 
+				xaxt='n', yaxt='n', xlab = '', ylab = '', 
+				frame.plot = FALSE )
+		text( .5, .5, w, ...) 
+		
+	}
+	
+	plotSpark <- function( x ){
+		N <- length(x)
+		plot(x, type = 'l', col = 'gray',  
+				xaxt='n', yaxt='n', xlab = '', ylab = '', 
+				frame.plot = FALSE )
+		points( 1, x[1], pch = 16 )
+		points( N, x[N], pch = 16 )  
+	}
+
+   # create the plot grid 
+	par( mar = c(0,0,0,0), oma = rep(1,4))
+	layout( mat = M, respect = FALSE  )
+	# plot the header 
+	plotWord("Node", cex = 1.5  )
+	for( j in 1:nspec){
+		plotWord(sx$nodeSpecies[j], cex =1.5  )
+	}
+	
+	# put IDs in a decent order
+    IDs <- sort(as.integer(sx$uniqueNodeIDs))
+	
+	nIDs <- length(IDs)
+	
+	for( j in 1:nIDs){
+		# node id 
+		plotWord(IDs[j])	
+		
+		for( k in 1:nspec){
+			# first param, start value 
+			paramTimeSeries <- subset( x$nodeResults, ID == IDs[j], select = c( sx$nodeSpecies[ k ], 'timeInSeconds') ) 
+			# make sure we're in the right order 
+			xx <- paramTimeSeries[ order(paramTimeSeries$timeInSeconds) ,1]
+			plotWord( head(xx,1) ) 
+			plotSpark( xx )
+			plotWord( tail(xx,1) ) 
+		}
+	}
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ }

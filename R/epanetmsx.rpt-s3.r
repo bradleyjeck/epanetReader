@@ -10,7 +10,8 @@
 # need to create data.frame of link results
 # and node results
 # 
-
+#' @export 
+#' @aliases epanetmsx.rpt 
 read.msxrpt <-function( file ){
 	
 	mro <- epanetmsx.rpt(file)
