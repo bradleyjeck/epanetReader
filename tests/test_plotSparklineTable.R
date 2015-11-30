@@ -5,6 +5,9 @@
 
 
 source("../R/plotSparklineTable.r")
+source("../R/epanetmsx.rpt-s3.r")
+source("../R/msxFuncs.r")
+source("../R/rptFuncs.r")
 
 context("Plot Sparkline Table")
 
@@ -24,9 +27,60 @@ test_that("argument checking works",{
 		})
 
 
-test_that("layout matrix works",{
+test_that("sparkline data matrix",{
 			
-			A <- getLayoutMatrix( 11, 5, show.legend = F)
-			expect_equal( A[12,16], 182 )
+#			df = Theoph
+#			row.var = 'Subject'
+#            this.row.var = '1' 
+#			col.var = 'conc'
+#            xvar = NULL 
+			
+			M <- sparklineData( Theoph, 'Subject', 1, 'conc', xvar = NULL)
+			expect_equal(M[1,1], 1)
+			expect_equal(class(M), 'matrix')
+			
+			M <- sparklineData( Theoph, 'Subject', 1, 'conc', xvar = 'Time')
+			expect_equal(M[1,1], 0)
+			expect_equal(class(M), 'matrix')
+		})
+
+test_that("msx example is ok",{
+			
+		mr <- read.msxrpt("example.rpt")	
+	#windows()	
+		plotSparklineTable( mr$nodeResults, row.var = 'ID', col.vars = c("AS5", "AStot", "NH2CL"))
 			
 		})
+
+test_that("5deg example is ok",{
+			mr <- read.msxrpt("5deg.msxrpt")
+		plotSparklineTable( mr$nodeResults, row.var = 'ID', col.vars = names(mr$nodeResults)[3:7])
+		title("5deg", outer = T)
+			
+		})
+
+test_that("datasets::Orange",{
+			plotSparklineTable( Orange, row.var = 'Tree', col.vars = c('age','circumference'))
+			plotSparklineTable( Orange, row.var = 'Tree', col.vars = 'circumference', xvar = 'age' )
+		})
+
+test_that("datasets::CO2",{
+			
+			plotSparklineTable( CO2, row.var = 'Plant', col.vars = c('conc', 'uptake'))
+		})
+test_that("datasets::Loglolly",{
+			
+			plotSparklineTable( Loblolly, row.var = 'Seed', col.vars = 'height', xvar = 'age')
+			
+		})
+
+test_that("datasets::Theoph",{
+		
+			plotSparklineTable( Theoph, 'Subject', 'conc')
+			plotSparklineTable( Theoph, 'Subject', 'conc', xvar = 'Time')
+		})
+
+test_that("xvar warning",{
+			fail("issue warning if data have different ranges of xvar")
+		})
+
