@@ -100,3 +100,45 @@ test_that("IDs are characters",{
 			
 			expect_true(class(df$ID) == "character")
 		})
+
+
+context("converting timestamps to seconds")
+
+test_that(" two colons parse to HH:MM:SS",{
+			
+			ts <- " 2:30:44"
+            x <- 2*3600+30*60+44
+			a<- .timeStampToSeconds(ts)
+			
+			expect_equal( x, a)
+		})
+
+
+test_that(" 0:00 parses as HH:MM",{
+			
+			ts <- " 2:30"
+            x <- 2*3600+30*60
+			a <- .timeStampToSeconds(ts)
+			
+			expect_equal( x, a)
+		})
+
+test_that(" 00:00:00:00 gives error",{
+			
+			ts <- " 2:30:11:22"
+			expect_error( .timeStampToSeconds(ts) )
+		})
+
+test_that(" 00 gives error",{
+			
+			ts <- " 22"
+			expect_error( .timeStampToSeconds(ts) )
+		})
+
+test_that(" returns integer",{
+			
+			ts <- " 2:33"
+			x <- .timeStampToSeconds(ts)
+			expect_equal('integer', class(x))
+			
+		})

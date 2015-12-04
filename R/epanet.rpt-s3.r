@@ -151,7 +151,7 @@ epanet.rpt <- function( file){
 
 #' Summary of Epanet Simulation Results
 #'
-#' Provides a basic sumary of simulation results 
+#' Provides a basic summary of simulation results 
 #'
 #' @export
 #' @param  object of epanet.rpt class

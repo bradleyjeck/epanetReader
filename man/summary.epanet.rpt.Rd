@@ -12,7 +12,7 @@
 \item{...}{further arguments passed to summary()}
 }
 \description{
-Provides a basic sumary of simulation results
+Provides a basic summary of simulation results
 }
 \details{
 Summary of pipe results shows positive and negative
