@@ -9,8 +9,8 @@ to access network information for subsequent analysis and visualization. This
 is a real strength of R however, and there many tools already existing in R to
 support analysis and visualization.  
 
-Reading an .inp or .rpt file creates an s3 object which can be used with the
-usual generic methods. 
+Reading an .inp or .rpt file (from Epanet or Epanet-msx) creates an s3 object which can be used with the
+usual generic methods.  
 
 The package is also useful in conjunction with the ggplot2 and animation
 packages. 
@@ -99,7 +99,7 @@ the node ID is stored as a character rather than an integer or factor.
                     Max.   :710.0   Max.   :200.0                 
 ```
 
-### Simulation Results 
+### Epanet Simulation Results 
 
 Results of the network simulation specified in Net.inp may be stored in
 Net1.rpt by running Epanet from the command line. Note that the report section
@@ -220,6 +220,41 @@ info make visualizing the results easier.
   9                -1866.18    800.00      0.00      1.00  Reservoir
   2                  766.18    970.00     52.00      1.00  Tank
 ```
+
+### Epanet-msx simulation results 
+
+Results of a multi-species simulation by Epanet-msx can be read as well. 
+
+The read.msxrpt() function creates an s3 object of class epanetmsx.rpt.
+Similar to the approach above, there is a data frame for node results
+and link results. 
+
+```R
+> x <- read.msxrpt("5deg.msxrpt")
+> names(x)
+[1] "Title"       "nodeResults" "linkResults"
+> summary(x)
+  Water Age + temp + Cl + TTHM + HAA6  
+ node results
+      AGE             TEMP              CL              TTHM       
+ Min.   :    0   Min.   : 5.000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.: 3233   1st Qu.: 5.302   1st Qu.:0.7282   1st Qu.:0.6792  
+ Median : 7508   Median : 5.652   Median :0.8283   Median :0.6850  
+ Mean   : 8446   Mean   : 6.298   Mean   :0.7104   Mean   :0.5808  
+ 3rd Qu.:12547   3rd Qu.: 6.023   3rd Qu.:0.9209   3rd Qu.:0.6915  
+ Max.   :27294   Max.   :10.000   Max.   :1.0000   Max.   :0.7703  
+      HAA6       
+ Min.   :0.0000  
+ 1st Qu.:0.7337  
+ Median :0.7387  
+ Mean   :0.6256  
+ 3rd Qu.:0.7443  
+ Max.   :0.8114  
+ Link results
+NULL
+```
+
+
 
 ## Usage with other packages  
 
