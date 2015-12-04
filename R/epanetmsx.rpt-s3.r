@@ -10,8 +10,17 @@
 # need to create data.frame of link results
 # and node results
 # 
-#' @export 
+#' Read msx results 
+#' 
+#' reads an Epanet-msx .rpt file into R
+#' 
 #' @aliases epanetmsx.rpt 
+#' @export 
+#' @param file the name of the file to read
+#' @return Returns an epanet.rpt S3 object with two data.frame elements. 
+#'
+#' \item{nodeResults}{data.frame}
+#' \item{linkResults}{data.frame}
 read.msxrpt <-function( file ){
 	
 	mro <- epanetmsx.rpt(file)
@@ -20,16 +29,6 @@ read.msxrpt <-function( file ){
 }
 
 
-#' Read msx results 
-#' 
-#' reads an Epanet-msx .rpt file into R
-#' 
-#' @export 
-#' @param file the name of the file to read
-#' @return Returns an epanet.rpt S3 object with two data.frame elements. 
-#'
-#' \item{nodeResults}{data.frame}
-#' \item{linkResults}{data.frame}
 epanetmsx.rpt <- function( file ) {
 # this based heavily on the epanet.rpt function
 	
@@ -212,101 +211,45 @@ print.summary.epanetmsx.rpt <- function(x,...){
 
 #' Plot method for epanetmsx.rpt
 #' 
-#' Create plot matrix of Epanet-msx results 
+#' Plots a sparkline table of Epanet-msx results 
 #' 
 #' @export 
 #' @param x epanetmsx.rpt object
-#' @param Nodes vector of node IDs to plot, 'all' to plot all of them or NULL to plot none 
-#' @param Links vector of link IDs to plot, 'all' to plot all of them or NULL to plot none 
-#' @details Creates a matrix of plots where each entry
-#' plots the timeseries of one species. Each row of the plotted matrix
-#' corresponds to a node or link.  The order
-#' of species for the columns is taken from the order in the file
-plot.epanetmsx.rpt <- function(x, Nodes = "All", Links = NULL, ...){
+#' @param elementType character indicating whether results for "nodes" or links" should be plotted 
+#' @param ... further arguments passed to plotSparklineTable 
+#' @seealso plotSparklineTable 
 
-  Nodes <- 'all'
-  Links <- NULL 
-
-
-
-  # argument checking - either Nodes OR Links should be NULL 
-  nn <- is.null(Nodes)
-  ln <- is.null(Links) 
-  if( nn & ln ) stop("Nodes = NULL  & Links = NULL . . . nothing to plot")
-  if( (nn + ln )== 0 ) stop("one of the arguments Nodes OR Links must be NULL") 
-
-  # compute summary of input
-  sx <- summary(x) 
-
-  # plotting for nodes 
-#  if( nn == FALSE ){
-    # nodes are plotted, confirm we have node results 
-    if( is.null(x$nodeResults)){stop("no node results to plot")}
-    # plotted num cols 
-    if( grepl("all", Nodes[1], ignore.case = TRUE) )  { 
-	   
-	   IDs <- sx$uniqueNodeIDs
-         stp <- sx$nodeSpecies  
-
-    } else {
-	   
-	   IDs <- Nodes 
-         stp <- sx$nodeSpecies  
-    }
-
-    # get the data to plot
-
-    results <- x$nodeResults
-
-    # species to plot 
-    # number of species 
-    nrow <- length(stp)
-    ncol <- length(IDs) 
-
-    dtp <- results[ which( results$ID %in% IDs == TRUE ) , ] 
-
-    # create plot region 
-    par( mfrow = c( nrow, ncol), oma = c(5,5,5,5), mar = c(0,0,0,0) )
-    # widths for outer margin titles 
-    omd <- par('omd')
-    pltwid <- (omd[2] - omd[1]) / ncol
-
-
-    # loop through speices  
-    for( i in 1:nrow){ 
-   
-        species <- stp[i]
-        print( paste('species =', species)) 
-        yrange <- range( subset(dtp, select = species) ) 
-
-        # loop over nodes or links 
-        for( j in 1:ncol){ 
-            epanetID <- IDs[j]
-            dtp2 <- subset( dtp, ID == epanetID, select = c( 'timeInSeconds', species) ) 
-              
-           plot( dtp2$timeInSeconds / 3600, dtp2[,2], 
-                  xlab ='', ylab = '', ylim = yrange,
-                  xaxt= 'n', yaxt = 'n' )
-
-            # only add axes in certain cases 
-            if( i == 1 ){
-               axis( side = 3 )                              
-            } 
-            if( j == 1){
-               axis( side = 2 )  
-               title( ylab = species ) 
-            }
-            if( i == nrow ){
-               axis( side = 1) 
-               title( xlab = "Hour", 
-                      sub = paste("Node", epanetID) ) 
-            }
-            
-            if( j == ncol ) axis( side = 4) 
-         }
-     }
+plot.epanetmsx.rpt <- function(x, elementType = 'Nodes',...){
+	
+	# argument checking 
+	if( length(elementType) > 1 ) stop("elementType must have length 1")
+	
+	sx <- summary(x)
+	
+	if( grepl("nodes", elementType, ignore.case = TRUE ) ){
+	
+	   xl <- c(   head(x$nodeResults$Time, 1),
+			      tail(x$nodeResults$Time, 1) ) 
+		
+		  plotSparklineTable( x$nodeResults, row.var = 'ID', col.vars = sx$nodeSpecies, 
+				xvar = 'timeInSeconds',
+				xrange.labels = xl , ... )
+		
+		
+	} else if( grepl("links", elementType, ignore.case = TRUE) ){
+		   xl <- c(   head(x$linkResults$Time, 1),
+			      tail(x$linkResults$Time, 1) ) 
+	
+		plotSparklineTable( x$linkResults, row.var = 'ID', col.vars = sx$linkSpeices, 
+				xvar = 'timeInSeconds',
+				xrange.labels = xl, ... )
+		
+	} else { 
+		
+		stop("illegal value of argument 'elementType' ")
+		
+	}
 }
-  
 
 
 

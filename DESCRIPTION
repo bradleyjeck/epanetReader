@@ -2,7 +2,7 @@ Package: epanetReader
 Type: Package
 Title: Read Epanet Files into R
 Version: 0.3.0-0001
-Date: 2015-10-05
+Date: 2015-12-04
 Author: Bradley J. Eck
 Maintainer: Bradley Eck <brad@bradeck.net>
 Depends: R (>= 3.0.0), graphics, utils
