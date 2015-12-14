@@ -16,11 +16,18 @@
 #' @param ID value in id.var on which to extract 
 #' @param yvar name of variable for the y values in the sparkline  
 #' @param xvar optional name of variable for horizontal axis of sparkline plots
-#' @details This function works on data.frames with one column of ID variables
-#'          and possibly several columns of other variables 
+#' @details 
+#' Creates an object with info for a single sparkline by extracting 
+#' from a data.frame.  The function works on data.frames with one column of ID variables
+#'          and possibly several columns of other variables.  The main use is 
+#'          as a helper function for building up a \link{sparklineTable}. 
 #' 
 #' @examples 
-#' ##TODO add examples here 
+#' ## look at the names in the built-in data set Theoph
+#' names(Theoph) 
+#' ## make sparkline object for the concentration over time in subject 2
+#' sl <- sparkline(df= Theoph, id.var = 'Subject', ID = 2, yvar='conc', xvar = 'Time') 
+#' plot(sl)
 sparkline <- function( df, id.var, ID, yvar, xvar){
 	
 	D <- df[ which( df[ , id.var] == ID ) , c( xvar, yvar )   ] 
@@ -60,14 +67,17 @@ sparkline <- function( df, id.var, ID, yvar, xvar){
 #' Plot a sparkline 
 #' 
 #' @export 
-#'@param x sparkline object   
+#' @param x sparkline object   
 #' @param ... further arguments passed to plot.default 
-#' 
+#' @details 
+#' Implementation of the generic plot function for a single sparkline object.
+#' The primarily used to build up plots of a sparklineTable
+#' @seealso sparkline
 plot.sparkline <- function( x, ... ){	
 	
 	dimxy <- dim(x)
 	N <- dimxy[1]
-	
+    # argument checking 	
 	if( dimxy[2] != 2 ) stop(" input x must have two columns")
 	
 	# give a 10% buffer in the vertical 

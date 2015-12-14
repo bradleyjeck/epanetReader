@@ -14,4 +14,11 @@
 \description{
 Plot a sparkline
 }
+\details{
+Implementation of the generic plot function for a single sparkline object.
+The primarily used to build up plots of a sparklineTable
+}
+\seealso{
+sparkline
+}
 

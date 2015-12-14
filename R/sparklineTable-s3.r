@@ -18,6 +18,8 @@
 #' @param xvar optional name of variable for horizontal axis of sparkline plots
 #' @param xrange.labels optional vector of length 2 with labels for the first
 #'        and last quantities plotted on x-axis, often a date and/or time
+#' @seealso plotSparklineTable
+#' 
 sparklineTable <- function( df, row.var, col.vars, xvar = NULL, xrange.labels = NULL ){
 	
 	#argument checking

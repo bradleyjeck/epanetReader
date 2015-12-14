@@ -21,6 +21,15 @@
 #'
 #' \item{nodeResults}{data.frame}
 #' \item{linkResults}{data.frame}
+#' @examples
+#' # path to Net1.inp example file included with this package
+#' msr <- file.path( find.package("epanetReader"), "extdata","example.rpt") 
+#' 
+#' #read the results into R
+#' x <- read.msxrpt(msr)
+#' names(x)
+#' summary(x)
+#' plot(x)
 read.msxrpt <-function( file ){
 	
 	mro <- epanetmsx.rpt(file)
@@ -218,7 +227,6 @@ print.summary.epanetmsx.rpt <- function(x,...){
 #' @param elementType character indicating whether results for "nodes" or links" should be plotted 
 #' @param ... further arguments passed to plotSparklineTable 
 #' @seealso plotSparklineTable 
-
 plot.epanetmsx.rpt <- function(x, elementType = 'Nodes',...){
 	
 	# argument checking 

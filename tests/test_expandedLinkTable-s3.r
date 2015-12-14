@@ -21,7 +21,8 @@ test_that("expanedLinkTable works for Net1",
 			
 			# pipes 
 			ept <- expandedLinkTable( Net1$Pipes, Net1$Coordinates)
-			expect_that(ept$y2[5], equals(40))
+			y2111 <- subset(ept, ID == '111', select = 'y2')
+			expect_that(as.numeric(y2111), equals(40))
 			
 			# pumps 
 			ept <- expandedLinkTable( Net1$Pumps, Net1$Coordinates)

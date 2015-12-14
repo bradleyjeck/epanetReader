@@ -167,8 +167,16 @@ print.summary.epanet.inp <- function(object, ...){
 #' Add lines for pipes, pumps and valves
 #'  from an epanet.inp object to an existing plot 
 #'  
-#' @param x epanet.inp object 
 #' @export 
+#' @param x epanet.inp object 
+#' @details 
+#' Helper function for building up a plot of the network by
+#' adding links to an existing plot.  
+#' @examples 
+#' ## make a new blank plot 
+#' plot( range(Net1$Coordinates$X), range(Net1$Coordinates$Y), type = 'n') 
+#' ## add the links
+#' plotInpLinks(Net1) 
 plotInpLinks <- function(x){
 	
   #############
@@ -180,7 +188,6 @@ plotInpLinks <- function(x){
           label = FALSE ) 
   }
 
-    
   #############
   #  Pumps  
   ############# 
@@ -214,8 +221,14 @@ plotInpLinks <- function(x){
 #' @export 
 #' @param x epanet.inp object
 #' @param plot.junctions logical indicating whether to plot junctions 
-#' @details  Tanks and Reservoirs are shown using plot characters (pch)
-#'           16 and 15. Junctions, if plotted, appear as pch ="."
+#' @details  Helper function for building up a network plot. Tanks and
+#' Reservoirs are shown using plot characters (pch) '           16 and 15.
+#' Junctions, if plotted, appear as pch ="."
+#' @examples 
+#' ## make a new blank plot 
+#' plot( range(Net1$Coordinates$X), range(Net1$Coordinates$Y), type = 'n') 
+#' ## add the nodes, including junctions 
+#' plotInpNodes(Net1, TRUE ) 
 plotInpNodes <- function( x, plot.junctions){
   ############# 
   #  Junctions 
@@ -253,11 +266,18 @@ plotInpNodes <- function( x, plot.junctions){
 #' 
 #' Add legend of network elements to the active plot 
 #' 
+#' @export  
 #' @param legend.locn keyword for location of legend. See details of legend()
 #'        function.
 #' @details
-#' Uses plot characters 16, 15, 8 and 25 for Tanks, Reservoirs, Pumps and Valves. 
-#' @export  
+#' Helper function for adding a legend to the active plot.  
+#' Uses plot characters 16, 15, 8 and 25 for Tanks, Reservoirs, Pumps and Valves 
+#' for compatibility with plotInpNodes() 
+#' @examples
+#' ## make a new blank plot 
+#' plot( c(0,1), c(0,1), type = 'n') 
+#' ## add the nodes, including junctions 
+#' plotElementsLegend('topright') 
 plotElementsLegend <- function(legend.locn) {
 	
   graphics::legend( legend.locn, bty = 'n',
@@ -277,6 +297,12 @@ plotElementsLegend <- function(legend.locn) {
 #' @param legend.locn character string passed to legend() specifying
 #'        the location of the legend on the plot 
 #' @param ... other arguments passed to plot()
+#' @details
+#' Implements the generic plot function for S3 objects of class epanet.inp.
+#' The plot is built from base graphics by creating a blank plot and then calling 
+#' the helper functions plotInpLinks(), plotInpNodes(), plotElementsLegend().  
+#' @examples
+#' plot(Net1) 
 plot.epanet.inp <- function( x, 
                              plot.junctions  = TRUE,
                              legend.locn = "topright",
@@ -297,7 +323,7 @@ plot.epanet.inp <- function( x,
         range(x$Coordinates$Y),
         type = 'n',
         xlab = "", xaxt = 'n',
-        ylab = "", yaxt = 'n' )
+        ylab = "", yaxt = 'n', ... )
 
   plotInpLinks(x)
   

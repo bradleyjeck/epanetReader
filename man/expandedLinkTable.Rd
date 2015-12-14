@@ -18,4 +18,9 @@ an expandedLinkTable object
 Create an expandedLinkTable object by adding node coordinates to a
 data frame of pipes, pumps, or valves.
 }
+\examples{
+x <- expandedLinkTable(Net1$Pipes, Net1$Coordinates)
+print(x)
+plot(x)
+}
 

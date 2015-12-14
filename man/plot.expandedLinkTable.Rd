@@ -23,6 +23,8 @@ add=FALSE creates a new plot.}
 plot an expanded link table
 }
 \details{
-links are drawn using segments()
+An implementation of the generic plot function for
+expandedLinkTable objects. Links are drawn using segments().
+Useful for building up network plots.
 }
 

@@ -8,8 +8,8 @@
 \description{
 \pkg{epanetReader} is a package for reading water network information
 and simulation results in Epanet's .inp
-and .rpt files into R.  See functions \link{read.inp} and
-\link{read.rpt} for some examples.
+and .rpt files into R.  See functions \link{read.inp},
+\link{read.rpt}, and \link{read.msxrpt} for some examples.
 }
 \author{
 Bradley J. Eck

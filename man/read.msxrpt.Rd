@@ -19,4 +19,14 @@ Returns an epanet.rpt S3 object with two data.frame elements.
 \description{
 reads an Epanet-msx .rpt file into R
 }
+\examples{
+# path to Net1.inp example file included with this package
+msr <- file.path( find.package("epanetReader"), "extdata","example.rpt")
+
+#read the results into R
+x <- read.msxrpt(msr)
+names(x)
+summary(x)
+plot(x)
+}
 

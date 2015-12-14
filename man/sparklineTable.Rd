@@ -21,4 +21,7 @@ and last quantities plotted on x-axis, often a date and/or time}
 \description{
 Create S3 object of data for table of sparklines
 }
+\seealso{
+plotSparklineTable
+}
 
