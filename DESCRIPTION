@@ -1,8 +1,8 @@
 Package: epanetReader
 Type: Package
 Title: Read Epanet Files into R
-Version: 0.3.0-0001
-Date: 2015-12-04
+Version: 0.3.0-0002
+Date: 2015-12-14
 Author: Bradley J. Eck
 Maintainer: Bradley Eck <brad@bradeck.net>
 Depends: R (>= 3.0.0), graphics, utils
@@ -13,3 +13,4 @@ Description: Reads water network simulation data in Epanet's
   software for modeling hydraulic and water quality behavior of water piping
   systems. 
 License: MIT + file LICENSE 
+LazyData: true

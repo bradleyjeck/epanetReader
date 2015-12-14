@@ -20,4 +20,12 @@ the location of the legend on the plot}
 \description{
 Make a plot of the network using base graphics
 }
+\details{
+Implements the generic plot function for S3 objects of class epanet.inp.
+The plot is built from base graphics by creating a blank plot and then calling
+the helper functions plotInpLinks(), plotInpNodes(), plotElementsLegend().
+}
+\examples{
+plot(Net1)
+}
 

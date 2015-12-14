@@ -21,10 +21,16 @@ sparkline(df, id.var, ID, yvar, xvar)
 Create sparkline object by extracting from a data frame
 }
 \details{
-This function works on data.frames with one column of ID variables
-         and possibly several columns of other variables
+Creates an object with info for a single sparkline by extracting
+from a data.frame.  The function works on data.frames with one column of ID variables
+         and possibly several columns of other variables.  The main use is
+         as a helper function for building up a \link{sparklineTable}.
 }
 \examples{
-##TODO add examples here
+## look at the names in the built-in data set Theoph
+names(Theoph)
+## make sparkline object for the concentration over time in subject 2
+sl <- sparkline(df= Theoph, id.var = 'Subject', ID = 2, yvar='conc', xvar = 'Time')
+plot(sl)
 }
 

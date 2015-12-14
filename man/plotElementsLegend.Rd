@@ -14,6 +14,14 @@ function.}
 Add legend of network elements to the active plot
 }
 \details{
-Uses plot characters 16, 15, 8 and 25 for Tanks, Reservoirs, Pumps and Valves.
+Helper function for adding a legend to the active plot.
+Uses plot characters 16, 15, 8 and 25 for Tanks, Reservoirs, Pumps and Valves
+for compatibility with plotInpNodes()
+}
+\examples{
+## make a new blank plot
+plot( c(0,1), c(0,1), type = 'n')
+## add the nodes, including junctions
+plotElementsLegend('topright')
 }
 
