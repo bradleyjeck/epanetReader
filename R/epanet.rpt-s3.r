@@ -564,7 +564,7 @@ plot.epanet.rpt <- function( x,
     graphics::par( mar = c(1,1,1,1))
 	graphics::plot( range(inp$Coordinates$X.coord),
 			range(inp$Coordinates$Y.coord),
-			type = 'n',
+			type = 'n', asp = 1,
 			xlab = "", xaxt = 'n',
 			ylab = "", yaxt = 'n'
 	)
