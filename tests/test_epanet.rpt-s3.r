@@ -18,6 +18,8 @@ library(testthat)
 # assume working dir is epanetReader/tests
 source("../R/rptFuncs.r")
 source("../R/epanet.rpt-s3.r")
+source("../R/epanet.inp-s3.r")
+source("../R/inpFuncs.r")
 
 
 
@@ -131,6 +133,13 @@ test_that("plot args for Net1.rpt",{
 			plot(Net1res,inp)
 			
 		})
+
+test_that("plot Net2.rpt",{
+          n2 <- read.inp("Net2.inp")
+          n2r <- read.rpt("Net2.rpt")
+          plot(n2r,n2)
+
+        })
 
 
 context("IDs are characters in rpt")
