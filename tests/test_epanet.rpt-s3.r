@@ -135,11 +135,18 @@ test_that("plot args for Net1.rpt",{
 		})
 
 test_that("plot Net2.rpt",{
-          n2 <- read.inp("Net2.inp")
+          n2 <- suppressWarnings( read.inp("Net2.inp") ) 
           n2r <- read.rpt("Net2.rpt")
           plot(n2r,n2)
 
         })
+
+test_that("rpt plot w valves",{
+			
+			v <- read.inp("oneprv.inp")
+			vr <- read.rpt("oneprv.rpt")
+			plot(vr,v)
+		})
 
 
 context("IDs are characters in rpt")
