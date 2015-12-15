@@ -399,7 +399,7 @@ print.summary.epanet.rpt <- function(x,...){
 			evt <- expandedLinkTable(inp$Valves, inp$Coordinates)
 			# add bin info to table 
 			# could write merge.expandedLinkTable() but prolly not worth it 
-			ept2 <- merge( x = ept, by.x = "ID", y = lqty, by.y = "Link")
+			ept2 <- merge( x = evt, by.x = "ID", y = lqty, by.y = "ID")
 	
 			# plot the segments 
 			graphics::segments( x0 = ept2$x1, y0 = ept2$y1,
@@ -564,7 +564,7 @@ plot.epanet.rpt <- function( x,
     graphics::par( mar = c(1,1,1,1))
 	graphics::plot( range(inp$Coordinates$X.coord),
 			range(inp$Coordinates$Y.coord),
-			type = 'n',
+			type = 'n', asp = 1,
 			xlab = "", xaxt = 'n',
 			ylab = "", yaxt = 'n'
 	)
