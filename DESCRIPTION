@@ -1,16 +1,19 @@
 Package: epanetReader
 Type: Package
 Title: Read Epanet Files into R
-Version: 0.3.0-0002
-Date: 2015-12-14
+Version: 0.3.0-0003
+Date: 2016-01-08
 Author: Bradley J. Eck
 Maintainer: Bradley Eck <brad@bradeck.net>
-Depends: R (>= 3.0.0), graphics, utils
-Description: Reads water network simulation data in Epanet's
-  text-based '.inp' and '.rpt' formats into R.  Basic summary information and plots
-  are also available. The README file has a quick introduction.   See
-  http://www2.epa.gov/water-research/epanet for more information on the Epanet
-  software for modeling hydraulic and water quality behavior of water piping
-  systems. 
-License: MIT + file LICENSE 
+Depends:
+    R (>= 3.0.0),
+    graphics,
+    utils
+Description: Reads water network simulation data in Epanet's text-based
+    '.inp' and '.rpt' formats into R. Basic summary information and plots are also
+    available. The README file has a quick introduction. See http://www2.epa.gov/
+    water-research/epanet for more information on the Epanet software for modeling
+    hydraulic and water quality behavior of water piping systems.
+License: MIT + file LICENSE
 LazyData: true
+RoxygenNote: 5.0.1
