@@ -83,4 +83,7 @@ test_that("Net3 summary",{
 
 
 
+test_that("plot w vertices",{
+          fail("read vertices in oneprv.inp and include in plot")
+        })
 

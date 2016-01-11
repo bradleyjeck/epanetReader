@@ -52,6 +52,7 @@
 #' \item{Pipes}{data.frame}
 #' \item{Pumps}{data.frame}
 #' \item{Valves}{data.frame}
+#' \item{Demands}{data.frame}
 #' \item{Status}{data.frame}
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
@@ -93,7 +94,7 @@ epanet.inp <- function( file ){
   pipe <- PIPES(allLines)
   pump <- PUMPS(allLines)
   valv <- VALVES(allLines)
-  #dmd
+  dmd  <- DEMANDS(allLines) 
   pats <- PATTERNS(allLines)
   crvs <- CURVES(allLines)
   #ctrl
@@ -120,6 +121,7 @@ epanet.inp <- function( file ){
                Pipes = pipe,
                Pumps = pump,
                Valves = valv,
+			   Demands = dmd, 
                Patterns = pats,
                Curves = crvs,
                Energy = engy,

@@ -220,6 +220,14 @@ test_that("[STATUS]  reads ok" ,{
 			
 		})
 
+test_that("[DEMANDS] reads ok",{
+			
+			dmd <- DEMANDS( readLines("oneprv.inp"))
+			expect_that( dmd[1,2], equals(1.1) ) 
+			expect_that( dim(dmd)[1], equals(3))  
+			
+		})
+
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {
@@ -227,19 +235,17 @@ test_that("Net1 valves table is missing",
             expect_that(vlv, equals(NULL))
           })
 
-  test_that("Net2.inp has no reservoirs",{
+test_that("Net2.inp has no reservoirs",{
 			
 			resr <- RESERVOIRS(readLines("Net2.inp"))
 			expect_that(resr, equals(NULL))
 		})
-
 
 test_that("Net2.inp has no pumps",{
 			pmp <- PUMPS(readLines("Net2.inp"))
 			expect_that(pmp, equals(NULL))
 		})
 
-context("empty.inp returns null sections")
 
 test_that("TITLE is null",{
          t <- TITLE(readLines("empty.inp"))
@@ -272,6 +278,11 @@ test_that("VALVES is null",{
          s <- VALVES(readLines("empty.inp"))
          expect_that(s, equals(NULL))
         })
+
+test_that("DEMANDS is null",{
+			s <- DEMANDS(readLines("empty.inp"))
+            expect_that(s, equals(NULL))
+		})
 
 test_that("PATTERNS is null",{
          s <- PATTERNS(readLines("empty.inp"))

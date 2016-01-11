@@ -346,11 +346,39 @@ VALVES <-function( allLines){
   }
 }
 
+
+## Demands Section
+##
+## read [DEMANDS] section of an .nip file to a data.frame 
+##
+## @param allLines 
+## @return data.frame of demands 
+DEMANDS <-function( allLines){
+  tag <- "\\[DEMANDS\\]"
+  df <- .inpSection2df(tag, allLines)  
+  
+  if( is.null(df) ) { 
+    return( NULL )  
+  } else {   
+    #proceed as usual
+    
+    # rename the columns
+    names(df)[1:3] <- c("Node","Demand","Pattern")
+    
+    #convert id and pattern field to character
+    df$Node <- as.character(df$Node) 
+	df$Pattern <- as.character(df$Pattern)
+
+    return(df)
+  }
+}
+
+
 ## Energy Parameters
 ##
 ## Convert the [ENERGY] section of an .inp file to a  character vector
 ##
-## @param allLines name of the .inp file to read from 
+## @param allLines results of readLines on .inp file  
 ## @return A character vector with an entry for each line of the section or 
 ##         NA if the section is missing. 
 ##         Comments and excess whitespace are removed. 
