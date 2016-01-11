@@ -21,6 +21,7 @@ of the .inp file. Sections missing from the .inp file have a value of NULL.
 \item{Pipes}{data.frame}
 \item{Pumps}{data.frame}
 \item{Valves}{data.frame}
+\item{Demands}{data.frame}
 \item{Status}{data.frame}
 \item{Patterns}{list}
 \item{Curves}{list}

@@ -16,4 +16,4 @@
 #' @docType data
 #' @usage Net1rpt
 #' @format An object of class \code{epanet.rpt} created by \link{read.inp}.
-'Net1rpt'
+NULL

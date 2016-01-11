@@ -19,4 +19,4 @@
 #' 
 #' @format An object of class \code{epanet.inp} created by \link{read.inp}.
 #' @source http://www.epa.gov/sites/production/files/2014-06/en2setup_0.exe
-'Net1'
+NULL
