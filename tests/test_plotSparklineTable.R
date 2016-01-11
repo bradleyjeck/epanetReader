@@ -29,8 +29,9 @@ test_that("msx example is ok",{
 
 test_that("5deg example is ok",{
 			mr <- read.msxrpt("5deg.msxrpt")
-		plotSparklineTable( mr$nodeResults, row.var = 'ID', col.vars = names(mr$nodeResults)[3:7])
-		title("5deg", outer = T)
+			
+			
+		plotSparklineTable( mr$nodeResults, row.var = 'ID', col.vars = names(mr$nodeResults)[3:7], )
 			
 		})
 

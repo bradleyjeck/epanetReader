@@ -104,11 +104,12 @@ sparklineTable <- function( df, row.var, col.vars, xvar = NULL, xrange.labels = 
 #' @param x object of class sparklineTable 
 #' @param ... further arguments passed to par
 plot.sparklineTable <- function( x,... ){
-	
+
 	#########################
 	#   Plotting 
 	#########################
 	# create the plot grid 
+	oldpar <- par(no.readonly = TRUE) # keep up w the old params 
 	par( mar = c(0,0,0,0), oma = rep(1,4),...)
 	layout( mat = x$layoutMatrix, respect = FALSE  )
 	
@@ -135,6 +136,8 @@ plot.sparklineTable <- function( x,... ){
 		}
 	}
 	
+	# go back to the old params 
+	par(oldpar)
 	
 }
 

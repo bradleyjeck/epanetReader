@@ -323,7 +323,7 @@ plot.epanet.inp <- function( x,
   # create blank plot 
   graphics::plot( range(x$Coordinates$X),
         range(x$Coordinates$Y),
-        type = 'n',
+        type = 'n', asp = 1, 
         xlab = "", xaxt = 'n',
         ylab = "", yaxt = 'n', ... )
 
