@@ -109,9 +109,9 @@ plot.sparklineTable <- function( x,... ){
 	#   Plotting 
 	#########################
 	# create the plot grid 
-	oldpar <- par(no.readonly = TRUE) # keep up w the old params 
-	par( mar = c(0,0,0,0), oma = rep(1,4),...)
-	layout( mat = x$layoutMatrix, respect = FALSE  )
+	oldpar <- graphics::par(no.readonly = TRUE) # keep up w the old params 
+	graphics::par( mar = c(0,0,0,0), oma = rep(1,4),...)
+	graphics::layout( mat = x$layoutMatrix, respect = FALSE  )
 	
 	lapply( x$tableHeader, plotWord, font = 2)
 	
@@ -130,14 +130,14 @@ plot.sparklineTable <- function( x,... ){
 			xy <- x$sparklines[[k]] 
 			N <- dim(xy)[1]
 			plotWord( xy[1,2] ) 
-			plot( xy )
+			graphics::plot( xy )
 			plotWord( xy[N,2] ) 	
 			k = k + 1 
 		}
 	}
 	
 	# go back to the old params 
-	par(oldpar)
+    graphics::par(oldpar)
 	
 }
 
@@ -190,10 +190,10 @@ plotWord <- function(w, ...){
 		w <- format( w, digits = 3)
 	} 
 	
-	plot(c(0,1),c(0,1), type = 'n', 
+    graphics::plot(c(0,1),c(0,1), type = 'n', 
 			xaxt='n', yaxt='n', xlab = '', ylab = '', 
 			frame.plot = FALSE )
-	text( .5, .5, w, ...) 
+	graphics::text( .5, .5, w, ...) 
 	
 }	
 	

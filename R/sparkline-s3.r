@@ -90,11 +90,11 @@ plot.sparkline <- function( x, ... ){
 	xbuff <- (xr[2] - xr[1]) * 0.01
 	xlimits <- c(xr[1] - xbuff, xr[2] + xbuff ) 
 	
-	plot.default(x, type = 'l', col = 'gray',  
+	graphics::plot.default(x, type = 'l', col = 'gray',  
 			xaxt='n', yaxt='n', xlab = '', ylab = '', 
 			ylim =  ylimits, xlim = xlimits,
 			frame.plot = FALSE, ... )
-	points( x[1,1], x[1,2], pch = 16, cex = .9 )
-	points( x[N,1], x[N,2], pch = 16, cex = .9 )  
+	graphics::points( x[1,1], x[1,2], pch = 16, cex = .9 )
+	graphics::points( x[N,1], x[N,2], pch = 16, cex = .9 )  
 }
 

@@ -40,7 +40,7 @@ plotSparklineTable <- function( df, row.var, col.vars, xvar = NULL, xrange.label
 	
 	#this is now a wrapper function 
 	slt <- sparklineTable( df, row.var, col.vars, xvar, xrange.labels)
-	plot(slt)
+	graphics::plot(slt)
 	
 } 
 
