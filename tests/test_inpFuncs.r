@@ -29,7 +29,7 @@ test_that("Net1 JUNCTIONs table",
 test_that("Net2 JUNCTIONS table",
          {
             jt <- JUNCTIONS(readLines("Net2.inp"))
-            expect_that(jt$Pattern[1], equals("2"))
+            expect_true( jt$Pattern[1] == 2 ) 
          })
 
 #test_that("poormond JUNCTIONS table",
@@ -321,4 +321,11 @@ test_that(" junction IDs are char",{
 			
 			junc <- JUNCTIONS(readLines("Net1.inp"))
 		    expect_true( class(junc$ID) == "character")	
+		})
+
+context("some non-ID columns in inp sections are factors")
+test_that("[Junctions] Pattern is factor",{
+			
+			junc <- JUNCTIONS(readLines("Net2.inp"))
+			expect_true( class(junc$Pattern) == 'factor')
 		})

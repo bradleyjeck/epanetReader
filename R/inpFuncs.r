@@ -153,7 +153,7 @@ JUNCTIONS <- function( allLines){
 		if( dim(df)[2] > 3){
 			# there is a pattern column
 			names(df)[4] <- "Pattern"
-			df$Pattern <- as.character(df$Pattern)
+			df$Pattern <- as.factor(df$Pattern)
 		} else {
 			# add it anyway and fill w NA
 			df$Pattern <- NA
