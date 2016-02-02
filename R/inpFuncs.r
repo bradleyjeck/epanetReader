@@ -228,7 +228,7 @@ TANKS <- function( allLines ){
 		
 		if( dim(df)[2]>7 ){
 			names(df)[8] <- "VolCurve"
-			df$VolCurve <- as.character(df$VolCurve)
+			df$VolCurve <- as.factor(df$VolCurve)
 		} else {
 			df$VolCurve <- NA
 		}

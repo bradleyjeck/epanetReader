@@ -329,3 +329,10 @@ test_that("[Junctions] Pattern is factor",{
 			junc <- JUNCTIONS(readLines("Net2.inp"))
 			expect_true( class(junc$Pattern) == 'factor')
 		})
+
+test_that("[Tanks] Curve ID is factor",{
+			
+			tank <- TANKS(readLines("for-various-tests.inp"))
+			expect_true( class(tank$VolCurve) == 'factor')
+			
+		})
