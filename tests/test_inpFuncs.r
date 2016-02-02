@@ -336,3 +336,10 @@ test_that("[Tanks] Curve ID is factor",{
 			expect_true( class(tank$VolCurve) == 'factor')
 			
 		})
+
+test_that("[Reservoirs] Pattern is factor",{
+			
+			res <- RESERVOIRS(readLines("for-various-tests.inp"))
+			expect_true( class(res$Pattern) == 'factor')
+		})
+
