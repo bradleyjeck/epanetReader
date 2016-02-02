@@ -215,7 +215,7 @@ test_that("[STATUS]  reads ok" ,{
 			
 	stat <- STATUS( readLines("Net3.inp"))
 	expect_that( stat[1,1], equals('10') )
-	expect_that( stat[1,2], equals("Closed"))
+	expect_true( stat[1,2] =="Closed")
 			
 			
 		})
@@ -359,4 +359,10 @@ test_that("[Valves] type is factor",{
 			
 			vlv <- VALVES(readLines("oneprv.inp"))
 			expect_true(class(vlv$Type) == 'factor')
+		})
+
+test_that("[Status] Status is factor",{
+			
+			stat <- STATUS(readLines("Net3.inp"))
+			expect_true(class(stat$Status) == 'factor')
 		})

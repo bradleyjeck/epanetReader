@@ -671,6 +671,7 @@ STATUS <- function( allLines ){
 		df$ID <- as.character(df$ID)
 		
 		names(df)[2] <- "Status"
+        df$Status <- as.factor(df$Status)
 
 		return(df)
 	}

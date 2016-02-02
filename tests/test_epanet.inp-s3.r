@@ -40,7 +40,7 @@ test_that("read Net3.inp",{
 			Net3 <- suppressWarnings( read.inp("Net3.inp"))
 			
 			expect_false( is.null(Net3$Status))
-			expect_equal(Net3$Status$Status[1], 'Closed')
+			expect_true(Net3$Status$Status[1] == 'Closed')
 		})
 
 context("summary.epanet.inp s3 object") 
