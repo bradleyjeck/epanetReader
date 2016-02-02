@@ -344,6 +344,7 @@ VALVES <-function( allLines){
     # name further cols 
     names(df)[4:7] <- c("Diameter", "Type", "Setting", "MinorLoss")
     df$ID <- as.character(df$ID)
+	df$Type <- as.factor(df$Type)
   
     return(df)
   }

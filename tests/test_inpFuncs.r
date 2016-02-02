@@ -354,3 +354,9 @@ test_that("[Pumps] keyword is factor",{
 			pmp <- PUMPS(readLines("Net3.inp"))
 			expect_true(class(pmp$Parameters) == 'factor')
 		})
+
+test_that("[Valves] type is factor",{
+			
+			vlv <- VALVES(readLines("oneprv.inp"))
+			expect_true(class(vlv$Type) == 'factor')
+		})
