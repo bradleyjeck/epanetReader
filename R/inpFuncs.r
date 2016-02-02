@@ -153,7 +153,7 @@ JUNCTIONS <- function( allLines){
 		if( dim(df)[2] > 3){
 			# there is a pattern column
 			names(df)[4] <- "Pattern"
-			df$Pattern <- as.character(df$Pattern)
+			df$Pattern <- as.factor(df$Pattern)
 		} else {
 			# add it anyway and fill w NA
 			df$Pattern <- NA
@@ -187,7 +187,7 @@ RESERVOIRS <- function(allLines){
 		if( dim(df)[2] > 2){
 			# there is a pattern column
 			names(df)[3] <- "Pattern"
-			df$Pattern <- as.character(df$Pattern)
+			df$Pattern <- as.factor(df$Pattern)
 		} else {
 			# add it anyway and fill w NA
 			df$Pattern <- NA
@@ -228,7 +228,7 @@ TANKS <- function( allLines ){
 		
 		if( dim(df)[2]>7 ){
 			names(df)[8] <- "VolCurve"
-			df$VolCurve <- as.character(df$VolCurve)
+			df$VolCurve <- as.factor(df$VolCurve)
 		} else {
 			df$VolCurve <- NA
 		}
@@ -270,7 +270,7 @@ PIPES <- function( allLines ){
 		
 		if( dim(df)[2]>7 ){
 			names(df)[8] <- "Status"
-			df$Status <- as.character(df$Status)
+			df$Status <- as.factor(df$Status)
 		} else {
 			df$Status<- NA
 		}
@@ -309,6 +309,9 @@ PUMPS <- function( allLines ){
 		# just keep the four cols we like
 		pmp <- df[,c("ID", "Node1", "Node2", "Parameters")]
 		
+		# store the parameters as a factor 
+		pmp$Parameters <- as.factor(pmp$Parameters)
+		
 		return(pmp)
 	}
 }
@@ -341,6 +344,7 @@ VALVES <-function( allLines){
     # name further cols 
     names(df)[4:7] <- c("Diameter", "Type", "Setting", "MinorLoss")
     df$ID <- as.character(df$ID)
+	df$Type <- as.factor(df$Type)
   
     return(df)
   }
@@ -367,7 +371,7 @@ DEMANDS <-function( allLines){
     
     #convert id and pattern field to character
     df$Node <- as.character(df$Node) 
-	df$Pattern <- as.character(df$Pattern)
+	df$Pattern <- as.factor(df$Pattern)
 
     return(df)
   }
@@ -667,6 +671,7 @@ STATUS <- function( allLines ){
 		df$ID <- as.character(df$ID)
 		
 		names(df)[2] <- "Status"
+        df$Status <- as.factor(df$Status)
 
 		return(df)
 	}

@@ -29,7 +29,7 @@ test_that("Net1 JUNCTIONs table",
 test_that("Net2 JUNCTIONS table",
          {
             jt <- JUNCTIONS(readLines("Net2.inp"))
-            expect_that(jt$Pattern[1], equals("2"))
+            expect_true( jt$Pattern[1] == 2 ) 
          })
 
 #test_that("poormond JUNCTIONS table",
@@ -215,7 +215,7 @@ test_that("[STATUS]  reads ok" ,{
 			
 	stat <- STATUS( readLines("Net3.inp"))
 	expect_that( stat[1,1], equals('10') )
-	expect_that( stat[1,2], equals("Closed"))
+	expect_true( stat[1,2] =="Closed")
 			
 			
 		})
@@ -321,4 +321,55 @@ test_that(" junction IDs are char",{
 			
 			junc <- JUNCTIONS(readLines("Net1.inp"))
 		    expect_true( class(junc$ID) == "character")	
+		})
+
+context("some non-ID columns in inp sections are factors")
+test_that("[Junctions] Pattern is factor",{
+			
+			junc <- JUNCTIONS(readLines("Net2.inp"))
+			expect_true( class(junc$Pattern) == 'factor')
+		})
+
+test_that("[Tanks] Curve ID is factor",{
+			
+			tank <- TANKS(readLines("for-various-tests.inp"))
+			expect_true( class(tank$VolCurve) == 'factor')
+			
+		})
+
+test_that("[Reservoirs] Pattern is factor",{
+			
+			res <- RESERVOIRS(readLines("for-various-tests.inp"))
+			expect_true( class(res$Pattern) == 'factor')
+		})
+
+test_that("[Pipes] status is factor",{
+			
+			pipe <- PIPES(readLines("Net3.inp"))
+			expect_true(class(pipe$Status) == 'factor')
+		})
+
+test_that("[Pumps] keyword is factor",{
+			
+			pmp <- PUMPS(readLines("Net3.inp"))
+			expect_true(class(pmp$Parameters) == 'factor')
+		})
+
+test_that("[Valves] type is factor",{
+			
+			vlv <- VALVES(readLines("oneprv.inp"))
+			expect_true(class(vlv$Type) == 'factor')
+		})
+
+test_that("[Status] Status is factor",{
+			
+			stat <- STATUS(readLines("Net3.inp"))
+			expect_true(class(stat$Status) == 'factor')
+		})
+
+test_that("[Demands] Pattern is factor",{
+		
+			dmd <- DEMANDS(readLines("oneprv.inp"))
+			expect_true(class(dmd$Pattern) == 'factor')
+			
 		})

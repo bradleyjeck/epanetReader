@@ -1,0 +1,15 @@
+[TITLE]
+This file is for testing parts of the epanetReader package.
+It's not intended to run.
+
+[TANKS]
+;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve
+ A               	123         	11          	10          	20          	50.5        	0           	vc1   ;
+
+[RESERVOIRS]
+;ID              	Head        	Pattern         
+ C               	321         	respat                	;
+ 
+ 
+[END]
+
