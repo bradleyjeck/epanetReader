@@ -366,3 +366,10 @@ test_that("[Status] Status is factor",{
 			stat <- STATUS(readLines("Net3.inp"))
 			expect_true(class(stat$Status) == 'factor')
 		})
+
+test_that("[Demands] Pattern is factor",{
+		
+			dmd <- DEMANDS(readLines("oneprv.inp"))
+			expect_true(class(dmd$Pattern) == 'factor')
+			
+		})

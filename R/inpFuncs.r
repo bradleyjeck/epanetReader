@@ -371,7 +371,7 @@ DEMANDS <-function( allLines){
     
     #convert id and pattern field to character
     df$Node <- as.character(df$Node) 
-	df$Pattern <- as.character(df$Pattern)
+	df$Pattern <- as.factor(df$Pattern)
 
     return(df)
   }
