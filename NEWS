@@ -1,0 +1,23 @@
+epanetReader version 0.3.0 (released Feb 2016)
+==============================================
+
+Changes:
+* Added read.msxrpt() function to read results of multi-species 
+  water quality simulations made with EPANET-MSX
+
+* Added plotSparklineTable() function to generate tables
+  of sparklines for exploratory analysis 
+
+* Added data objects Net1 and Net1rpt in rdata format so 
+  some examples run without having to parse the text files.
+
+* Changed treatment of some columns of sections of .inp files from
+  character to factor to improve summaries (e.g. Pipe Status, Valve Type) 
+
+* Added support to read Status and Demands sections of .inp files 
+
+* Plotting changes for simulation results: fixed bug for plotting with valves, 
+  changed aspect ratio to 1 for maps
+  
+
+

@@ -13,7 +13,7 @@
 #' and .rpt files into R.  See functions \link{read.inp}, 
 #' \link{read.rpt}, and \link{read.msxrpt} for some examples. 
 #' 
-#' @docType package '
+#' @docType package
 #' @name epanetReader
 #' @author Bradley J. Eck 
 

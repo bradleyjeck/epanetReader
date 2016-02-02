@@ -412,7 +412,7 @@ print.summary.epanet.rpt <- function(x,...){
 	}
 }
 
-#' @param ndqty
+#' @param ndqty the node quantity 
 #' @param inp epanet.inp object 
 .plotRptNodes <- function(ndqty, inp){
 	
