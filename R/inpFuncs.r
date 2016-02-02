@@ -270,7 +270,7 @@ PIPES <- function( allLines ){
 		
 		if( dim(df)[2]>7 ){
 			names(df)[8] <- "Status"
-			df$Status <- as.character(df$Status)
+			df$Status <- as.factor(df$Status)
 		} else {
 			df$Status<- NA
 		}

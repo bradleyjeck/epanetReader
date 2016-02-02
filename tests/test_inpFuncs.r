@@ -343,3 +343,8 @@ test_that("[Reservoirs] Pattern is factor",{
 			expect_true( class(res$Pattern) == 'factor')
 		})
 
+test_that("[Pipes] status is factor",{
+			
+			pipe <- PIPES(readLines("Net3.inp"))
+			expect_true(class(pipe$Status) == 'factor')
+		})
