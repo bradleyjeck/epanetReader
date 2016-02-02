@@ -11,7 +11,7 @@ read.msxrpt(file)
 \item{file}{the name of the file to read}
 }
 \value{
-Returns an epanet.rpt S3 object with two data.frame elements. 
+Returns an epanetmsx.rpt S3 object . 
 
 \item{nodeResults}{data.frame}
 \item{linkResults}{data.frame}
@@ -19,8 +19,17 @@ Returns an epanet.rpt S3 object with two data.frame elements.
 \description{
 reads an Epanet-msx .rpt file into R
 }
+\details{
+Specify the needed outputs from an Epanet-msx simulation in the
+ [REPORT] section of the .msx file to create reports for reading with 
+with this function. 
+
+The function returns an S3 object (list) with a data.frame for node results and
+data.frame for link results.  These data.frames contain results from all
+the time periods to facilitate time series plots.
+}
 \examples{
-# path to Net1.inp example file included with this package
+# path to example file included with this package
 msr <- file.path( find.package("epanetReader"), "extdata","example.rpt") 
 
 #read the results into R
@@ -28,5 +37,10 @@ x <- read.msxrpt(msr)
 names(x)
 summary(x)
 plot(x)
+}
+\references{
+Shang, F., Uber, J.G., Rossman, L.A. (2011)
+            EPANET Multi-species Extension User's Manual.
+            US Environmental Protection Agency, Cincinnati.
 }
 

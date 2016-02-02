@@ -6,10 +6,6 @@
 #
 #************************************
 
-# s3 class for report files created by epanetmsx
-# need to create data.frame of link results
-# and node results
-# 
 #' Read msx results 
 #' 
 #' reads an Epanet-msx .rpt file into R
@@ -17,12 +13,23 @@
 #' @aliases epanetmsx.rpt 
 #' @export 
 #' @param file the name of the file to read
-#' @return Returns an epanet.rpt S3 object with two data.frame elements. 
+#' @return Returns an epanetmsx.rpt S3 object . 
 #'
 #' \item{nodeResults}{data.frame}
 #' \item{linkResults}{data.frame}
+#' @details  Specify the needed outputs from an Epanet-msx simulation in the
+#'  [REPORT] section of the .msx file to create reports for reading with 
+#' with this function. 
+#'
+#' The function returns an S3 object (list) with a data.frame for node results and
+#' data.frame for link results.  These data.frames contain results from all
+#' the time periods to facilitate time series plots. 
+#'
+#' @references Shang, F., Uber, J.G., Rossman, L.A. (2011)
+#'             EPANET Multi-species Extension User's Manual.
+#'             US Environmental Protection Agency, Cincinnati. 
 #' @examples
-#' # path to Net1.inp example file included with this package
+#' # path to example file included with this package
 #' msr <- file.path( find.package("epanetReader"), "extdata","example.rpt") 
 #' 
 #' #read the results into R

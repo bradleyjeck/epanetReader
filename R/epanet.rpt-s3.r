@@ -17,7 +17,7 @@
 #'
 #' \item{nodeResults}{data.frame}
 #' \item{linkResults}{data.frame}
-
+#'
 #' @details add lines "Page 0", "Links All" and "Nodes All" to the
 #'  [REPORT] section of the .inp file to output info to read in
 #' with this function
@@ -30,7 +30,8 @@
 #' 
 #'
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
-# http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
+#'
+#' http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
 #'
 #' @examples
 #' # path to Net1.rpt example file included with this package
