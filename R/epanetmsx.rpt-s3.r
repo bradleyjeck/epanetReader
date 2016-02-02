@@ -236,8 +236,8 @@ plot.epanetmsx.rpt <- function(x, elementType = 'Nodes',...){
 	
 	if( grepl("nodes", elementType, ignore.case = TRUE ) ){
 	
-	   xl <- c(   head(x$nodeResults$Time, 1),
-			      tail(x$nodeResults$Time, 1) ) 
+	   xl <- c(   utils::head(x$nodeResults$Time, 1),
+			      utils::tail(x$nodeResults$Time, 1) ) 
 		
 		  plotSparklineTable( x$nodeResults, row.var = 'ID', col.vars = sx$nodeSpecies, 
 				xvar = 'timeInSeconds',
@@ -245,8 +245,8 @@ plot.epanetmsx.rpt <- function(x, elementType = 'Nodes',...){
 		
 		
 	} else if( grepl("links", elementType, ignore.case = TRUE) ){
-		   xl <- c(   head(x$linkResults$Time, 1),
-			      tail(x$linkResults$Time, 1) ) 
+		   xl <- c(   utils::head(x$linkResults$Time, 1),
+			      utils::tail(x$linkResults$Time, 1) ) 
 	
 		plotSparklineTable( x$linkResults, row.var = 'ID', col.vars = sx$linkSpeices, 
 				xvar = 'timeInSeconds',
