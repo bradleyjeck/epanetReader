@@ -309,6 +309,9 @@ PUMPS <- function( allLines ){
 		# just keep the four cols we like
 		pmp <- df[,c("ID", "Node1", "Node2", "Parameters")]
 		
+		# store the parameters as a factor 
+		pmp$Parameters <- as.factor(pmp$Parameters)
+		
 		return(pmp)
 	}
 }

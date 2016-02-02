@@ -348,3 +348,9 @@ test_that("[Pipes] status is factor",{
 			pipe <- PIPES(readLines("Net3.inp"))
 			expect_true(class(pipe$Status) == 'factor')
 		})
+
+test_that("[Pumps] keyword is factor",{
+			
+			pmp <- PUMPS(readLines("Net3.inp"))
+			expect_true(class(pmp$Parameters) == 'factor')
+		})
