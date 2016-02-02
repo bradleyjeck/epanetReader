@@ -26,7 +26,9 @@
 #' sections of the .inp file.  Sections of the .inp file that are implemented 
 #' appear in the Value section.
 #' 
-#' ID fields are stored as characters not factors or integers.
+#' Fields for node or link ID are stored as characters not factors or integers.
+#' However, some fields are stored as factors
+#' to allow more informative summaries. Examples include valve type and pipe status.  
 #'        
 #' Sections that are absent from the .inp file are NULL in the list.
 #' 
