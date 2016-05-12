@@ -100,6 +100,13 @@ test_that("Net3 PIPES table",
           expect_that(dim(pip)[1], equals(117))
           })
 
+test_that("pipes table missing status",{
+  pip <- PIPES(readLines("inp-pipe-table-some-statuses-empty.txt"))
+  expect_equal( class(pip$Status), "factor") 
+})
+
+
+
 #test_that("anytown PUMPS table",
 #          {
 #            pmpt <- PUMPS(readLines("anytown.inp"))
