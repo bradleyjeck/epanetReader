@@ -79,9 +79,6 @@ test_that("missing link results gives warning",{
 })
 
 
-#test_that("SB25-det-max-dmd.rpt reads",{
-#			sb25res <- read.rpt("SB25-det-max-dmd.rpt")
-#		})
 
 context("summary.epanet.rpt s3 object")
 test_that("net1.rpt summary is ok",
@@ -103,11 +100,6 @@ test_that("Net2.rpt summary is ok",{
 			
 		})
 
-#test_that("ctown.rpt summary is ok",{
-#			ctownres <- read.rpt("ctown.rpt")
-#			scr <- summary(ctownres)
-#			expect_output(print(scr), "1244.18")
-#		})
 
 test_that("Net3.rpt summary is ok",{
 			Net3res <- suppressWarnings( read.rpt("Net3.rpt") )

@@ -107,12 +107,18 @@
   
   sect <- .inpSection2char(tag, allLines)
 
+  
+
   if( is.null(sect)){
     return(NULL)
   } else { 
-  
+    # get the right number of columns by taking
+    # the max length of all records 
+    numcols <- max(  sapply( strsplit(sect,split = " ") , length ) ) 
+ 
     # convert the data into a data frame 
     df <- utils::read.table( text= sect, as.is = TRUE, 
+                     col.names = paste0("V", 1:numcols), 
                       fill = TRUE, header = FALSE)  
     
     return( df )
