@@ -32,11 +32,6 @@ test_that("Net2 JUNCTIONS table",
             expect_true( jt$Pattern[1] == 2 ) 
          })
 
-#test_that("poormond JUNCTIONS table",
-#         {
-#            jt <- JUNCTIONS(readLines("poormond.inp"))
-#            expect_that(jt$Pattern[3], equals("domestic"))
-#         })
 
 
 test_that("IDs are character",{
@@ -58,12 +53,6 @@ test_that("Net3 RESERVOIRSs table",
 		  expect_true( class(res$ID) == "character")
 })
 
-#test_that("anytown RESERVOIRSs table",
-#{ 
-#          res <- RESERVOIRS(readLines("anytown.inp"))
-#          expect_that(class(res), equals("data.frame"))
-#          expect_that(res$Pattern[1], equals(NA))
-#})
 
 test_that("RESERVOIR table has patterns",{
 			
@@ -79,20 +68,6 @@ test_that("Net3 TANKS table",
           expect_that(tt$VolCurve[1], equals(NA))
 })
 
-#test_that("anytown TANKS table",
-#{ 
-#          tt <- TANKS(readLines("anytown.inp"))
-#          expect_that(class(tt), equals("data.frame"))
-#          expect_that(dim(tt)[1], equals(2))
-#          expect_that(tt$VolCurve[1], equals(NA))
-#})
-
-#test_that("anytown PIPES table",
-#          {
-#            pip <- PIPES(readLines("anytown.inp"))
-#          expect_that(dim(pip)[1], equals(43))
-#          })
-#
 
 test_that("Net3 PIPES table",
           {
@@ -107,24 +82,12 @@ test_that("pipes table missing status",{
 
 
 
-#test_that("anytown PUMPS table",
-#          {
-#            pmpt <- PUMPS(readLines("anytown.inp"))
-#            expect_that(dim(pmpt)[1], equals(3))
-#          })
-#
 test_that("Net3 PUMPS table",
           {
             pmpt <- PUMPS(readLines("Net3.inp"))
             expect_that(dim(pmpt)[1], equals(2))
           })
 
-#test_that("anytown ENERGY table is ok ",
-#          {
-#            engy <-ENERGY(readLines("anytown.inp"))
-#            expect_that(length(engy),equals(3))
-#          })
-#
 test_that("Net3 ENERGY table is ok ",
           {
             engy <-ENERGY(readLines("Net3.inp"))
@@ -132,12 +95,6 @@ test_that("Net3 ENERGY table is ok ",
           })
 
 
-#test_that("anytown TIMES",
-#          {
-#            tms <- TIMES(readLines("anytown.inp"))
-#            expect_that(length(tms),equals(9))
-#          })
-#
 
 test_that("Net3 TIMES",
           {
@@ -145,29 +102,17 @@ test_that("Net3 TIMES",
             expect_that(length(tms),equals(9))
           })
 
-#test_that("anytown OPTIONS",
-#          {
-#            opts <- OPTIONS(readLines("anytown.inp"))
-#            expect_that(class(opts),equals("list"))
-#          })
 test_that("Net3 OPTIONS",
           {
             opts <- OPTIONS(readLines("Net3.inp"))
             expect_that(class(opts),equals("list"))
           })
-#
-#test_that("anytown COORDINATES",
-#          {
-#            coord <- COORDINATES(readLines("anytown.inp"))
-#            expect_that(dim(coord)[1],equals(25))
-#			
-#          })
 test_that("Net3 COORDINATES",
           {
             coord <- COORDINATES(readLines("Net3.inp"))
             expect_that(dim(coord)[1],equals(96))
           })
-#
+
 test_that("two word options are picked up",
            {
            newList <-  .listUpdater( list( a_b = 4 ), "a b 5")
@@ -181,14 +126,6 @@ test_that("for options case doesn't matter",
            expect_that(newList$A_B, equals("5"))
            })
 
-#test_that(" anytown patterns work",
-#          {
-#            pats <- PATTERNS(readLines("anytown.inp"))
-#            expect_that(length(pats),equals(4))
-#            expect_that(pats$`1`[16],equals(1.3))
-#			
-#			fail("issue warning for integer IDs")
-#          })
   
 test_that(" patterns work",
           {
