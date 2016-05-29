@@ -1,0 +1,8 @@
+bibentry('InProceedings',
+year = "2016",
+title = "epanetReader: A Package for Reading EPANET Files into R",
+pages = "487-496",
+doi = "10.1061/9780784479865.051",
+author = "Bradley J. Eck",
+booktitle = "World Environmental and Water Resources Congress 2016",
+publisher = "ASCE")
