@@ -51,7 +51,17 @@ test_that("Net3.rpt reads",{
 			expect_warning(read.rpt("Net3.rpt"), "Node results not found")
 		})
 
-
+test_that("Net3-nodes.rpt has correct col names",{
+			
+			n3nr <- read.rpt("Net3-nodes.rpt")
+			node_result_names <- names(n3nr$nodeResults)
+			expect_equal(node_result_names[1], "ID" )
+			expect_equal(node_result_names[2], "Demand" )
+			expect_equal(node_result_names[3], "Head" )
+			expect_equal(node_result_names[4], "Pressure" )
+			expect_equal(node_result_names[5], "Pct_from_Lake" )
+			
+		})
 context("read.rpt error checking")
 
 test_that("page breaks give an error",{
