@@ -96,8 +96,18 @@
    # Take column headings from labels. Sometimes first column is labeled
    # in two rows, sometimes in 1.  See tests. 
    headerRow1 <- unlist(strsplit( gsub("^\\s+", "", sect[3] ), "\\s+"))
-   lh1 <- length( headerRow1 )
    headerRow2 <- unlist(strsplit( gsub("^\\s+", "", sect[4] ), "\\s+"))
+   # When the water quality is a trace the header row includes a percent symbol
+   # in this case modify headerRow1 one so that the last entry is Pct_from_<row2>
+	gpl <- grepl("\\%", headerRow1)
+	if( max(gpl) > 0  ){
+		 gp <- grep("\\%", headerRow1)
+	    cn <- paste("Pct", headerRow1[gp +1], tail(headerRow2,1), sep = "_")	
+		headerRow1 <- c( headerRow1[1:(gp-1)], cn)
+	}
+	
+	
+   lh1 <- length( headerRow1 )
    lh2 <- length( headerRow2) 
 
 
