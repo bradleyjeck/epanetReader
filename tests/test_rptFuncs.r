@@ -80,6 +80,28 @@ expect_equal( names(df)[5], expected = "Chlorine")
         })
 
 
+test_that(" pct sign in heading",{
+          #some sample input
+aFewLines <- c(          
+"  Node Results at 0:00:00 hrs: ",
+"  --------------------------------------------------------",
+"                     Demand      Head  Pressure    % from ",
+"  Node                  gpm        ft       psi      Lake ",
+"  --------------------------------------------------------",
+"  10                   0.00    145.52     -0.64      0.00 ",
+"  15                 620.00    125.81     40.65      0.00 ",
+"  20                   0.00    158.00     12.57      0.00 ",
+"  35                1637.00    145.74     57.73      0.00 ")
+
+df <- .section2df(aFewLines)
+
+expect_equal( names(df)[1] , "ID")
+expect_equal( names(df)[5] , "Pct_from_Lake")
+
+})
+
+
+
 test_that("IDs are characters",{
 		
 			## Manually input due to complexity of reading and breaking into sections
