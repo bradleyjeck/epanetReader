@@ -5,36 +5,35 @@
 #  Author: Bradley J Eck
 #
 #************************************
-#' Read char lines  
+#' Read lines wrapper   
 #' 
-#' Read lines of characters from a file via 
-#' the readChar function. 
-#' 
-#' @export
+#' Wrapper function for different implementations of
+#' readlines functions  
+#'
+#' @export  
 #' @param file the name of the file to read 
 #' @return character vector where each entry corresponds to 
-#' a line in the file.  #'
+#' a line in the file.  
 #' @details
-#' Checks for windows and unix line endings. 
-#' Testing showed this took about half the time of base::readLines()  
-
-read_char_lines <- function( file ){
+#' calls Kmisc::readlines if available and base::readLines otherwise 
+read_lines_wrapper <- function( file ){
 	
 	size <- file.info(file)$size
-	val <- readChar( file, size, TRUE)
+	size_MB <- size / 1e6
 	
-	has_windows_ending <- grepl("\r\n", val)
-	has_unix_ending <- grepl("\n", val)
-	if( has_windows_ending ) { 
-		sp <-   strsplit(val, "\r\n")
-		cv <- sp[[1]]
-	} else if( has_unix_ending ){
-		# assume unix ending
-		sp <-  strsplit(val, "\n" ) 
-		cv <- sp[[1]]
+	if( requireNamespace("Kmisc", quietly = TRUE)){
+		
+		allLines <- Kmisc::readlines(file)
+		
 	} else {
-		# didn't work for some reason so default to readLines
-		cv <- readLines( file )
+		
+		if( size_MB > 100){
+			warning("Consider installing package Kmisc to speed up file reading")
+		}
+		
+		allLines <- readLines(file)
+		
 	}
-	return (cv)
+	
+	return (allLines)
 }

@@ -25,15 +25,15 @@ test_that("benchmark reading Net2.rpt",{
 
 test_that("benchmark etmnt.rpt",{
 			
-		x <- "../../../networks/et/etmnt.rpt"
-		readLines(x)	
+		x <- file.path(R.home("doc"), "COPYING")
+		
 		mb <- microbenchmark(
 				baseReadLines = readLines(x),
-				viaReadChar = read_char_lines(x), 
-				
-				times = 10
+		        Kmisc_readlines = readlines(x)
 		) 
 		
 		print(mb)	
 			
 		})
+
+
