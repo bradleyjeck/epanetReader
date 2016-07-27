@@ -23,4 +23,17 @@ test_that("benchmark reading Net2.rpt",{
 		print(mb)	
 		})
 
-
+test_that("benchmark etmnt.rpt",{
+			
+		x <- "../../../networks/et/etmnt.rpt"
+		readLines(x)	
+		mb <- microbenchmark(
+				baseReadLines = readLines(x),
+				viaReadChar = read_char_lines(x), 
+				
+				times = 10
+		) 
+		
+		print(mb)	
+			
+		})
