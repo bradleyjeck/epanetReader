@@ -190,6 +190,11 @@ test_that("[QUALITY] reads ok",{
 			expect_equal( class(qlty), "data.frame")
 		})
 
+test_that("[SOURCES] reads ok",{
+			x <- SOURCES( readLines("for-various-tests.inp"))
+			expect_equal( class(x), "data.frame")
+		})
+
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {

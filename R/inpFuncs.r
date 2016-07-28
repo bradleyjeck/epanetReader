@@ -725,3 +725,30 @@ QUALITY <- function( allLines){
 	}
 	
 }
+
+SOURCES <- function( allLines ){
+	
+	tag <- "\\[SOURCES\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null(df)) {
+		return( NULL )  
+	} else {   
+		# rename the columns
+		names(df)[1:3] <- c("ID","Type","Quality")
+		
+		#convert id field to character
+		df$ID <- as.character(df$ID)
+		
+		# deal w optional fields
+		if( dim(df)[2]>3){
+			names(df)[4] <- "Pattern"        
+			df$Pattern <- as.factor(df$Pattern)
+		} else {
+			df$Pattern = NA
+		}
+		
+		return(df)
+	} 
+	
+}

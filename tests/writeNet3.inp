@@ -384,6 +384,8 @@ Demand Charge 0.0
 
 [QUALITY]
 
+[SOURCES]
+
 [TIMES]
 Duration 24:00
 Hydraulic Timestep 1:00

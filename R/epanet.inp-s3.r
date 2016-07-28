@@ -58,6 +58,7 @@
 #' \item{Status}{data.frame}
 #' \item{Emitters}{data.frame}
 #' \item{Quality}{data.frame}
+#' \item{Sources}{data.frame}
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
 #' \item{Controls}{character}
@@ -107,7 +108,7 @@ epanet.inp <- function( file ){
   stat <- STATUS(allLines)
   emit <- EMITTERS(allLines)
   qlty <- QUALITY(allLines)
-  #srcs
+  srcs <- SOURCES(allLines)
   #rxns
   #mix
   tims <- TIMES(allLines)
@@ -134,6 +135,7 @@ epanet.inp <- function( file ){
 			   Status = stat,
 			   Emitters = emit,
 			   Quality = qlty,
+			   Sources = srcs,
                Times = tims,
                Options = opts,
                Coordinates = coor)               
