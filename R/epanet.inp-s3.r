@@ -69,6 +69,7 @@
 #' \item{Report}{character}
 #' \item{Options}{list}
 #' \item{Coordinates}{data.frame}
+#' \item{Vertices}{data.frame}
 #' 
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 #' 
@@ -118,7 +119,7 @@ epanet.inp <- function( file ){
   rpt  <- REPORT(allLines)
   opts <- OPTIONS(allLines)
   coor <- COORDINATES(allLines)
-  #vert
+  vert <- VERTICES(allLines)
   #labs
   #bdrp
   
@@ -144,7 +145,8 @@ epanet.inp <- function( file ){
                Times = tims,
 			   Report =rpt,
                Options = opts,
-               Coordinates = coor)               
+               Coordinates = coor,
+			   Vertices = vert)               
   
   class(inp) <- "epanet.inp"
   return( inp )

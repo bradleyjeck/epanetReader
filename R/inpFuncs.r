@@ -791,3 +791,24 @@ REPORT <- function( allLines ){
   sect <- .inpSection2char(tag,allLines)
   return(sect)  
 }
+
+
+VERTICES <- function( allLines ){
+  
+  tag <- "\\[VERTICES\\]"
+  df <- .inpSection2df(tag, allLines)  
+
+  if( is.null(unlist(df)[1])){
+    return( NULL )  
+  } else {   
+    #proceed as usual
+    
+    # rename the columns
+    names(df)[1:3] <- c("ID","X.coord","Y.coord")
+    
+    #convert id field to character
+    df$ID <- as.character(df$ID)
+    
+    return( df )
+  }
+}
