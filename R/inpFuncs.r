@@ -831,3 +831,8 @@ TAGS <- function( allLines ){
   sect <- .inpSection2char(tag,allLines)
   return(sect)  
 }
+RULES <- function( allLines ){
+  tag <- "\\[RULES\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}

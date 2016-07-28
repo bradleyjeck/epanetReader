@@ -64,6 +64,7 @@
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
 #' \item{Controls}{character}
+#' \item{Rules}{character}
 #' \item{Energy}{character}
 #' \item{Times}{character}
 #' \item{Report}{character}
@@ -111,6 +112,7 @@ epanet.inp <- function( file ){
   pats <- PATTERNS(allLines)
   crvs <- CURVES(allLines)
   ctrl <- CONTROLS(allLines)
+  rul  <- RULES(allLines)
   engy <- ENERGY(allLines)
   stat <- STATUS(allLines)
   emit <- EMITTERS(allLines)
@@ -139,6 +141,7 @@ epanet.inp <- function( file ){
                Patterns = pats,
                Curves = crvs,
 			   Controls = ctrl, 
+			   Rules = rul,
                Energy = engy,
 			   Status = stat,
 			   Emitters = emit,

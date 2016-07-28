@@ -372,6 +372,8 @@ Link 335 CLOSED IF Node 1 ABOVE 19.1
 Link 330 CLOSED IF Node 1 BELOW 17.1
 Link 330 OPEN IF Node 1 ABOVE 19.1
 
+[RULES]
+
 [ENERGY]
 Global Efficiency 75
 Global Price 0.0
