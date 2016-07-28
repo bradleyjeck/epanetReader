@@ -819,3 +819,9 @@ LABELS <- function( allLines ){
   sect <- .inpSection2char(tag,allLines)
   return(sect)  
 }
+
+BACKDROP <- function( allLines ){
+  tag <- "\\[BACKDROP\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}

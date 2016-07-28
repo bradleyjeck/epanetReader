@@ -70,6 +70,8 @@
 #' \item{Options}{list}
 #' \item{Coordinates}{data.frame}
 #' \item{Vertices}{data.frame}
+#' \item{Labels}{character}
+#' \item{Backdrop}{character}
 #' 
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 #' 
@@ -121,7 +123,7 @@ epanet.inp <- function( file ){
   coor <- COORDINATES(allLines)
   vert <- VERTICES(allLines)
   labs <- LABELS(allLines)
-  #bdrp
+  bdrp <- BACKDROP(allLines)
   
   # make a list of all the elements 
   inp <- list( Title = titl,
@@ -147,7 +149,8 @@ epanet.inp <- function( file ){
                Options = opts,
                Coordinates = coor,
 			   Vertices = vert,
-			   Labels = labs)               
+			   Labels = labs,
+			   Backdrop = bdrp)               
   
   class(inp) <- "epanet.inp"
   return( inp )
