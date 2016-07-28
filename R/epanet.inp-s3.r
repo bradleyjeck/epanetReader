@@ -59,6 +59,7 @@
 #' \item{Emitters}{data.frame}
 #' \item{Quality}{data.frame}
 #' \item{Sources}{data.frame}
+#' \item{Reactions}{character}
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
 #' \item{Controls}{character}
@@ -109,7 +110,7 @@ epanet.inp <- function( file ){
   emit <- EMITTERS(allLines)
   qlty <- QUALITY(allLines)
   srcs <- SOURCES(allLines)
-  #rxns
+  rxns <- REACTIONS(allLines)
   #mix
   tims <- TIMES(allLines)
   #rpt

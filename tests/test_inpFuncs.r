@@ -196,6 +196,11 @@ test_that("[SOURCES] reads ok",{
 			expect_equal( as.character(x$Pattern[1]), "Pat1")
 		})
 
+test_that("[REACTIONS] reads ok",{
+			x <- REACTIONS( readLines("for-various-tests.inp"))
+			expect_equal( class(x), "character")
+			expect_equal( length(x) , 5)
+		})
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {

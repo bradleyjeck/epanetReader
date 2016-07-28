@@ -20,6 +20,13 @@ EE    3.3
 ;--------------------------------
 N1 CONCEN 1.2 Pat1 ;Concentration varies with time
 N44 MASS 12 ;Constant mass injection
+
+[REACTIONS]
+ORDER WALL 0 ;Wall reactions are zero-order
+GLOBAL BULK -0.5 ;Global bulk decay coeff.
+GLOBAL WALL -1.0 ;Global wall decay coeff.
+WALL P220 -0.5 ;Pipe-specific wall coeffs.
+WALL P244 -0.7
  
 [END]
 

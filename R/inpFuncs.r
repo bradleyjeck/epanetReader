@@ -752,3 +752,10 @@ SOURCES <- function( allLines ){
 	} 
 	
 }
+
+
+REACTIONS <- function( allLines ){
+  tag <- "\\[REACTIONS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
