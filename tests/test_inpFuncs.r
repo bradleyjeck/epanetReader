@@ -193,6 +193,7 @@ test_that("[QUALITY] reads ok",{
 test_that("[SOURCES] reads ok",{
 			x <- SOURCES( readLines("for-various-tests.inp"))
 			expect_equal( class(x), "data.frame")
+			expect_equal( as.character(x$Pattern[1]), "Pat1")
 		})
 
 context("missing inp tables are null")
