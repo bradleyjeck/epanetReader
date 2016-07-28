@@ -177,6 +177,13 @@ test_that("[CONTROLS] reads ok",{
 			expect_equal( length(ctrl), 2)
 		})
 
+test_that("[EMITTERS] reads ok",{
+			
+			emit <- EMITTERS( readLines("for-various-tests.inp"))
+			expect_equal( length(emit), 2)
+			expect_equal( class(emit), "data.frame")
+		})
+
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {
@@ -268,6 +275,10 @@ test_that("COORDINATES is null",{
          expect_that(t, equals(NULL))
         })
 
+test_that("EMITTERS is null",{
+         t <- EMITTERS(readLines("empty.inp"))
+         expect_that(t, equals(NULL))
+        })
 
 context("IDs in inp sections are character")
 

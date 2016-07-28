@@ -103,7 +103,7 @@ epanet.inp <- function( file ){
   ctrl <- CONTROLS(allLines)
   engy <- ENERGY(allLines)
   stat <- STATUS(allLines)
-  #emit
+  emit <- EMITTERS(allLines)
   #qlty
   #srcs
   #rxns
@@ -130,6 +130,7 @@ epanet.inp <- function( file ){
 			   Controls = ctrl, 
                Energy = engy,
 			   Status = stat,
+			   Emitters = emit,
                Times = tims,
                Options = opts,
                Coordinates = coor)               

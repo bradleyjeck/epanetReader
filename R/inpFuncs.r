@@ -689,3 +689,21 @@ CONTROLS <- function( allLines ){
   sect <- .inpSection2char(tag,allLines)
   return(sect)  
 }
+
+EMITTERS <- function( allLines){
+	
+	tag <- "\\[EMITTERS\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null( df ) ){
+		return( NULL )  
+	} else {   
+		names(df)[1] <- "ID"
+		df$ID <- as.character(df$ID)
+		
+		names(df)[2] <- "FlowCoef"
+		
+		return( df )
+	}
+	
+}

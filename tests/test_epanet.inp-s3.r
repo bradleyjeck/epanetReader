@@ -35,8 +35,6 @@ test_that("Net2.inp reads correctly", {
 		
 		})
 
-
-		
 test_that("read Net3.inp",{
 			
 			Net3 <- suppressWarnings( read.inp("Net3.inp"))
@@ -44,6 +42,7 @@ test_that("read Net3.inp",{
 			expect_false( is.null(Net3$Status))
 			expect_true(Net3$Status$Status[1] == 'Closed')
 		})
+
 
 context("summary.epanet.inp s3 object") 
 test_that(" summary works for Net1 ",

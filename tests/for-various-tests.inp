@@ -9,7 +9,11 @@ It's not intended to run.
 [RESERVOIRS]
 ;ID              	Head        	Pattern         
  C               	321         	respat                	;
- 
+
+[EMITTERS]
+;ID   FlowCoef
+D     1.1
+EE    3.3 
  
 [END]
 
