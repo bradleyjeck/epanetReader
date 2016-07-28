@@ -201,6 +201,11 @@ test_that("[REACTIONS] reads ok",{
 			expect_equal( class(x), "character")
 			expect_equal( length(x) , 5)
 		})
+test_that("[MIXING] reads ok",{
+			x <- MIXING( readLines("for-various-tests.inp"))
+			expect_equal( class(x), "data.frame")
+			expect_equal( dim(x)[1] , 2)
+		})
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {

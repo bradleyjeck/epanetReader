@@ -49,6 +49,17 @@ Demand Charge 0
 
 [SOURCES]
 
+[REACTIONS]
+Order Bulk 1
+Order Tank 1
+Order Wall 1
+Global Bulk 0
+Global Wall 0
+Limiting Potential 0
+Roughness Correlation 0
+
+[MIXING]
+
 [TIMES]
 Duration 0
 Hydraulic Timestep 1:00

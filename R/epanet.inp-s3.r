@@ -60,6 +60,7 @@
 #' \item{Quality}{data.frame}
 #' \item{Sources}{data.frame}
 #' \item{Reactions}{character}
+#' \item{Mixing}{data.frame}
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
 #' \item{Controls}{character}
@@ -111,7 +112,7 @@ epanet.inp <- function( file ){
   qlty <- QUALITY(allLines)
   srcs <- SOURCES(allLines)
   rxns <- REACTIONS(allLines)
-  #mix
+  mix  <- MIXING(allLines)
   tims <- TIMES(allLines)
   #rpt
   opts <- OPTIONS(allLines)
@@ -137,6 +138,8 @@ epanet.inp <- function( file ){
 			   Emitters = emit,
 			   Quality = qlty,
 			   Sources = srcs,
+			   Reactions = rxns,
+			   Mixing = mix,
                Times = tims,
                Options = opts,
                Coordinates = coor)               

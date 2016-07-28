@@ -27,6 +27,12 @@ GLOBAL BULK -0.5 ;Global bulk decay coeff.
 GLOBAL WALL -1.0 ;Global wall decay coeff.
 WALL P220 -0.5 ;Pipe-specific wall coeffs.
 WALL P244 -0.7
+
+[MIXING]
+;Tank Model
+;-----------------------
+T12 LIFO
+T23 2COMP 0.2
  
 [END]
 

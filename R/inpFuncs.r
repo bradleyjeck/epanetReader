@@ -759,3 +759,28 @@ REACTIONS <- function( allLines ){
   sect <- .inpSection2char(tag,allLines)
   return(sect)  
 }
+
+MIXING <- function( allLines){
+	
+	tag <- "\\[MIXING\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null(df)) {
+		return( NULL )  
+	} else {   
+		# rename the columns
+		names(df)[1:2] <- c("ID","Model") 
+		
+		#convert id field to character
+		df$ID <- as.character(df$ID)
+
+		# deal w optional fields
+		if( dim(df)[2]>2){
+			names(df)[3] <- "CompartmentVolumeFraction"
+		} else {
+			df$CompartmentVolumeFraction = NA
+		}
+		
+		return(df)
+	} 
+}
