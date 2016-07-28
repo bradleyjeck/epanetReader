@@ -7,29 +7,43 @@
 library(microbenchmark)
 context("benchmark file reading   ")
 
-source("../R/text_file_reader.r")
+## bje implementation for test purposes
+read_char_lines <- function( file ){
+	
+	size <- file.info(file)$size
+	val <- readChar( file, size, TRUE)
+	
+	has_windows_ending <- grepl("\r\n", val)
+	has_unix_ending <- grepl("\n", val)
+	if( has_windows_ending ) { 
+		sp <-   strsplit(val, "\r\n")
+		cv <- sp[[1]]
+	} else if( has_unix_ending ){
+		# assume unix ending
+		sp <-  strsplit(val, "\n" ) 
+		cv <- sp[[1]]
+	} else {
+		# didn't work for some reason so default to readLines
+		cv <- readLines( file )
+	}
+	return (cv)
+}
 
-test_that("benchmark reading Net2.rpt",{
-			
-		x <- "Net2.rpt"
-			
-		mb <- microbenchmark(
-				baseReadLines = readLines(x),
-				viaReadChar = read_char_lines(x), 
-				
-				times = 10
-		) 
-		
-		print(mb)	
-		})
-
-test_that("benchmark etmnt.rpt",{
+test_that("benchmark file reading",{
+		library(Kmisc)
+		library(readr)
 			
 		x <- file.path(R.home("doc"), "COPYING")
 		
+		
+		
 		mb <- microbenchmark(
 				baseReadLines = readLines(x),
-		        Kmisc_readlines = readlines(x)
+				bje_read_char_lines = read_char_lines(x),
+		        Kmisc_readlines = Kmisc::readlines(x),
+		        readr_read_lines = readr::read_lines(x),
+				
+				times = 50
 		) 
 		
 		print(mb)	
