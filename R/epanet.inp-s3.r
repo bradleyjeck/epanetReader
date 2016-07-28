@@ -72,6 +72,7 @@
 #' \item{Vertices}{data.frame}
 #' \item{Labels}{character}
 #' \item{Backdrop}{character}
+#' \item{Tags}{character}
 #' 
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 #' 
@@ -124,6 +125,7 @@ epanet.inp <- function( file ){
   vert <- VERTICES(allLines)
   labs <- LABELS(allLines)
   bdrp <- BACKDROP(allLines)
+  tags <- TAGS(allLines)
   
   # make a list of all the elements 
   inp <- list( Title = titl,
@@ -150,7 +152,8 @@ epanet.inp <- function( file ){
                Coordinates = coor,
 			   Vertices = vert,
 			   Labels = labs,
-			   Backdrop = bdrp)               
+			   Backdrop = bdrp,
+			   Tags = tags)               
   
   class(inp) <- "epanet.inp"
   return( inp )
