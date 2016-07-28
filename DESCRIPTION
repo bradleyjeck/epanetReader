@@ -10,7 +10,7 @@ Depends:
     graphics,
     utils
 Suggests:
-	Kmisc (>= 0.5.0)
+    Kmisc (>= 0.5.0)
 Description: Reads water network simulation data in Epanet's text-based
     '.inp' and '.rpt' formats into R. Also reads results from Epanet-msx.
     Provides basic summary information and plots. 
