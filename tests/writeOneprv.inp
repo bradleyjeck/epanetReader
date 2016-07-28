@@ -34,12 +34,18 @@
 
 [CURVES]
 
+[CONTROLS]
+
 [ENERGY]
 Global Efficiency 75
 Global Price 0
 Demand Charge 0
 
 [STATUS]
+
+[EMITTERS]
+
+[QUALITY]
 
 [TIMES]
 Duration 0

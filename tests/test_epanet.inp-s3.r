@@ -23,6 +23,7 @@ test_that("net1.inp reads correctly",
                expect_that( class(Net1), equals("epanet.inp"))
                expect_that( Net1$Curves$`1`$Y , equals(250))
 			   expect_that( length(Net1$Controls), equals(2))
+			   expect_that( dim(Net1$Quality)[1], equals(11))
     
 })
 

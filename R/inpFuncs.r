@@ -707,3 +707,21 @@ EMITTERS <- function( allLines){
 	}
 	
 }
+
+QUALITY <- function( allLines){
+	
+	tag <- "\\[QUALITY\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null( df ) ){
+		return( NULL )  
+	} else {   
+		names(df)[1] <- "ID"
+		df$ID <- as.character(df$ID)
+		
+		names(df)[2] <- "InitQual"
+		
+		return( df )
+	}
+	
+}

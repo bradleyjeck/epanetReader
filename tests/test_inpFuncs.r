@@ -180,8 +180,14 @@ test_that("[CONTROLS] reads ok",{
 test_that("[EMITTERS] reads ok",{
 			
 			emit <- EMITTERS( readLines("for-various-tests.inp"))
-			expect_equal( length(emit), 2)
+			expect_equal( dim(emit)[1], 2)
 			expect_equal( class(emit), "data.frame")
+		})
+test_that("[QUALITY] reads ok",{
+			
+			qlty <- QUALITY( readLines("Net1.inp"))
+			expect_equal( dim(qlty)[1], 11)
+			expect_equal( class(qlty), "data.frame")
 		})
 
 context("missing inp tables are null")

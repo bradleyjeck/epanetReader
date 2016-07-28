@@ -56,6 +56,8 @@
 #' \item{Valves}{data.frame}
 #' \item{Demands}{data.frame}
 #' \item{Status}{data.frame}
+#' \item{Emitters}{data.frame}
+#' \item{Quality}{data.frame}
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
 #' \item{Controls}{character}
@@ -104,7 +106,7 @@ epanet.inp <- function( file ){
   engy <- ENERGY(allLines)
   stat <- STATUS(allLines)
   emit <- EMITTERS(allLines)
-  #qlty
+  qlty <- QUALITY(allLines)
   #srcs
   #rxns
   #mix
@@ -131,6 +133,7 @@ epanet.inp <- function( file ){
                Energy = engy,
 			   Status = stat,
 			   Emitters = emit,
+			   Quality = qlty,
                Times = tims,
                Options = opts,
                Coordinates = coor)               
