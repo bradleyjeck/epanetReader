@@ -59,12 +59,46 @@ wall reactions are included.
 [CURVES]
 1 1500 250
 
+[CONTROLS]
+LINK 9 OPEN IF NODE 2 BELOW 110
+LINK 9 CLOSED IF NODE 2 ABOVE 140
+
+[RULES]
+
 [ENERGY]
 Global Efficiency 75
 Global Price 0.0
 Demand Charge 0.0
 
 [STATUS]
+
+[EMITTERS]
+
+[QUALITY]
+10	0.5
+11	0.5
+12	0.5
+13	0.5
+21	0.5
+22	0.5
+23	0.5
+31	0.5
+32	0.5
+9	1
+2	1
+
+[SOURCES]
+
+[REACTIONS]
+Order Bulk 1
+Order Tank 1
+Order Wall 1
+Global Bulk -.5
+Global Wall -1
+Limiting Potential 0.0
+Roughness Correlation 0.0
+
+[MIXING]
 
 [TIMES]
 Duration 24:00
@@ -76,6 +110,14 @@ Report Timestep 1:00
 Report Start 0:00
 Start ClockTime 12 am
 Statistic None
+
+[REPORT]
+Status Yes
+Summary No
+Page 0
+Links All
+Nodes All
+Energy Yes
 
 [OPTIONS]
 UNITS GPM
@@ -104,5 +146,20 @@ TOLERANCE 0.01
 32	50	10
 9	10	70
 2	50	90
+
+[VERTICES]
+
+[LABELS]
+6.99 73.63 "Source"
+13.48 68.13 "Pump"
+43.85 91.21 "Tank"
+
+[BACKDROP]
+DIMENSIONS 7.00 6.00 73.00 94.00
+UNITS None
+FILE
+OFFSET 0.00 0.00
+
+[TAGS]
 
 [END]

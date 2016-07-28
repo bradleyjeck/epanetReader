@@ -22,6 +22,8 @@ test_that("net1.inp reads correctly",
    Net1 <- suppressWarnings( read.inp( "../inst/extdata/net1.inp") )
                expect_that( class(Net1), equals("epanet.inp"))
                expect_that( Net1$Curves$`1`$Y , equals(250))
+			   expect_that( length(Net1$Controls), equals(2))
+			   expect_that( dim(Net1$Quality)[1], equals(11))
     
 })
 
@@ -31,11 +33,11 @@ test_that("Net2.inp reads correctly", {
 
 			expect_that( class(Net2), equals("epanet.inp"))
             expect_that( Net2$Junctions$Demand[1] , equals(-694.4))
+			expect_that( Net2$Sources$Type[1], equals("CONCEN"))
+			expect_false( is.null(Net2$Report))
 		
 		})
 
-
-		
 test_that("read Net3.inp",{
 			
 			Net3 <- suppressWarnings( read.inp("Net3.inp"))
@@ -43,6 +45,7 @@ test_that("read Net3.inp",{
 			expect_false( is.null(Net3$Status))
 			expect_true(Net3$Status$Status[1] == 'Closed')
 		})
+
 
 context("summary.epanet.inp s3 object") 
 test_that(" summary works for Net1 ",

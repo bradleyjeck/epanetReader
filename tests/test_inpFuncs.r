@@ -172,6 +172,47 @@ test_that("[DEMANDS] reads ok",{
 			
 		})
 
+test_that("[CONTROLS] reads ok",{
+			ctrl <- CONTROLS( readLines("Net1.inp"))
+			expect_equal( length(ctrl), 2)
+		})
+
+test_that("[EMITTERS] reads ok",{
+			
+			emit <- EMITTERS( readLines("for-various-tests.inp"))
+			expect_equal( dim(emit)[1], 2)
+			expect_equal( class(emit), "data.frame")
+		})
+test_that("[QUALITY] reads ok",{
+			
+			qlty <- QUALITY( readLines("Net1.inp"))
+			expect_equal( dim(qlty)[1], 11)
+			expect_equal( class(qlty), "data.frame")
+		})
+
+test_that("[SOURCES] reads ok",{
+			x <- SOURCES( readLines("for-various-tests.inp"))
+			expect_equal( class(x), "data.frame")
+			expect_equal( as.character(x$Pattern[1]), "Pat1")
+		})
+
+test_that("[REACTIONS] reads ok",{
+			x <- REACTIONS( readLines("for-various-tests.inp"))
+			expect_equal( class(x), "character")
+			expect_equal( length(x) , 5)
+		})
+test_that("[MIXING] reads ok",{
+			x <- MIXING( readLines("for-various-tests.inp"))
+			expect_equal( class(x), "data.frame")
+			expect_equal( dim(x)[1] , 2)
+		})
+test_that("[REPORT] reads ok",{
+			x <- REPORT( readLines("Net1.inp"))
+			expect_equal( class(x), "character")
+			expect_equal( length(x) , 6)
+		})
+
+
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {
@@ -238,6 +279,11 @@ test_that("CURVES is null",{
          expect_that(s, equals(NULL))
         })
 
+test_that("CONTROLS is null",{
+         s <- CONTROLS(readLines("empty.inp"))
+         expect_that(s, equals(NULL))
+	 })
+
 test_that("ENERGY is null",{
          t <- ENERGY(readLines("empty.inp"))
          expect_that(t, equals(NULL))
@@ -258,6 +304,10 @@ test_that("COORDINATES is null",{
          expect_that(t, equals(NULL))
         })
 
+test_that("EMITTERS is null",{
+         t <- EMITTERS(readLines("empty.inp"))
+         expect_that(t, equals(NULL))
+        })
 
 context("IDs in inp sections are character")
 

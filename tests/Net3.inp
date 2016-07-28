@@ -316,9 +316,6 @@ Link 330 OPEN IF Node 1 ABOVE 19.1
 
 [REACTIONS]
 ;Type     	Pipe/Tank       	Coefficient
-
-
-[REACTIONS]
  Order Bulk            	1
  Order Tank            	1
  Order Wall            	1

@@ -684,3 +684,155 @@ STATUS <- function( allLines ){
 }
 
 
+CONTROLS <- function( allLines ){
+  tag <- "\\[CONTROLS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+EMITTERS <- function( allLines){
+	
+	tag <- "\\[EMITTERS\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null( df ) ){
+		return( NULL )  
+	} else {   
+		names(df)[1] <- "ID"
+		df$ID <- as.character(df$ID)
+		
+		names(df)[2] <- "FlowCoef"
+		
+		return( df )
+	}
+	
+}
+
+QUALITY <- function( allLines){
+	
+	tag <- "\\[QUALITY\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null( df ) ){
+		return( NULL )  
+	} else {   
+		names(df)[1] <- "ID"
+		df$ID <- as.character(df$ID)
+		
+		names(df)[2] <- "InitQual"
+		
+		return( df )
+	}
+	
+}
+
+SOURCES <- function( allLines ){
+	
+	tag <- "\\[SOURCES\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null(df)) {
+		return( NULL )  
+	} else {   
+		# rename the columns
+		names(df)[1:3] <- c("ID","Type","Quality")
+		
+		#convert id field to character
+		df$ID <- as.character(df$ID)
+		
+		# deal w optional fields
+		if( dim(df)[2]>3){
+			names(df)[4] <- "Pattern"        
+			df$Pattern <- as.factor(df$Pattern)
+		} else {
+			df$Pattern = NA
+		}
+		
+		return(df)
+	} 
+	
+}
+
+
+REACTIONS <- function( allLines ){
+  tag <- "\\[REACTIONS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+MIXING <- function( allLines){
+	
+	tag <- "\\[MIXING\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null(df)) {
+		return( NULL )  
+	} else {   
+		# rename the columns
+		names(df)[1:2] <- c("ID","Model") 
+		
+		#convert id field to character
+		df$ID <- as.character(df$ID)
+
+		# deal w optional fields
+		if( dim(df)[2]>2){
+			names(df)[3] <- "CompartmentVolumeFraction"
+		} else {
+			df$CompartmentVolumeFraction = NA
+		}
+		
+		return(df)
+	} 
+}
+
+
+REPORT <- function( allLines ){
+  tag <- "\\[REPORT\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+
+VERTICES <- function( allLines ){
+  
+  tag <- "\\[VERTICES\\]"
+  df <- .inpSection2df(tag, allLines)  
+
+  if( is.null(unlist(df)[1])){
+    return( NULL )  
+  } else {   
+    #proceed as usual
+    
+    # rename the columns
+    names(df)[1:3] <- c("ID","X.coord","Y.coord")
+    
+    #convert id field to character
+    df$ID <- as.character(df$ID)
+    
+    return( df )
+  }
+}
+
+
+LABELS <- function( allLines ){
+  tag <- "\\[LABELS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+BACKDROP <- function( allLines ){
+  tag <- "\\[BACKDROP\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+TAGS <- function( allLines ){
+  tag <- "\\[TAGS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+RULES <- function( allLines ){
+  tag <- "\\[RULES\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}

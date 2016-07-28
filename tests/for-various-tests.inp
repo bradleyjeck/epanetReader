@@ -9,7 +9,30 @@ It's not intended to run.
 [RESERVOIRS]
 ;ID              	Head        	Pattern         
  C               	321         	respat                	;
- 
+
+[EMITTERS]
+;ID   FlowCoef
+D     1.1
+EE    3.3 
+
+[SOURCES]
+;Node Type Strength Pattern
+;--------------------------------
+N1 CONCEN 1.2 Pat1 ;Concentration varies with time
+N44 MASS 12 ;Constant mass injection
+
+[REACTIONS]
+ORDER WALL 0 ;Wall reactions are zero-order
+GLOBAL BULK -0.5 ;Global bulk decay coeff.
+GLOBAL WALL -1.0 ;Global wall decay coeff.
+WALL P220 -0.5 ;Pipe-specific wall coeffs.
+WALL P244 -0.7
+
+[MIXING]
+;Tank Model
+;-----------------------
+T12 LIFO
+T23 2COMP 0.2
  
 [END]
 

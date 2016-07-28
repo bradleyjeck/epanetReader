@@ -56,12 +56,24 @@
 #' \item{Valves}{data.frame}
 #' \item{Demands}{data.frame}
 #' \item{Status}{data.frame}
+#' \item{Emitters}{data.frame}
+#' \item{Quality}{data.frame}
+#' \item{Sources}{data.frame}
+#' \item{Reactions}{character}
+#' \item{Mixing}{data.frame}
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
+#' \item{Controls}{character}
+#' \item{Rules}{character}
 #' \item{Energy}{character}
 #' \item{Times}{character}
+#' \item{Report}{character}
 #' \item{Options}{list}
 #' \item{Coordinates}{data.frame}
+#' \item{Vertices}{data.frame}
+#' \item{Labels}{character}
+#' \item{Backdrop}{character}
+#' \item{Tags}{character}
 #' 
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 #' 
@@ -99,21 +111,23 @@ epanet.inp <- function( file ){
   dmd  <- DEMANDS(allLines) 
   pats <- PATTERNS(allLines)
   crvs <- CURVES(allLines)
-  #ctrl
+  ctrl <- CONTROLS(allLines)
+  rul  <- RULES(allLines)
   engy <- ENERGY(allLines)
   stat <- STATUS(allLines)
-  #emit
-  #qlty
-  #srcs
-  #rxns
-  #mix
+  emit <- EMITTERS(allLines)
+  qlty <- QUALITY(allLines)
+  srcs <- SOURCES(allLines)
+  rxns <- REACTIONS(allLines)
+  mix  <- MIXING(allLines)
   tims <- TIMES(allLines)
-  #rpt
+  rpt  <- REPORT(allLines)
   opts <- OPTIONS(allLines)
   coor <- COORDINATES(allLines)
-  #vert
-  #labs
-  #bdrp
+  vert <- VERTICES(allLines)
+  labs <- LABELS(allLines)
+  bdrp <- BACKDROP(allLines)
+  tags <- TAGS(allLines)
   
   # make a list of all the elements 
   inp <- list( Title = titl,
@@ -126,11 +140,23 @@ epanet.inp <- function( file ){
 			   Demands = dmd, 
                Patterns = pats,
                Curves = crvs,
+			   Controls = ctrl, 
+			   Rules = rul,
                Energy = engy,
 			   Status = stat,
+			   Emitters = emit,
+			   Quality = qlty,
+			   Sources = srcs,
+			   Reactions = rxns,
+			   Mixing = mix,
                Times = tims,
+			   Report =rpt,
                Options = opts,
-               Coordinates = coor)               
+               Coordinates = coor,
+			   Vertices = vert,
+			   Labels = labs,
+			   Backdrop = bdrp,
+			   Tags = tags)               
   
   class(inp) <- "epanet.inp"
   return( inp )
