@@ -206,6 +206,13 @@ test_that("[MIXING] reads ok",{
 			expect_equal( class(x), "data.frame")
 			expect_equal( dim(x)[1] , 2)
 		})
+test_that("[REPORT] reads ok",{
+			x <- REPORT( readLines("Net1.inp"))
+			expect_equal( class(x), "character")
+			expect_equal( length(x) , 6)
+		})
+
+
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {

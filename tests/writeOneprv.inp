@@ -71,6 +71,11 @@ Report Start 0:00
 Start ClockTime 12 am
 Statistic None
 
+[REPORT]
+Status No
+Summary No
+Page 0
+
 [OPTIONS]
 UNITS GPM
 HEADLOSS H-W

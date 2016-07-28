@@ -340,6 +340,13 @@ Report Start 0:00
 Start ClockTime 8 am
 Statistic None
 
+[REPORT]
+Status No
+Summary No
+Page 0
+Links All
+Nodes All
+
 [OPTIONS]
 UNITS GPM
 HEADLOSS H-W

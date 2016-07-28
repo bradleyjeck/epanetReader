@@ -66,6 +66,7 @@
 #' \item{Controls}{character}
 #' \item{Energy}{character}
 #' \item{Times}{character}
+#' \item{Report}{character}
 #' \item{Options}{list}
 #' \item{Coordinates}{data.frame}
 #' 
@@ -114,7 +115,7 @@ epanet.inp <- function( file ){
   rxns <- REACTIONS(allLines)
   mix  <- MIXING(allLines)
   tims <- TIMES(allLines)
-  #rpt
+  rpt  <- REPORT(allLines)
   opts <- OPTIONS(allLines)
   coor <- COORDINATES(allLines)
   #vert
@@ -141,6 +142,7 @@ epanet.inp <- function( file ){
 			   Reactions = rxns,
 			   Mixing = mix,
                Times = tims,
+			   Report =rpt,
                Options = opts,
                Coordinates = coor)               
   

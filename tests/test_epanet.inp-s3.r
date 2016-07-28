@@ -34,6 +34,7 @@ test_that("Net2.inp reads correctly", {
 			expect_that( class(Net2), equals("epanet.inp"))
             expect_that( Net2$Junctions$Demand[1] , equals(-694.4))
 			expect_that( Net2$Sources$Type[1], equals("CONCEN"))
+			expect_false( is.null(Net2$Report))
 		
 		})
 

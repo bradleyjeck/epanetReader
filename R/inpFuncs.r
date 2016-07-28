@@ -784,3 +784,10 @@ MIXING <- function( allLines){
 		return(df)
 	} 
 }
+
+
+REPORT <- function( allLines ){
+  tag <- "\\[REPORT\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
