@@ -62,7 +62,7 @@ read.rpt <- function( file ){
 
 epanet.rpt <- function( file){
   # read all the lines in the file 
-  allLines <- readLines(file)
+  allLines <- read_lines_wrapper(file)
   checkRptFile( allLines ) 
 
   lengthOfAllLines <- length( allLines)

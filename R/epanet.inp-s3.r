@@ -86,7 +86,7 @@ read.inp <- function (file ){
 
 epanet.inp <- function( file ){
 	
-	allLines <- readLines( file )
+	allLines <- read_lines_wrapper( file )
   
   # read in all the sections  
   titl <- TITLE( allLines )
