@@ -49,7 +49,7 @@ epanetmsx.rpt <- function( file ) {
 # this based heavily on the epanet.rpt function
 	
   # read all the lines in the file 
-  allLines <- readLines(file)
+  allLines <- read_lines_wrapper(file)
   #checkRptFile( allLines ) 
 
   title <- getTitle( allLines) 

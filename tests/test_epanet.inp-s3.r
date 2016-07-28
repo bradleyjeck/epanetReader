@@ -11,6 +11,7 @@
 source("../R/epanet.inp-s3.r")
 source("../R/inpFuncs.r")
 source("../R/expandedLinkTable-s3.r")
+source("../R/text_file_reader.r")
 
 
    
