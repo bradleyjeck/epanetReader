@@ -147,4 +147,9 @@ TOLERANCE 0.01
 
 [VERTICES]
 
+[LABELS]
+6.99 73.63 "Source"
+13.48 68.13 "Pump"
+43.85 91.21 "Tank"
+
 [END]

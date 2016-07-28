@@ -812,3 +812,10 @@ VERTICES <- function( allLines ){
     return( df )
   }
 }
+
+
+LABELS <- function( allLines ){
+  tag <- "\\[LABELS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}

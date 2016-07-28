@@ -120,7 +120,7 @@ epanet.inp <- function( file ){
   opts <- OPTIONS(allLines)
   coor <- COORDINATES(allLines)
   vert <- VERTICES(allLines)
-  #labs
+  labs <- LABELS(allLines)
   #bdrp
   
   # make a list of all the elements 
@@ -146,7 +146,8 @@ epanet.inp <- function( file ){
 			   Report =rpt,
                Options = opts,
                Coordinates = coor,
-			   Vertices = vert)               
+			   Vertices = vert,
+			   Labels = labs)               
   
   class(inp) <- "epanet.inp"
   return( inp )
