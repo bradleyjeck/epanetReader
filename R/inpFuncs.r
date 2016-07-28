@@ -684,3 +684,8 @@ STATUS <- function( allLines ){
 }
 
 
+CONTROLS <- function( allLines ){
+  tag <- "\\[CONTROLS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}

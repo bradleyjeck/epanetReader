@@ -22,6 +22,7 @@ test_that("net1.inp reads correctly",
    Net1 <- suppressWarnings( read.inp( "../inst/extdata/net1.inp") )
                expect_that( class(Net1), equals("epanet.inp"))
                expect_that( Net1$Curves$`1`$Y , equals(250))
+			   expect_that( length(Net1$Controls), equals(2))
     
 })
 

@@ -58,6 +58,7 @@
 #' \item{Status}{data.frame}
 #' \item{Patterns}{list}
 #' \item{Curves}{list}
+#' \item{Controls}{character}
 #' \item{Energy}{character}
 #' \item{Times}{character}
 #' \item{Options}{list}
@@ -99,7 +100,7 @@ epanet.inp <- function( file ){
   dmd  <- DEMANDS(allLines) 
   pats <- PATTERNS(allLines)
   crvs <- CURVES(allLines)
-  #ctrl
+  ctrl <- CONTROLS(allLines)
   engy <- ENERGY(allLines)
   stat <- STATUS(allLines)
   #emit
@@ -126,6 +127,7 @@ epanet.inp <- function( file ){
 			   Demands = dmd, 
                Patterns = pats,
                Curves = crvs,
+			   Controls = ctrl, 
                Energy = engy,
 			   Status = stat,
                Times = tims,

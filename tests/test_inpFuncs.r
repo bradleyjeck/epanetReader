@@ -172,6 +172,11 @@ test_that("[DEMANDS] reads ok",{
 			
 		})
 
+test_that("[CONTROLS] reads ok",{
+			ctrl <- CONTROLS( readLines("Net1.inp"))
+			expect_equal( length(ctrl), 2)
+		})
+
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",
           {
@@ -237,6 +242,11 @@ test_that("CURVES is null",{
          s <- CURVES(readLines("empty.inp"))
          expect_that(s, equals(NULL))
         })
+
+test_that("CONTROLS is null",{
+         s <- CONTROLS(readLines("empty.inp"))
+         expect_that(s, equals(NULL))
+	 })
 
 test_that("ENERGY is null",{
          t <- ENERGY(readLines("empty.inp"))
