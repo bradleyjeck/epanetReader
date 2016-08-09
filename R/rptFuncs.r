@@ -97,7 +97,6 @@
 	gpl <- grepl("\\%", headerRow1)
 	if( max(gpl) > 0  ){
 		 gp <- grep("\\%", headerRow1)
-	    cn <- paste("Pct", headerRow1[gp +1], tail(headerRow2,1), sep = "_")	
 		headerRow1 <- c( headerRow1[1:(gp-1)], cn)
 	}
 	

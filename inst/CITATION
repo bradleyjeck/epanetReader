@@ -4,7 +4,7 @@ title = "An R package for reading EPANET files",
 pages = "149-154",
 doi = "10.1016/j.envsoft.2016.06.027",
 author = "Bradley J. Eck",
-journal = "Environmental Modeling \& Software",
+journal = "Environmental Modeling and Software",
 volume = "86",
 publisher = "Elsevier")
 
