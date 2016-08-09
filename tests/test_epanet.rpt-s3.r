@@ -74,15 +74,61 @@ test_that("another version of net1  with page breaks reads ",{
 			expect_that(as.numeric(q), equals(1892.24))
 
 })
-
-test_that("Net2.rpt reads correctly",{
-            Net2res <- read.rpt("Net2.rpt")
+test_that("Net1.rpt and Net1-gui.rpt are equivalent",{
+			
+            n1r <- read.rpt("net1.rpt")
+			n1rg <- read.rpt("Net1-gui.rpt")
+			actual <- all.equal(n1r,n1rg)
+			expected <- c( "Component \"nodeResults\": Names: 1 string mismatch", 
+						   "Component \"nodeResults\": Component \"Timestamp\": 275 string mismatches", 
+						  "Component \"linkResults\": Names: 4 string mismatches", 
+						 "Component \"linkResults\": Length mismatch: comparison on first 8 components",           
+						 "Component \"linkResults\": Component 5: Modes: character, numeric",          
+						 "Component \"linkResults\": Component 5: Attributes: < target is NULL, current is list >",
+						 "Component \"linkResults\": Component 5: target is character, current is factor",
+						 "Component \"linkResults\": Component 6: 325 string mismatches",        
+						 "Component \"linkResults\": Component 7: Modes: numeric, character",                      
+						 "Component \"linkResults\": Component 7: target is numeric, current is character",        
+						 "Component \"linkResults\": Component 8: 'current' is not a factor")
+					
+					
+					
+					expect_equal(actual, expected)
 		})
 
+
+
+test_that("Net2.rpt reads correctly",{
+            net2res <- read.rpt("net2.rpt")
+		})
+
+test_that("Net2-gui.rpt reads",{
+			
+			Net2res <- read.rpt("Net2-gui.rpt")
+		})
+
+test_that("Net2.rpt and Net2-gui.rpt are equivalent",{
+			
+            n2r <- read.rpt("net2.rpt")
+			n2rg <- read.rpt("Net2-gui.rpt")
+		
+		    s <- summary(n2r)	
+			
+			sg <- summary(n2rg)
+			
+			actual <- all.equal(s, sg)
+			
+			expected <-c("Component \"juncSummary\": Attributes: < Component \"dimnames\": Component 2: 1 string mismatch >",
+			             "Component \"tankSummary\": Attributes: < Component \"dimnames\": Component 2: 1 string mismatch >" )
+			
+			expect_equal(actual, expected)
+			
+		})
 
 test_that("Net3.rpt reads",{
 			expect_warning(read.rpt("Net3.rpt"), "Node results not found")
 		})
+
 
 test_that("Net3-nodes.rpt has correct col names",{
 			
@@ -94,6 +140,28 @@ test_that("Net3-nodes.rpt has correct col names",{
 			expect_equal(node_result_names[4], "Pressure" )
 			expect_equal(node_result_names[5], "Pct_from_Lake" )
 			
+		})
+test_that("Net3-gui.rpt reads",{
+			
+			n3r <- read.rpt("Net3-gui.rpt")
+			n3r <- read.rpt("Net3-nodes.rpt")
+			node_result_names <- names(n3r$nodeResults)
+			expect_equal(node_result_names[1], "ID" )
+			expect_equal(node_result_names[2], "Demand" )
+			expect_equal(node_result_names[3], "Head" )
+			expect_equal(node_result_names[4], "Pressure" )
+			expect_equal(node_result_names[5], "Pct_from_Lake" )
+		})
+
+test_that("Net3.rpt and Net3-gui.rpt are equivalent",{
+			
+            n3r <- read.rpt("net3-nodes.rpt")
+			n3rg <- read.rpt("Net3-gui.rpt")
+			actual <- 
+					all.equal(n3r$nodeResults,n3rg$nodeResults)
+			expected <- c( "Names: 1 string mismatch",                       
+							 "Component \"Timestamp\": 2425 string mismatches")
+		    expect_equal(actual, expected)
 		})
 context("read.rpt error checking")
 
