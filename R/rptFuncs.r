@@ -34,14 +34,9 @@
   
  tokens <- unlist(  strsplit(tsLine, "\\s") ) 
 
- stamp <-
-   tokens[ grep(":.{2}:", tokens) ]
+ # stamp in token after "at"
+ stamp  <- tokens[  grep( "at", tokens) + 1 ]
 
- if( length(stamp) > 1 ){
-   msg <- paste( "more than one timestamp found on line", tsLine)
-   stop( msg )
- }
- 
  if( length(stamp) == 0 ){
 	 # use a time of zero if none is supplied 
 	 stamp <- "0:00:00"
@@ -106,30 +101,32 @@
 		headerRow1 <- c( headerRow1[1:(gp-1)], cn)
 	}
 	
+	## figure out the column names 
+	 hr1_link <- grepl("link", headerRow1[1], ignore.case=TRUE) 
+	 hr1_node <- grepl("node", headerRow1[1], ignore.case=TRUE) 
+	 
+	 if( hr1_link | hr1_node){
+		 columnNames <- c(headerRow1, "note")
+	 } else { 
+		 # node or link is not in first col of first row
+		 columnNames <- c("ID", headerRow1, "note")
+	 }
 	
-   lh1 <- length( headerRow1 )
-   lh2 <- length( headerRow2) 
-
-
-   if( lh1 ==  lh2 ){
-     columnNames <- c( headerRow1, "note" ) 
-   } else if( lh2 == ( lh1 + 1 ) ) {
-     columnNames <- c( headerRow2[1], headerRow1, "note" )
-   } else {
-     warning("unexpected header format in rpt file, check results")
-     columnNames <- c( headerRow2[1], headerRow1, "note" )
-   }
-
    # name the first column "ID" rather than
    # "Node" or "Link"  to be consistent with inp objects
 	columnNames[1] <- "ID"
+
+  # a quirk of the gui rpt file 	
+  columnNames <- gsub( "VelocityUnit", "Velocity", columnNames)	
    
-  # set colClasses, everything is numeric execpt fist 
-	# and last column
+  # set colClasses, everything is numeric execpt
+  # columns: ID, Status, and note  
 	lcn <- length( columnNames)
   cc <- rep("numeric", lcn )
   cc[1] <- "character"  # for ID column 
   cc[lcn] <- "character" # for note column 
+  #status column 
+  cc[grep("Status", columnNames)] <- "factor"
   
    
   # make the section a data frame 
@@ -188,16 +185,6 @@ binBreaker <- function( x, nbin){
 checkRptFile <- function( allLines ){
   # check rpt file format 
    
-   # look for new page character in the file 
-   hasPageBreaks <-  as.logical(   max( grepl("\f", allLines) ) )
-
-   if( hasPageBreaks ) {
-      msg <- paste( " Page breaks not allowed in rpt file.\n",
-                    "Put the line 'Page 0' in the [REPORT] section of\n",
-                    "the .inp file and generate the .rpt file again.\n")
-     stop( msg ) 
-   }
-
 
    # look for node results and link results 
    hasNodeResults <- as.logical( max( grepl("Node Results", allLines)))
@@ -226,4 +213,26 @@ checkRptFile <- function( allLines ){
 
    }
 
+}
+
+cleanRptLines <- function( allLines ){
+	
+	#  lines with page break 
+	pb_lines <- grepl("\f", allLines)
+	myLines <- allLines[ !pb_lines ]
+		
+	# delete lines starting with __Page_#
+	pg_lines <- grepl("^  Page ", myLines)
+	myLines <- myLines[ !pg_lines ]
+	
+	# delete lines containing "(continued)" along with
+	continues_header <- rep(FALSE, length(myLines))
+	continues_lines <- grep("(continued)", myLines)
+	continues_header_lines <- unlist( lapply(continues_lines, seq, by=1, length.out=5)) 
+	continues_header[ continues_header_lines] <- TRUE 
+	
+	cleanLines <- myLines[ !continues_header ]
+	
+	return( cleanLines)
+	
 }
