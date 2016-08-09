@@ -112,18 +112,6 @@
 		 columnNames <- c("ID", headerRow1, "note")
 	 }
 	
-#   lh1 <- length( headerRow1 )
-#   lh2 <- length( headerRow2) 
-#
-#   if( lh1 ==  lh2 ){
-#     columnNames <- c( headerRow1, "note" ) 
-#   } else if( lh2 == ( lh1 + 1 ) ) {
-#     columnNames <- c( headerRow2[1], headerRow1, "note" )
-#   } else {
-#     #warning("unexpected header format in rpt file, check results")
-#     columnNames <- c( headerRow2[1], headerRow1, "note" )
-#   }
-
    # name the first column "ID" rather than
    # "Node" or "Link"  to be consistent with inp objects
 	columnNames[1] <- "ID"
@@ -197,16 +185,6 @@ binBreaker <- function( x, nbin){
 checkRptFile <- function( allLines ){
   # check rpt file format 
    
-#   # look for new page character in the file 
-#   hasPageBreaks <-  as.logical(   max( grepl("\f", allLines) ) )
-#
-#   if( hasPageBreaks ) {
-#      msg <- paste( " Page breaks not allowed in rpt file.\n",
-#                    "Put the line 'Page 0' in the [REPORT] section of\n",
-#                    "the .inp file and generate the .rpt file again.\n")
-#     stop( msg ) 
-#   }
-
 
    # look for node results and link results 
    hasNodeResults <- as.logical( max( grepl("Node Results", allLines)))
