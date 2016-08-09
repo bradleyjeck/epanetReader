@@ -123,6 +123,26 @@ test_that("IDs are characters",{
 			expect_true(class(df$ID) == "character")
 		})
 
+test_that(" gui rpt file cleaner",{
+			
+			
+			allLines <- readLines("Net1-gui.rpt")
+			cleanLines <- cleanRptLines(allLines)
+			expect_equal(class(cleanLines), "character")
+			x <- length(allLines) - 19 - 20 - 35
+			expect_equal(length(cleanLines), x)
+		})
+
+test_that(" gui rpt file cleaner on a clean file",{
+			
+			
+			allLines <- readLines("Net1.rpt")
+			cleanLines <- cleanRptLines(allLines)
+			expect_equal(class(cleanLines), "character")
+			x <- length(allLines) -1 
+			expect_equal(length(cleanLines), x)
+		})
+
 
 context("converting timestamps to seconds")
 
@@ -143,6 +163,14 @@ test_that(" 0:00 parses as HH:MM",{
 			a <- .timeStampToSeconds(ts)
 			
 			expect_equal( x, a)
+		})
+
+test_that( "  Node Results at 2:00 Hrs:",{
+			
+			tsl <- "  Node Results at 2:00 Hrs:"
+			a <- .getTimeStamp(tsl)
+			expect_equal( "2:00", a)
+			
 		})
 
 test_that(" 00:00:00:00 gives error",{

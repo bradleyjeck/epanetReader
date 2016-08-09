@@ -64,10 +64,12 @@ epanet.rpt <- function( file){
   # read all the lines in the file 
   allLines <- read_lines_wrapper(file)
   checkRptFile( allLines ) 
+	
+	cleanLines <- cleanRptLines(allLines)
 
-  lengthOfAllLines <- length( allLines)
+  lengthOfCleanLines <- length( cleanLines)
   
-  resLines <- grep("Results", allLines)
+  resLines <- grep("Results", cleanLines)
   numTables <- length(resLines)
   
   #create a lits of empty data frames to store each of these
@@ -81,8 +83,8 @@ epanet.rpt <- function( file){
   # go through the tables  
   for( i in 1:numTables ){
     # get the section  
-    sectRange <- .getSectionRange( i, resLines, lengthOfAllLines)
-    sect <- allLines[ sectRange$start : sectRange$end ]  
+    sectRange <- .getSectionRange( i, resLines, lengthOfCleanLines)
+    sect <- cleanLines[ sectRange$start : sectRange$end ]  
     
     # create a data frame from this section
     df <- .section2df( sect )  

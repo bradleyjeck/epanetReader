@@ -41,6 +41,39 @@ Net1res <- read.rpt("Net1.rpt")
 			expect_that(as.numeric(q), equals(1892.24))
 })
 
+test_that("net1-gui.rpt reads correctly",
+{
+Net1res <- read.rpt("Net1-gui.rpt")
+            
+            expect_that( Net1res, is_a("epanet.rpt"))
+            
+            expect_that( class(Net1res$nodeResults), equals("data.frame"))
+		
+			# get the value of P in node 22 for timestep 1:00
+			p <- subset(Net1res$nodeResults, Timestamp == "1:00" & ID == "22", select = Pressure)
+			expect_that( as.numeric(p), equals(120.07)  )
+			
+			# flow in pump 9 at 24 hrs 
+			q <- subset( Net1res$linkResults, Timestamp =="24:00" & ID == "9", select = Flow)
+			expect_that(as.numeric(q), equals(1892.24))
+})
+
+test_that("another version of net1  with page breaks reads ",{
+
+			Net1res <-  read.rpt("Net1-pagebrks.rpt") 	
+            expect_that( Net1res, is_a("epanet.rpt"))
+            
+            expect_that( class(Net1res$nodeResults), equals("data.frame"))
+		
+			# get the value of P in node 22 for timestep 1:00
+			p <- subset(Net1res$nodeResults, Timestamp == "1:00:00" & ID == "22", select = Pressure)
+			expect_that( as.numeric(p), equals(120.07)  )
+			
+			# flow in pump 9 at 24 hrs 
+			q <- subset( Net1res$linkResults, Timestamp =="24:00:00" & ID == "9", select = Flow)
+			expect_that(as.numeric(q), equals(1892.24))
+
+})
 
 test_that("Net2.rpt reads correctly",{
             Net2res <- read.rpt("Net2.rpt")
@@ -64,11 +97,6 @@ test_that("Net3-nodes.rpt has correct col names",{
 		})
 context("read.rpt error checking")
 
-test_that("page breaks give an error",{
-
-  expect_error( read.rpt("Net1-pagebrks.rpt"), "Page breaks not allowed") 	
-
-})
 
 test_that("missing both node and link results gives error",{
 
