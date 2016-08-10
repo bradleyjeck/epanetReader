@@ -19,7 +19,7 @@ source("../R/text_file_reader.r")
   context("epanet.inp s3 object") 
 test_that("net1.inp reads correctly",
 {
-   Net1 <- suppressWarnings( read.inp( "../inst/extdata/net1.inp") )
+   Net1 <- suppressWarnings( read.inp( "../inst/extdata/Net1.inp") )
                expect_that( class(Net1), equals("epanet.inp"))
                expect_that( Net1$Curves$`1`$Y , equals(250))
 			   expect_that( length(Net1$Controls), equals(2))
@@ -57,14 +57,14 @@ context("summary.epanet.inp s3 object")
 test_that(" summary works for Net1 ",
 		{
 			
-   Net1 <- suppressWarnings( read.inp( "net1.inp"))
+   Net1 <- suppressWarnings( read.inp( "Net1.inp"))
 			sn1 <- summary(Net1)
 			expect_that(sn1$entryCounts[1,1], equals(9))
 		})
 
 test_that(" summary prints correctly for Net 1",{
 			
-   Net1 <- suppressWarnings( read.inp( "net1.inp"))
+   Net1 <- suppressWarnings( read.inp( "Net1.inp"))
 			sn1 <- summary(Net1)
 			expect_output(print(sn1), "EPANET Example Network 1")
 			expect_output(print(sn1), "Junctions \\s+ 9")
@@ -90,10 +90,4 @@ test_that("Net3 summary",{
 			expect_output(print(n3s),"Junctions\\s+92")
 			expect_output(print(n3s),"Pumps\\s+2")
 		})
-
-
-
-test_that("plot w vertices",{
-          fail("read vertices in oneprv.inp and include in plot")
-        })
 
