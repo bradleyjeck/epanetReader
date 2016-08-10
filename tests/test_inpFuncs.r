@@ -150,7 +150,7 @@ test_that("some pattern entries in junc table can be missing",
 
 test_that("title reads correctly",
 {
-          titl <- TITLE( readLines("net1.inp"))
+          titl <- TITLE( readLines("Net1.inp"))
           expect_that( titl[1], equals("EPANET Example Network 1"))
 })
 
