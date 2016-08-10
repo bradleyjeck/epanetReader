@@ -1,3 +1,20 @@
+epanetReader version 0.4.0 (released Aug 2016)
+==============================================
+Changes:
+* Use readlines from package Kmisc, if available, to speed up reading of large files
+
+* Added write.inp() function for writing inp files from an R object
+
+* Allow page breaks in rpt files to support reading rpt files
+  created by Epanet's  Windows GUI
+  
+* Added citation information for recently published papers
+
+* Added support for reading sections of inp files that were not supported yet
+
+* Handled % sign in rpt file node result header for water trace analysis
+
+
 epanetReader version 0.3.1 (released Feb 2016)
 ==============================================
 
