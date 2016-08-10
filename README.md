@@ -4,16 +4,19 @@ epanetReader is an R package for reading water network simulation data in
 Epanet's .inp and .rpt formats into R.  Some basic summary information and
 plots are also provided.   
 
-Epanet is a highly popular tool for water network simulation. It can be difficult
+Epanet is a highly popular tool for water network simulation. But, it can be difficult
 to access network information for subsequent analysis and visualization. This
 is a real strength of R however, and there many tools already existing in R to
 support analysis and visualization.  
 
-Reading an .inp or .rpt file (from Epanet or Epanet-msx) creates an s3 object which can be used with the
-usual generic methods.  
+In addition to this README page, information about epanetReader is available from 
+[Environmental Modelling & Software](http://www.sciencedirect.com/science/article/pii/S1364815216302870) [pdf](http://authors.elsevier.com/a/1TLaX4sKhE9jiM)
+and 
+[ASCE Conference Proceedings](http://ascelibrary.org/doi/abs/10.1061/9780784479865.051) [pdf](http://bradeck.net/docs/Eck2016epanetReader-ewri.pdf). 
 
-The package is also useful in conjunction with the ggplot2 and animation
-packages. 
+
+
+
 
 ## Installation 
 
