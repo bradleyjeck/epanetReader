@@ -27,6 +27,12 @@ test_that("net1.inp reads correctly",
     
 })
 
+test_that("Net1-gui.inp reads with warning",{
+			
+			expect_warning( n1 <- read.inp("Net1-gui.inp"))
+			
+		})
+
 test_that("Net2.inp reads correctly", {
 		
    Net2 <- suppressWarnings( read.inp("Net2.inp") )
