@@ -23,9 +23,8 @@ with EPANET.
 }
 \examples{
 write.inp(Net1, "Net1-fromR.inp")
-\dontrun{
 n1 <- read.inp("Net1-fromR.inp")
 all.equal(Net1, n1)
-}
+
 }
 
