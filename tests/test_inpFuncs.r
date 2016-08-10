@@ -367,3 +367,25 @@ test_that("[Demands] Pattern is factor",{
 			expect_true(class(dmd$Pattern) == 'factor')
 			
 		})
+
+
+context("inp helper funcs")
+test_that( ".lineRange returns same for missing and duplicate sections",{
+			
+			allLines <- c("[JUNCTIONS]",
+					      "A 1 2 ",
+						  "[REACTIONS]",
+						   "some param",
+						   "[REACTIONS]",
+						   "another param",
+						   "[END]")
+				   
+		p <- .lineRange("\\[PIPES\\]", allLines)
+		
+		expect_warning( r <- .lineRange("\\[REACTIONS\\]", allLines))
+
+		ok <- all.equal(p,r)
+		
+		expect_true( ok ) 
+			
+		})

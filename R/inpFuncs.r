@@ -24,7 +24,9 @@
   begin <- grep(tag, allLines)  + 1 
   
   if( length(begin) > 1 ){
-    stop( paste(tag, "appeared more than once"))
+    warning( paste("The section ", tag, " appeared more than once in the inp file and so was not read.",
+				   "\nTry opening the .inp file in a text editor and deleting the duplicate section."))
+    return( as.numeric(NA) )
   }
   # file lines starting with [ aka taglines  
   tl <- grep("\\s*\\[",allLines)
