@@ -30,7 +30,7 @@ write.inp <- function(x, file){
    cx <- class(x)
    if( cx != "epanet.inp" ) stop("x is not of class epanet.inp") 
 
-   write( "", file = file) 
+   file.create(file) 
 
   nx = names(x) 
   N <- length(x) 
