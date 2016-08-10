@@ -10,9 +10,9 @@ is a real strength of R however, and there many tools already existing in R to
 support analysis and visualization.  
 
 In addition to this README page, information about epanetReader is available from 
-[Environmental Modelling & Software](http://www.sciencedirect.com/science/article/pii/S1364815216302870) [pdf](http://authors.elsevier.com/a/1TLaX4sKhE9jiM)
+[Environmental Modelling & Software](http://www.sciencedirect.com/science/article/pii/S1364815216302870) [(pdf)](http://authors.elsevier.com/a/1TLaX4sKhE9jiM)
 and 
-[ASCE Conference Proceedings](http://ascelibrary.org/doi/abs/10.1061/9780784479865.051) [pdf](http://bradeck.net/docs/Eck2016epanetReader-ewri.pdf). 
+[ASCE Conference Proceedings](http://ascelibrary.org/doi/abs/10.1061/9780784479865.051) [(pdf)](http://bradeck.net/docs/Eck2016epanetReader-ewri.pdf). 
 
 
 
