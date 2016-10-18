@@ -71,7 +71,7 @@
 #' \item{Options}{list}
 #' \item{Coordinates}{data.frame}
 #' \item{Vertices}{data.frame}
-#' \item{Labels}{character}
+#' \item{Labels}{data.frame}
 #' \item{Backdrop}{character}
 #' \item{Tags}{character}
 #' 
