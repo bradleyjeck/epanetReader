@@ -78,12 +78,6 @@ test_that("summary works for Net2",{
 			expect_output(print(sn2), "Pipes\\s+40")
 		})
 
-#test_that("ctown summary",{
-#			ctown <- read.inp("ctown.inp")
-#			cts <- summary(ctown)
-#			expect_output(print(cts), "Coordinates\\s+396")
-#		})
-
 test_that("Net3 summary",{
 			Net3 <- suppressWarnings( read.inp("Net3.inp"))
 			n3s <- summary(Net3)
@@ -91,3 +85,16 @@ test_that("Net3 summary",{
 			expect_output(print(n3s),"Pumps\\s+2")
 		})
 
+context("plot.epanet.inp works")
+test_that("Plot Net 1 labels",{
+			x  <- suppressWarnings(read.inp("Net1.inp"))
+			plot(x , plot.labels=T)
+		})
+test_that("Plot Net 2 labels",{
+			x  <- suppressWarnings(read.inp("Net2.inp"))
+			plot(x , plot.labels=T)
+		})
+test_that("Plot Net 3 labels",{
+			x  <- suppressWarnings(read.inp("Net3.inp"))
+			plot(x , plot.labels=T)
+		})

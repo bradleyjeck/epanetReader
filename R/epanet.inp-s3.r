@@ -326,6 +326,7 @@ plotElementsLegend <- function(legend.locn) {
 #' @param plot.junctions logical indicating whether to plot junctions
 #' @param legend.locn character string passed to legend() specifying
 #'        the location of the legend on the plot 
+#' @param plot.labels logical indicating whether to plot the labels using text()
 #' @param ... other arguments passed to plot()
 #' @details
 #' Implements the generic plot function for S3 objects of class epanet.inp.
@@ -336,6 +337,7 @@ plotElementsLegend <- function(legend.locn) {
 plot.epanet.inp <- function( x, 
                              plot.junctions  = TRUE,
                              legend.locn = "topright",
+							 plot.labels = FALSE,
                                 ... ) {
 
   
@@ -361,7 +363,18 @@ plot.epanet.inp <- function( x,
 
   plotElementsLegend(legend.locn) 
   
+  if( plot.labels){
+  	plotInpLabels(x)
+  }
+  
 }
 
+plotInpLabels <- function(x){
+	
+	xx <- x$Labels$X.coord
+	yy <- x$Labels$Y.coord
+	lab <- x$Labels$Label
+	graphics::text(xx,yy,lab)
+}
 
 
