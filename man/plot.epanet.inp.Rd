@@ -5,7 +5,8 @@
 \title{Plot Method for epanet.inp}
 \usage{
 \method{plot}{epanet.inp}(x, plot.junctions = TRUE,
-  legend.locn = "topright", ...)
+  legend.locn = "topright", plot.labels = FALSE, link.lwd = 3,
+  link.col = "black", ...)
 }
 \arguments{
 \item{x}{object of class epanet.inp}
@@ -14,6 +15,12 @@
 
 \item{legend.locn}{character string passed to legend() specifying
 the location of the legend on the plot}
+
+\item{plot.labels}{logical indicating whether to plot the labels using text()}
+
+\item{link.lwd}{value of lwd passed to segments()}
+
+\item{link.col}{value of col passed to segments()}
 
 \item{...}{other arguments passed to plot()}
 }

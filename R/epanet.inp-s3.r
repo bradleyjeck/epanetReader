@@ -336,6 +336,8 @@ plotElementsLegend <- function(legend.locn) {
 #' @param legend.locn character string passed to legend() specifying
 #'        the location of the legend on the plot 
 #' @param plot.labels logical indicating whether to plot the labels using text()
+#' @param link.lwd value of lwd passed to segments()
+#' @param link.col value of col passed to segments() 
 #' @param ... other arguments passed to plot()
 #' @details
 #' Implements the generic plot function for S3 objects of class epanet.inp.

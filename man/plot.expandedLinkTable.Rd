@@ -5,7 +5,7 @@
 \title{plot an expanded link table}
 \usage{
 \method{plot}{expandedLinkTable}(x, add = FALSE, label = FALSE,
-  linewidths = 3, ...)
+  linewidths = 3, color = "black", ...)
 }
 \arguments{
 \item{x}{object of type expandedLinkTable}
@@ -16,6 +16,8 @@ add=FALSE creates a new plot.}
 \item{label}{logical indicating if the links should be labeled at the mid points}
 
 \item{linewidths}{passed to lwd argument in segments()}
+
+\item{color}{passed to col argument in segments()}
 
 \item{...}{further arguments passed to segments()}
 }

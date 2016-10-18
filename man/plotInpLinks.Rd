@@ -4,10 +4,14 @@
 \alias{plotInpLinks}
 \title{Plot .inp Links}
 \usage{
-plotInpLinks(x)
+plotInpLinks(x, lwd = 3, col = "black")
 }
 \arguments{
 \item{x}{epanet.inp object}
+
+\item{lwd}{width of lines}
+
+\item{col}{color of lines}
 }
 \description{
 Add lines for pipes, pumps and valves
