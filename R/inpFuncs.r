@@ -818,8 +818,27 @@ VERTICES <- function( allLines ){
 
 LABELS <- function( allLines ){
   tag <- "\\[LABELS\\]"
-  sect <- .inpSection2char(tag,allLines)
-  return(sect)  
+  df <- .inpSection2df(tag,allLines)
+  if( is.null(unlist(df)[1])){
+    return( NULL )  
+  } else {   
+    #proceed as usual
+    
+    # rename the columns
+    names(df)[1:3] <- c("X.coord","Y.coord", "Label")
+   
+	# add anchor column if it's there
+	nc <- dim(df)[2]
+	if( nc > 3){
+		names(df)[4] <- "Anchor"
+	} else {
+		df$Anchor <- NA
+	}
+    
+    return( df )
+  }
+  
+  
 }
 
 BACKDROP <- function( allLines ){
