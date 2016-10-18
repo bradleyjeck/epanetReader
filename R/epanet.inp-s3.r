@@ -71,7 +71,7 @@
 #' \item{Options}{list}
 #' \item{Coordinates}{data.frame}
 #' \item{Vertices}{data.frame}
-#' \item{Labels}{character}
+#' \item{Labels}{data.frame}
 #' \item{Backdrop}{character}
 #' \item{Tags}{character}
 #' 
@@ -199,6 +199,8 @@ print.summary.epanet.inp <- function(object, ...){
 #'  
 #' @export 
 #' @param x epanet.inp object 
+#' @param lwd width of lines  
+#' @param col color of lines
 #' @details 
 #' Helper function for building up a plot of the network by
 #' adding links to an existing plot.  
@@ -207,15 +209,18 @@ print.summary.epanet.inp <- function(object, ...){
 #' plot( range(Net1$Coordinates$X), range(Net1$Coordinates$Y), type = 'n') 
 #' ## add the links
 #' plotInpLinks(Net1) 
-plotInpLinks <- function(x){
+plotInpLinks <- function(x, lwd=3, col='black'){
 	
   #############
   #  Pipes  
   ############# 
   if( is.null( x$Pipes) == FALSE ){
-    graphics::plot( expandedLinkTable( x$Pipes, x$Coordinates ),
-          add = TRUE,  
-          label = FALSE ) 
+    graphics::plot( expandedLinkTable( x$Pipes, x$Coordinates),         
+	                add = TRUE,  
+                    label = FALSE, 
+		            linewidth=lwd, 
+		            color=col )
+ 
   }
 
   #############
@@ -224,8 +229,10 @@ plotInpLinks <- function(x){
   if( is.null( x$Pumps )  == FALSE ){
 	  ept <-  expandedLinkTable( x$Pumps, x$Coordinates )
 	  graphics::plot( ept,
-			  add = TRUE,  
-			  label = FALSE) 
+		        	  add = TRUE,  
+                    label = FALSE, 
+		            linewidth=lwd, 
+		            color=col )
 	  graphics::points( ept$midx, ept$midy, pch = 8 ) 
   }
 
@@ -236,8 +243,10 @@ plotInpLinks <- function(x){
   if( is.null( x$Valves )   == FALSE ){
 	  evt <- expandedLinkTable(x$Valves, x$Coordinates)
 	  graphics::plot( evt,
-			  add = TRUE,  
-			  label = FALSE) 
+		        	  add = TRUE,  
+                    label = FALSE, 
+		            linewidth=lwd, 
+		            color=col )
 	  
 	  graphics::points( evt$midx, evt$midy, pch = 25 ,
 			  bg="black", col = "black" )  
@@ -326,6 +335,9 @@ plotElementsLegend <- function(legend.locn) {
 #' @param plot.junctions logical indicating whether to plot junctions
 #' @param legend.locn character string passed to legend() specifying
 #'        the location of the legend on the plot 
+#' @param plot.labels logical indicating whether to plot the labels using text()
+#' @param link.lwd value of lwd passed to segments()
+#' @param link.col value of col passed to segments() 
 #' @param ... other arguments passed to plot()
 #' @details
 #' Implements the generic plot function for S3 objects of class epanet.inp.
@@ -336,6 +348,9 @@ plotElementsLegend <- function(legend.locn) {
 plot.epanet.inp <- function( x, 
                              plot.junctions  = TRUE,
                              legend.locn = "topright",
+							 plot.labels = FALSE,
+							 link.lwd = 3,
+							 link.col = 'black',
                                 ... ) {
 
   
@@ -355,13 +370,24 @@ plot.epanet.inp <- function( x,
         xlab = "", xaxt = 'n',
         ylab = "", yaxt = 'n', ... )
 
-  plotInpLinks(x)
+  plotInpLinks(x, lwd=link.lwd, col=link.col)
   
   plotInpNodes(x, plot.junctions)
 
   plotElementsLegend(legend.locn) 
   
+  if( plot.labels){
+  	plotInpLabels(x)
+  }
+  
 }
 
+plotInpLabels <- function(x){
+	
+	xx <- x$Labels$X.coord
+	yy <- x$Labels$Y.coord
+	lab <- x$Labels$Label
+	graphics::text(xx,yy,lab)
+}
 
 

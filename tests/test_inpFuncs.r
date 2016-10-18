@@ -212,6 +212,15 @@ test_that("[REPORT] reads ok",{
 			expect_equal( length(x) , 6)
 		})
 
+test_that("[LABELS] reads as data frame",{
+			x <- LABELS(readLines("Net1.inp"))
+			expect_equal( class(x), "data.frame")
+			expect_equal(x$X.coord[3], 43.85)
+			expect_equal(x$Y.coord[3], 91.21)
+			expect_equal( x$Label[3], "Tank")
+			expect_true( is.na(x$Anchor[3]))
+			
+		})
 
 context("missing inp tables are null")
 test_that("Net1 valves table is missing",

@@ -67,12 +67,13 @@ expandedLinkTable <- function( Links, Coordinates ){
 #'        add=FALSE creates a new plot.
 #' @param label logical indicating if the links should be labeled at the mid points
 #' @param linewidths passed to lwd argument in segments()
+#' @param color passed to col argument in segments()
 #' @param ... further arguments passed to segments() 
 #' @details 
 #' An implementation of the generic plot function for
 #' expandedLinkTable objects. Links are drawn using segments(). 
 #' Useful for building up network plots.
-plot.expandedLinkTable <- function(x, add=FALSE, label=FALSE, linewidths = 3, ...){
+plot.expandedLinkTable <- function(x, add=FALSE, label=FALSE, linewidths = 3, color = 'black', ...){
   
     if( add == FALSE ){
       # generate a blank plot first 
@@ -88,7 +89,7 @@ plot.expandedLinkTable <- function(x, add=FALSE, label=FALSE, linewidths = 3, ..
     # just put the segments out there 
     graphics::segments( x0 = x$x1, y0 = x$y1,
               x1 = x$x2, y1 = x$y2,
-			  lwd = linewidths, ... )  
+			  lwd = linewidths, col = color, ... )  
                
 	
     if( label == TRUE ){
