@@ -96,5 +96,5 @@ test_that("Plot Net 2 labels",{
 		})
 test_that("Plot Net 3 labels",{
 			x  <- suppressWarnings(read.inp("Net3.inp"))
-			plot(x , plot.labels=T)
+			plot(x , plot.labels=T, link.lwd=1, link.col='red')
 		})
