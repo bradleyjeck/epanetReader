@@ -1,3 +1,7 @@
+
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/epanetReader)](https://cran.r-project.org/package=epanetReader)
+[![CRAN version](http://www.r-pkg.org/badges/version/epanetReader)](https://cran.r-project.org/package=epanetReader)
+
 # epanetReader
 
 epanetReader is an R package for reading water network simulation data in
