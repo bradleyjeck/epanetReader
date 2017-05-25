@@ -12,16 +12,6 @@
 # Purpose: tests for reading .rpt files 
 #
 
-# package used for testing 
-library(testthat)
-
-# assume working dir is epanetReader/tests
-source("../R/rptFuncs.r")
-source("../R/epanet.rpt-s3.r")
-source("../R/epanet.inp-s3.r")
-source("../R/inpFuncs.r")
-
-
 
 context("epanet.rpt s3 object")
 test_that("net1.rpt reads correctly",

@@ -7,8 +7,6 @@
 #************************************
 
 
-source("../R/sparklineTable-s3.r")
-source("../R/sparkline-s3.r")
 context("sparklineTable-s3")
 
 test_that("argument checking works",{

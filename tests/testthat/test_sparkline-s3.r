@@ -5,7 +5,6 @@
 #  Author: Bradley J Eck
 #
 #************************************
-source("../R/sparkline-s3.r")
 
 context("sparkline-s3")
 

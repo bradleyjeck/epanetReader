@@ -9,10 +9,6 @@
 # File:  test_rptFuncs.r
 #
 
-
-
-source("../R/rptFuncs.r")
-
 context("test helper functions used with rpt ")
 
 test_that("testing binBreaker",{

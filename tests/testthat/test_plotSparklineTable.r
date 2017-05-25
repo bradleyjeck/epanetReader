@@ -6,18 +6,8 @@
 #
 #************************************
 
-source("../R/plotSparklineTable.r")
-source("../R/sparklineTable-s3.r")
-source("../R/sparkline-s3.r")
-
-source("../R/epanetmsx.rpt-s3.r")
-source("../R/msxFuncs.r")
-source("../R/rptFuncs.r")
 
 context("Plot Sparkline Table")
-
-
-
 
 test_that("msx example is ok",{
 			

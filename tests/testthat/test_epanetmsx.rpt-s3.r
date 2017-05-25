@@ -1,4 +1,3 @@
-
 #************************************
 #
 #  (C) Copyright IBM Corp. 2015
@@ -6,13 +5,6 @@
 #  Author: Bradley J Eck
 #
 #************************************
-
-source("../R/msxFuncs.r")
-source("../R/rptFuncs.r")
-source("../R/epanetmsx.rpt-s3.r")
-source("../R/plotSparklineTable.r")
-source("../R/sparklineTable-s3.r")
-source("../R/sparkline-s3.r")
 
 context("epanetmsx.rpt object")
 test_that( "epanetmsx.rpt-s3 reads",{
