@@ -35,7 +35,9 @@ and
 
 ### Network files 
 
-Read network information from an .inp file with a similar syntax as the popular read.table or read.csv functions.  
+Read network information from an .inp file with a similar syntax as the popular read.table or read.csv functions.
+Note that the example network one that ships with Epanet causes a warning. The warning is just a reminder
+of how R deals with integer IDs.  
 
 ```{r}
 library(epanetReader)
