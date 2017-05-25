@@ -11,7 +11,6 @@ Depends:
     utils
 Suggests:
     testthat,
-    covr,
     Kmisc (>= 0.5.0)
 Description: Reads water network simulation data in Epanet's text-based
     '.inp' and '.rpt' formats into R. Also reads results from Epanet-msx.
