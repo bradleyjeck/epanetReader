@@ -7,8 +7,6 @@
 #******************************************
 
 
-source("../R/msxFuncs.r")
-
 context("msx funcs")
 test_that( "getID func works",{
 			

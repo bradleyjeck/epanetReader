@@ -6,20 +6,10 @@
 #
 #******************************************
 
-
-
-source("../R/epanet.inp-s3.r")
-source("../R/inpFuncs.r")
-source("../R/expandedLinkTable-s3.r")
-source("../R/text_file_reader.r")
-
-
-   
-   
-  context("epanet.inp s3 object") 
+context("epanet.inp s3 object") 
 test_that("net1.inp reads correctly",
 {
-   Net1 <- suppressWarnings( read.inp( "../inst/extdata/Net1.inp") )
+   Net1 <- suppressWarnings( read.inp( "Net1.inp") )
                expect_that( class(Net1), equals("epanet.inp"))
                expect_that( Net1$Curves$`1`$Y , equals(250))
 			   expect_that( length(Net1$Controls), equals(2))

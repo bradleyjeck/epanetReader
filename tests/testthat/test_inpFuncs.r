@@ -9,9 +9,6 @@
 #  File: inpFuncs_tests.r
 #  Purpose: test reading of .inp files 
 
-source("../R/inpFuncs.r")
-
-
 context("functions for inp parts")
 test_that("semi-colon at end of line is removed",
           {

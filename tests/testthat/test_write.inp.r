@@ -7,8 +7,6 @@
 #************************************
 
 
-source("../R/write.inp.r")
-
 context("write.inp")
 
 test_that("class check works",{

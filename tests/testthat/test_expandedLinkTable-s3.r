@@ -6,13 +6,8 @@
 #
 #******************************************
 
-
 #  File: test_expandedLinkTable-s3.r
 #  By  : bradley.eck@ie.ibm.com
-
-source("../R/epanet.inp-s3.r")
-source("../R/inpFuncs.r")
-source("../R/expandedLinkTable-s3.r")
 
 context("expandedlinkTable s3 object")
 test_that("expanedLinkTable works for Net1",

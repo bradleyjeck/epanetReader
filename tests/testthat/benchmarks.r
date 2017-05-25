@@ -5,6 +5,7 @@
 # as the file name does not begin with test_
 
 library(microbenchmark)
+library(testthat)
 context("benchmark file reading   ")
 
 ## bje implementation for test purposes

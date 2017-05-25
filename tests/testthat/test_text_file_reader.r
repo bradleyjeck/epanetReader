@@ -6,7 +6,6 @@
 #
 #************************************
 
-source("../R/text_file_reader.r")
 context("text file reader")
 
 test_that("same result as readLines",{
