@@ -42,6 +42,15 @@ test_that("read Net3.inp",{
 			expect_true(Net3$Status$Status[1] == 'Closed')
 		})
 
+test_that("icdm.inp",{
+
+
+  net <- suppressWarnings( read.inp("icdm13.inp") ) 
+
+  numPipes <- dim( net$Pipes)[1] 
+  expect_equal( numPipes, 21 ) 
+
+})
 
 context("summary.epanet.inp s3 object") 
 test_that(" summary works for Net1 ",
