@@ -52,6 +52,14 @@ test_that("icdm.inp",{
 
 })
 
+test_that("ap1.inp",{
+  
+  net <- read.inp("ap1.inp") 
+  numPipes <- dim( net$Pipes)[1]
+  expect_equal( numPipes,6 ) 
+})
+
+
 context("summary.epanet.inp s3 object") 
 test_that(" summary works for Net1 ",
 		{
