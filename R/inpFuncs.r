@@ -477,7 +477,9 @@ epanetDefaultOptions <- function(){
 ## Assumes  multi-word names in charVec are joined
 ## by underscore in the named list.
 .listUpdater <-function( oldList, charVec ){
-  
+
+  if( is.null(charVec) == FALSE){
+    
   imax <- length( charVec ) 
   for( i in 1:imax ){
     
@@ -503,7 +505,7 @@ epanetDefaultOptions <- function(){
     }
     
   }
-  
+  } 
   return(oldList)  
 }
 

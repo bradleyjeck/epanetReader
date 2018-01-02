@@ -316,9 +316,9 @@ test_that("EMITTERS is null",{
         })
 
 
-test_that("OPTIONS is null",{
+test_that("missing OPTIONS give default options",{
   t <- OPTIONS( readLines("empty.inp"))
-  expect_that(t, equals(NULL))
+  expect_equal(t, epanetDefaultOptions() )
 })
 
 context("IDs in inp sections are character")
