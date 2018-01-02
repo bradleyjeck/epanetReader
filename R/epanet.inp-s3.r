@@ -345,6 +345,7 @@ plotElementsLegend <- function(legend.locn) {
 #' the helper functions plotInpLinks(), plotInpNodes(), plotElementsLegend().  
 #' @examples
 #' plot(Net1) 
+#' plot(Net1, plot.labels=TRUE)
 plot.epanet.inp <- function( x, 
                              plot.junctions  = TRUE,
                              legend.locn = "topright",
