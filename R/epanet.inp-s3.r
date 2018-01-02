@@ -99,6 +99,9 @@ read.inp <- function (file ){
 epanet.inp <- function( file ){
 	
 	allLines <- read_lines_wrapper( file )
+	
+	# remove comments  
+	allLines <-  gsub( ";.*$", "", allLines)
   
   # read in all the sections  
   titl <- TITLE( allLines )
@@ -345,6 +348,7 @@ plotElementsLegend <- function(legend.locn) {
 #' the helper functions plotInpLinks(), plotInpNodes(), plotElementsLegend().  
 #' @examples
 #' plot(Net1) 
+#' plot(Net1, plot.labels=TRUE)
 plot.epanet.inp <- function( x, 
                              plot.junctions  = TRUE,
                              legend.locn = "topright",

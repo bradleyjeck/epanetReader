@@ -16,4 +16,10 @@ A dataset created by reading the Net1.inp file
 distributed with Epanet using this package's
 read.inp() function.
 }
-
+\examples{
+#confirm built-in dataset matches output of read.inp
+inp <- file.path( find.package("epanetReader"), "extdata","Net1.inp") 
+n1 <- suppressWarnings( read.inp(inp) )
+ok <- isTRUE( all.equal(Net1, n1))
+if( ok==FALSE) stop("built-in Net1 doesn't match read.inp")
+}

@@ -33,4 +33,3 @@ names(Theoph)
 sl <- sparkline(df= Theoph, id.var = 'Subject', ID = 2, yvar='conc', xvar = 'Time') 
 plot(sl)
 }
-

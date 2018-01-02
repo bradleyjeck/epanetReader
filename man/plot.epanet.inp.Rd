@@ -34,5 +34,5 @@ the helper functions plotInpLinks(), plotInpNodes(), plotElementsLegend().
 }
 \examples{
 plot(Net1) 
+plot(Net1, plot.labels=TRUE)
 }
-

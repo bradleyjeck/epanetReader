@@ -27,4 +27,3 @@ n1 <- read.inp("Net1-fromR.inp")
 all.equal(Net1, n1)
 
 }
-

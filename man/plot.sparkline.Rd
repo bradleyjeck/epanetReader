@@ -21,4 +21,3 @@ The primarily used to build up plots of a sparklineTable
 \seealso{
 sparkline
 }
-

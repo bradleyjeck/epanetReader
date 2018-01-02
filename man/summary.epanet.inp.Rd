@@ -15,4 +15,3 @@
 Summarizes the network by printing the Title of the
 network and the number of each type of elements.
 }
-

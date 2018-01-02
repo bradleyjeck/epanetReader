@@ -21,7 +21,7 @@
   # get the range of line numbers that pertain
   # to a table 
   #
-  begin <- grep(tag, allLines)  + 1 
+  begin <- grep(tag, allLines, ignore.case=TRUE)  + 1 
   
   if( length(begin) > 1 ){
     warning( paste("The section ", tag, " appeared more than once in the inp file and so was not read.",
@@ -477,7 +477,9 @@ epanetDefaultOptions <- function(){
 ## Assumes  multi-word names in charVec are joined
 ## by underscore in the named list.
 .listUpdater <-function( oldList, charVec ){
-  
+
+  if( is.null(charVec) == FALSE){
+    
   imax <- length( charVec ) 
   for( i in 1:imax ){
     
@@ -503,7 +505,7 @@ epanetDefaultOptions <- function(){
     }
     
   }
-  
+  } 
   return(oldList)  
 }
 

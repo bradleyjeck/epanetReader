@@ -24,4 +24,3 @@ plot( c(0,1), c(0,1), type = 'n')
 ## add the nodes, including junctions 
 plotElementsLegend('topright') 
 }
-

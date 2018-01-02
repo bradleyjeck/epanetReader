@@ -19,4 +19,3 @@ Plots a sparkline table of Epanet-msx results
 \seealso{
 plotSparklineTable
 }
-

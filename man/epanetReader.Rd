@@ -14,4 +14,3 @@ and .rpt files into R.  See functions \link{read.inp},
 \author{
 Bradley J. Eck
 }
-

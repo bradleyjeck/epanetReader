@@ -315,6 +315,12 @@ test_that("EMITTERS is null",{
          expect_that(t, equals(NULL))
         })
 
+
+test_that("missing OPTIONS give default options",{
+  t <- OPTIONS( readLines("empty.inp"))
+  expect_equal(t, epanetDefaultOptions() )
+})
+
 context("IDs in inp sections are character")
 
 test_that(" junction IDs are char",{

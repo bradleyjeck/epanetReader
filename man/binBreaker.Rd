@@ -22,4 +22,3 @@ and range labels based on sample max and min
 Helpful in making labels use the acutal max and min rather than
 the +/- 1% cut() uses by default.
 }
-

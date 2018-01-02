@@ -19,4 +19,3 @@ Summary of pipe results shows positive and negative
 values of flow but only positive values of velocity
 as in the rpt file.
 }
-

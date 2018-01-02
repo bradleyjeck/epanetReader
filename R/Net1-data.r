@@ -19,4 +19,10 @@
 #' 
 #' @format An object of class \code{epanet.inp} created by \link{read.inp}.
 #' @source http://www.epa.gov/sites/production/files/2014-06/en2setup_0.exe
+#' @examples
+#' #confirm built-in dataset matches output of read.inp
+#' inp <- file.path( find.package("epanetReader"), "extdata","Net1.inp") 
+#' n1 <- suppressWarnings( read.inp(inp) )
+#' ok <- isTRUE( all.equal(Net1, n1))
+#' if( ok==FALSE) stop("built-in Net1 doesn't match read.inp")
 NULL
