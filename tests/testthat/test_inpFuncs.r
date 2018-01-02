@@ -315,6 +315,12 @@ test_that("EMITTERS is null",{
          expect_that(t, equals(NULL))
         })
 
+
+test_that("OPTIONS is null",{
+  t <- OPTIONS( readLines("empty.inp"))
+  expect_that(t, equals(NULL))
+})
+
 context("IDs in inp sections are character")
 
 test_that(" junction IDs are char",{
