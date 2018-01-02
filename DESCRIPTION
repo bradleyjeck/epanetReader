@@ -22,4 +22,4 @@ Description: Reads water network simulation data in 'Epanet' text-based
 License: MIT + file LICENSE
 URL: https://github.com/bradleyjeck/epanetReader
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
