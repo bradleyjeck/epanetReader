@@ -20,5 +20,6 @@ Description: Reads water network simulation data in 'Epanet' text-based
     water-research/epanet> for more information on the Epanet software for modeling
     hydraulic and water quality behavior of water piping systems.
 License: MIT + file LICENSE
+URL: https://github.com/bradleyjeck/epanetReader
 LazyData: true
 RoxygenNote: 5.0.1
