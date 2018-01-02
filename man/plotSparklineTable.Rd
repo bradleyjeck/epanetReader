@@ -43,4 +43,3 @@ E. Tufte, Beautiful Evidence, Graphics Press, 2006.
 \seealso{
 yaletoolkit and sparkTable packages
 }
-

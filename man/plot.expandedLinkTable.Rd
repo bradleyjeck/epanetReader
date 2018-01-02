@@ -29,4 +29,3 @@ An implementation of the generic plot function for
 expandedLinkTable objects. Links are drawn using segments(). 
 Useful for building up network plots.
 }
-

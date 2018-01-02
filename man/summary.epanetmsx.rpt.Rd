@@ -14,4 +14,3 @@
 \description{
 Provides a basic summary of simulation results
 }
-

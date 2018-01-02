@@ -37,4 +37,3 @@ juncQty plots and values for Junctions only; Tanks and Reservoirs are not includ
          In contrast, linkQty is scaled over all of the link types: Pipes, Pumps & Valves.
          These choices aim at a map showing demand at junctions and velocity in links.
 }
-

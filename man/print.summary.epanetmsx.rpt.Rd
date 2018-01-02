@@ -15,4 +15,3 @@
 The function prints a summary of multi-species simulation results
 contained in the report file
 }
-

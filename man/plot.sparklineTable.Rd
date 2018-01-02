@@ -14,4 +14,3 @@
 \description{
 Plot Sparkline Table
 }
-

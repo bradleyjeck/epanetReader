@@ -24,4 +24,3 @@ Create S3 object of data for table of sparklines
 \seealso{
 plotSparklineTable
 }
-

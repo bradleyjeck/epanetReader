@@ -20,4 +20,3 @@ readlines functions
 \details{
 calls Kmisc::readlines if available and base::readLines otherwise
 }
-

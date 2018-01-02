@@ -15,4 +15,3 @@
 The function prints a summary of simulation results
 contained in the rpt file.
 }
-
