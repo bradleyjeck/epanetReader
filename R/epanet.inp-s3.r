@@ -99,6 +99,9 @@ read.inp <- function (file ){
 epanet.inp <- function( file ){
 	
 	allLines <- read_lines_wrapper( file )
+	
+	# remove comments  
+	allLines <-  gsub( ";.*$", "", allLines)
   
   # read in all the sections  
   titl <- TITLE( allLines )
