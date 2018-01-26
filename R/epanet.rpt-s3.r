@@ -583,3 +583,11 @@ plot.epanet.rpt <- function( x,
   .plotRptLegend(juncQty, juncBinfo, linkQty, linkBinfo, legend2.locn)
 }
 
+#' Check if an object has class 'epanet.rpt' 
+#'
+#' @param x an R object 
+#' @export
+is.epanet.rpt <- function(x){
+  inherits(x,"epanet.rpt")
+
+}
