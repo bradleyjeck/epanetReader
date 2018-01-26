@@ -96,3 +96,11 @@ plot.expandedLinkTable <- function(x, add=FALSE, label=FALSE, linewidths = 3, co
       graphics::text( x$midx, x$midy, x$ID)
     }
 }
+
+#' Check if an object has class 'expandedLinkTable' 
+#'
+#' @param x an R object 
+#' @export
+is.expandedLinkTable <- function( x ){
+  inherits( x, "expandedLinkTable")
+}

@@ -17,6 +17,7 @@ test_that( "epanetmsx.rpt-s3 reads",{
             expect_equal(0, min(mr$linkResults$timeInSeconds)) 
             expect_equal(172800, max(mr$linkResults$timeInSeconds)) 
 
+	    expect_true( is.epanetmsx.rpt( mr))
 })
 
 test_that( "timeInSeconds ",{
@@ -59,11 +60,12 @@ test_that(" no title works ",{
 test_that(" plot works" ,{
 			
 			x <- epanetmsx.rpt( "example.rpt")
+	                expect_true( is.epanetmsx.rpt( x) )
 			plot(x)
 })
 
 test_that("plot works for another case",{
-     x <- read.msxrpt("5deg.msxrpt")
-
-	 plot(x)
+   x <- read.msxrpt("5deg.msxrpt")
+   expect_true( is.epanetmsx.rpt( x) )
+   plot(x)
 })
