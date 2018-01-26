@@ -98,3 +98,11 @@ plot.sparkline <- function( x, ... ){
 	graphics::points( x[N,1], x[N,2], pch = 16, cex = .9 )  
 }
 
+
+#' Check if an object has class 'sparkline'
+#'
+#' @param x an R object
+#' @export
+is.sparkline <- function(x){
+  inherits(x,"sparkline")
+}

@@ -269,6 +269,14 @@ plot.epanetmsx.rpt <- function(x, elementType = 'Nodes',...){
 
 
 
+#' Check if an object has class 'epanetmsx.rpt' 
+#'
+#' @param x an R object 
+#' @export
+is.epanetmsx.rpt <- function(x){
+  inherits(x,"epanetmsx.rpt")
+
+}
 
  
 

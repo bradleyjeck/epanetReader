@@ -197,3 +197,10 @@ plotWord <- function(w, ...){
 	
 }	
 	
+#' Check if an object has class 'sparklineTable'
+#'
+#' @param x an R object
+#' @export
+is.sparklineTable <- function(x){
+  inherits(x,"sparklineTable")
+}

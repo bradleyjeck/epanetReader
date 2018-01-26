@@ -29,6 +29,8 @@ Net1res <- read.rpt("Net1.rpt")
 			# flow in pump 9 at 24 hrs 
 			q <- subset( Net1res$linkResults, Timestamp =="24:00:00" & ID == "9", select = Flow)
 			expect_that(as.numeric(q), equals(1892.24))
+
+   expect_true( is.epanet.rpt( Net1res))
 })
 
 test_that("net1-gui.rpt reads correctly",

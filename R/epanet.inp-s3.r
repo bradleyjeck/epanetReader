@@ -394,4 +394,11 @@ plotInpLabels <- function(x){
 	graphics::text(xx,yy,lab)
 }
 
+#' Check if an object as class 'epanet.inp' 
+#'
+#' @param x an R object 
+#' @export
+is.epanet.inp <- function(x){
+  inherits(x,"epanet.inp")
 
+}

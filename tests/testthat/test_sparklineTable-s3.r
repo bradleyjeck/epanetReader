@@ -22,6 +22,7 @@ test_that("argument checking works",{
 			
 			
 			slt <- sparklineTable( df, 'ID', c('Param1', 'Param2')) 
+			expect_true( is.sparklineTable( slt))
 		})
 
 
@@ -42,7 +43,7 @@ test_that('plotting works',{
 			
 			
 			slt <- sparklineTable( Loblolly, row.var = 'Seed', col.vars = 'height', xvar = 'age')
-			
+			expect_true( is.sparklineTable( slt) ) 	
 			plot(slt)
 						
 					
