@@ -1,4 +1,4 @@
-epanetReader version 0.6.1 (released Jan 2018)
+epanetReader version 0.6.2 (released Jan 2018)
 =============================================
 Changes:
 * added is.XXX functions to check class of S3 objects

@@ -1,28 +1,45 @@
+# epanetReader
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/bradleyjeck/epanetReader.svg?branch=master)](https://travis-ci.org/bradleyjeck/epanetReader) [![Coverage Status](https://codecov.io/gh/bradleyjeck/epanetReader/branch/master/graph/badge.svg)](https://codecov.io/gh/bradleyjeck/epanetReader) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/epanetReader)](https://cran.r-project.org/package=epanetReader) [![CRAN version](http://www.r-pkg.org/badges/version/epanetReader)](https://cran.r-project.org/package=epanetReader)
+[![Build
+Status](https://travis-ci.org/bradleyjeck/epanetReader.svg?branch=master)](https://travis-ci.org/bradleyjeck/epanetReader)
+[![Coverage
+Status](https://codecov.io/gh/bradleyjeck/epanetReader/branch/master/graph/badge.svg)](https://codecov.io/gh/bradleyjeck/epanetReader)
+[![CRAN RStudio mirror
+downloads](http://cranlogs.r-pkg.org/badges/epanetReader)](https://cran.r-project.org/package=epanetReader)
+[![CRAN
+version](http://www.r-pkg.org/badges/version/epanetReader)](https://cran.r-project.org/package=epanetReader)
 
-epanetReader
-============
+epanetReader is an R package for reading water network simulation data
+in Epanet’s .inp and .rpt formats into R. Some basic summary information
+and plots are also provided.
 
-epanetReader is an R package for reading water network simulation data in Epanet's .inp and .rpt formats into R. Some basic summary information and plots are also provided.
+Epanet is a highly popular tool for water network simulation. But, it
+can be difficult to access network information for subsequent analysis
+and visualization. This is a real strength of R however, and there many
+tools already existing in R to support analysis and visualization.
 
-Epanet is a highly popular tool for water network simulation. But, it can be difficult to access network information for subsequent analysis and visualization. This is a real strength of R however, and there many tools already existing in R to support analysis and visualization.
+In addition to this README page, information about epanetReader is
+available from [Environmental Modelling &
+Software](http://www.sciencedirect.com/science/article/pii/S1364815216302870)
+[(pdf)](http://bradeck.net/docs/Eck2016epanetReaderEMS.pdf) and [ASCE
+Conference
+Proceedings](http://ascelibrary.org/doi/abs/10.1061/9780784479865.051)
+[(pdf)](http://bradeck.net/docs/Eck2016epanetReader-ewri.pdf).
 
-In addition to this README page, information about epanetReader is available from [Environmental Modelling & Software](http://www.sciencedirect.com/science/article/pii/S1364815216302870) [(pdf)](http://bradeck.net/docs/Eck2016epanetReaderEMS.pdf) and [ASCE Conference Proceedings](http://ascelibrary.org/doi/abs/10.1061/9780784479865.051) [(pdf)](http://bradeck.net/docs/Eck2016epanetReader-ewri.pdf).
+## Installation
 
-Installation
-------------
+  - the latest released version: install.packages(“epanetReader”)
+  - the development version:
+    devtools::install\_github(“bradleyjeck/epanetReader”)
 
--   the latest released version: install.packages("epanetReader")
--   the development version: devtools::install\_github("bradleyjeck/epanetReader")
-
-Getting Started
----------------
+## Getting Started
 
 ### Network files
 
-Read network information from an .inp file with a similar syntax as the popular read.table or read.csv functions. Note that the example network one that ships with Epanet causes a warning. The warning is just a reminder of how R deals with integer IDs.
+Read network information from an .inp file with a similar syntax as the
+popular read.table or read.csv functions. Note that the example network
+one that ships with Epanet causes a warning. The warning is just a
+reminder of how R deals with integer IDs.
 
 ``` r
 library(epanetReader)
@@ -39,10 +56,12 @@ Retrieve summary information about the network.
 summary(n1)
 ```
 
-    ## EPANET Example Network 1
-    ## A simple example of modeling chlorine decay. Both bulk and
-    ## wall reactions are included.
+    ## $Title
+    ## [1] "EPANET Example Network 1"                                  
+    ## [2] "A simple example of modeling chlorine decay. Both bulk and"
+    ## [3] "wall reactions are included."                              
     ## 
+    ## $entryCounts
     ##             Number
     ## Junctions        9
     ## Tanks            1
@@ -52,6 +71,9 @@ summary(n1)
     ## Quality         11
     ## Coordinates     11
     ## Labels           3
+    ## 
+    ## attr(,"class")
+    ## [1] "summary.epanet.inp"
 
 A basic network plot is also available
 
@@ -59,9 +81,12 @@ A basic network plot is also available
 plot(n1)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-1.png) ![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1inp.png)
+![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1inp.png)
 
-The read.inp function returns an object with structure similar to the .inp file itself. A section in the .inp file corresponds to a named entry in the list. These entries are accessed using the $ syntax of R.
+The read.inp function returns an object with structure similar to the
+.inp file itself. A section in the .inp file corresponds to a named
+entry in the list. These entries are accessed using the $ syntax of
+    R.
 
 ``` r
 names(n1)
@@ -74,7 +99,10 @@ names(n1)
     ## [21] "Report"      "Options"     "Coordinates" "Vertices"    "Labels"     
     ## [26] "Backdrop"    "Tags"
 
-Sections of the .inp file are stored as a data.frame or character vector. For example, the junction table is stored as a data.frame and retrieved as follows. In this case patterns were not specified in the junction table and so are marked NA.
+Sections of the .inp file are stored as a data.frame or character
+vector. For example, the junction table is stored as a data.frame and
+retrieved as follows. In this case patterns were not specified in the
+junction table and so are marked NA.
 
 ``` r
 n1$Junctions
@@ -91,7 +119,11 @@ n1$Junctions
     ## 8 31       700    100      NA
     ## 9 32       710    100      NA
 
-A summary of the junction table shows that Net1.inp has nine junctions with elevations ranging from 690 to 710 and demands ranging from 0 to 200. Note that the node ID is stored as a character rather than an integer or factor.
+A summary of the junction table shows that Net1.inp has nine junctions
+with elevations ranging from 690 to 710 and demands ranging from 0 to
+200. Note that the node ID is stored as a character rather than an
+integer or
+    factor.
 
 ``` r
 summary(n1$Junctions)
@@ -107,27 +139,31 @@ summary(n1$Junctions)
 
 ### Epanet Simulation Results
 
-Results of the network simulation specified in Net.inp may be stored in Net1.rpt by running Epanet from the command line. Note that the report section of the .inp file should contain the following lines in order to generate output readable by this package.
+Results of the network simulation specified in Net.inp may be stored in
+Net1.rpt by running Epanet from the command line. Note that the report
+section of the .inp file should contain the following lines in order to
+generate output readable by this package.
 
-> \[REPORT\]
-> Page 0
-> Links All
+> \[REPORT\]  
+> Page 0  
+> Links All  
 > Nodes All
 
 On windows, calling the epanet executable epanet2d runs the simulation.
 
     >epanet2d Net1.inp Net1.rpt 
-
+    
     ... EPANET Version 2.0
-
+    
       o Retrieving network data
       o Computing hydraulics 
       o Computing water quality
       o Writing output report to Net1.rpt
-
+    
     ... EPANET completed.
 
-The .rpt file generated by Epanet may be read into R using read.rpt(). The simulation is summarized over junctions, tanks and pipes.
+The .rpt file generated by Epanet may be read into R using read.rpt().
+The simulation is summarized over junctions, tanks and pipes.
 
 ``` r
 n1r <- read.rpt("Net1.rpt") 
@@ -165,17 +201,25 @@ summary(n1r)
     ##  3rd Qu.:  237.23   3rd Qu.:1.0075   3rd Qu.:0.755  
     ##  Max.   : 1909.42   Max.   :2.7300   Max.   :3.210
 
-The default plot of simulation results is a map for time period 00:00:00. Note that the object created from the .inp file is a required argument to make the plot.
+The default plot of simulation results is a map for time period
+00:00:00. Note that the object created from the .inp file is a required
+argument to make the plot.
 
 ``` r
 plot( n1r, n1)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-8-1.png) ![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
+![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
 
-In contrast to the treatment of .inp files described above, data from .rpt files is stored using a slightly different structure than the .rpt file. The function returns an object (list) with a data.frame for node results and data.frame for link results. These two data frames contain results from all the time periods. This storage choice was made to facilitate time series plots.
+In contrast to the treatment of .inp files described above, data from
+.rpt files is stored using a slightly different structure than the .rpt
+file. The function returns an object (list) with a data.frame for node
+results and data.frame for link results. These two data frames contain
+results from all the time periods. This storage choice was made to
+facilitate time series plots.
 
-Entries in the epanet.rpt object (list) created by read.rpt() are found using the names() function.
+Entries in the epanet.rpt object (list) created by read.rpt() are found
+using the names() function.
 
 ``` r
 names(n1r)
@@ -183,7 +227,8 @@ names(n1r)
 
     ## [1] "nodeResults" "linkResults"
 
-Results for a chosen time period can be retrieved using the subset function.
+Results for a chosen time period can be retrieved using the subset
+function.
 
 ``` r
 subset(n1r$nodeResults, Timestamp == "0:00:00")
@@ -214,37 +259,45 @@ subset(n1r$nodeResults, Timestamp == "0:00:00")
     ## 10 Reservoir
     ## 11      Tank
 
-A comparison with the corresponding entry of the .rpt file, shown below for reference, shows that four columns have been added to the table. These pieces of extra info make visualizing the results easier.
+A comparison with the corresponding entry of the .rpt file, shown below
+for reference, shows that four columns have been added to the table.
+These pieces of extra info make visualizing the results easier.
 
-      Node Results at 0:00:00 hrs:
-      --------------------------------------------------------
-                         Demand      Head  Pressure  Chlorine
-      Node                  gpm        ft       psi      mg/L
-      --------------------------------------------------------
-      10                   0.00   1004.35    127.54      0.50
-      11                 150.00    985.23    119.26      0.50
-      12                 150.00    970.07    117.02      0.50
-      13                 100.00    968.87    118.67      0.50
-      21                 150.00    971.55    117.66      0.50
-      22                 200.00    969.08    118.76      0.50
-      23                 150.00    968.65    120.74      0.50
-      31                 100.00    967.39    115.86      0.50
-      32                 100.00    965.69    110.79      0.50
-      9                -1866.18    800.00      0.00      1.00  Reservoir
-      2                  766.18    970.00     52.00      1.00  Tank
+``` 
+  Node Results at 0:00:00 hrs:
+  --------------------------------------------------------
+                     Demand      Head  Pressure  Chlorine
+  Node                  gpm        ft       psi      mg/L
+  --------------------------------------------------------
+  10                   0.00   1004.35    127.54      0.50
+  11                 150.00    985.23    119.26      0.50
+  12                 150.00    970.07    117.02      0.50
+  13                 100.00    968.87    118.67      0.50
+  21                 150.00    971.55    117.66      0.50
+  22                 200.00    969.08    118.76      0.50
+  23                 150.00    968.65    120.74      0.50
+  31                 100.00    967.39    115.86      0.50
+  32                 100.00    965.69    110.79      0.50
+  9                -1866.18    800.00      0.00      1.00  Reservoir
+  2                  766.18    970.00     52.00      1.00  Tank
+```
 
 ### Epanet-msx simulation results
 
 Results of a multi-species simulation by Epanet-msx can be read as well.
 
-The read.msxrpt() function creates an s3 object of class epanetmsx.rpt. Similar to the approach above, there is a data frame for node results and link results.
+The read.msxrpt() function creates an s3 object of class epanetmsx.rpt.
+Similar to the approach above, there is a data frame for node results
+and link results.
 
-Usage with other packages
--------------------------
+## Usage with other packages
 
 ### ggplot2
 
-The ggplot2 package makes it easy to create complex graphics by allowing users to describe the plot in terms of the data. Continuing the Net1 example Here we plot chlorine concentration over time at each node in the network.
+The ggplot2 package makes it easy to create complex graphics by allowing
+users to describe the plot in terms of the data. Continuing the Net1
+example Here we plot chlorine concentration over time at each node in
+the network.
 
 ``` r
 library(ggplot2)
@@ -253,13 +306,12 @@ qplot( data= n1r$nodeResults,
        facets = ~ID, xlab = "Hour")  
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-11-1.png)
-
 ![Net 1 Cl plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1cl.png)
 
 ### Animation
 
-The animation package is useful for creating a video from successive plots.
+The animation package is useful for creating a video from successive
+plots.
 
 ``` r
 # example with animation package 
@@ -277,7 +329,8 @@ saveHTML(
 )
 ```
 
-References
-----------
+## References
 
-Rossman, L. A. (2000) [Epanet 2 users manual](http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf). US EPA, Cincinnati, Ohio.
+Rossman, L. A. (2000) [Epanet 2 users
+manual](http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf). US EPA,
+Cincinnati, Ohio.
