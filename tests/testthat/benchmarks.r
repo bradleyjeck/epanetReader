@@ -30,12 +30,21 @@ read_char_lines <- function( file ){
 	return (cv)
 }
 
+dtreadlines <- function(file){
+
+ x <- fread(file,sep=NULL,data.table=F)
+# ,colClasses="character",autostart=1,header=F,select=1,fill=T,data.table=F)
+ x[,1]
+} 
+
 test_that("benchmark file reading",{
 		library(Kmisc)
 		library(readr)
+    library(data.table)
 			
 		x <- file.path(R.home("doc"), "COPYING")
 		
+		dtreadlines(x)
 		
 		
 		mb <- microbenchmark(
@@ -43,6 +52,7 @@ test_that("benchmark file reading",{
 				bje_read_char_lines = read_char_lines(x),
 		        Kmisc_readlines = Kmisc::readlines(x),
 		        readr_read_lines = readr::read_lines(x),
+                        data.table_read_lines = dtreadlines(x),
 				
 				times = 50
 		) 
