@@ -53,9 +53,6 @@ plot( n1r, n1)
 
 # Energy Usage table
 print(n1r$energyUsage)
-
-# Confirm built-in data is the same as parsed 
-if( !all.equal(Net1rpt, n1r)) stop("built-in data doesn't match parsed") 
 }
 \references{
 Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.

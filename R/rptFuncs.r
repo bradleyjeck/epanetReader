@@ -259,7 +259,7 @@ getEnergyUsage <- function( cleanLines ){
     }
     
     # build a data frame of energy usage     
-    egyusg <- read.table( text = cleanLines[begin:end], 
+    egyusg <- utils::read.table( text = cleanLines[begin:end], 
                       stringsAsFactors = FALSE,
                       col.names = varnames) 
     result <- egyusg
