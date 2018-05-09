@@ -212,7 +212,7 @@ argument to make the plot.
 plot( n1r, n1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- --> ![Net 1
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- --> ![Net 1 rpt
 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
 
 In contrast to the treatment of .inp files described above, data from
