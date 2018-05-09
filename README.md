@@ -305,12 +305,6 @@ the network.
 
 ``` r
 library(ggplot2)
-```
-
-    ## Need help getting started? Try the cookbook for R:
-    ## http://www.cookbook-r.com/Graphs/
-
-``` r
 qplot( data= n1r$nodeResults,  
        x = timeInSeconds/3600, y = Chlorine, 
        facets = ~ID, xlab = "Hour")  
