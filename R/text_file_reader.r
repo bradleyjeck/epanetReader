@@ -21,14 +21,16 @@ read_lines_wrapper <- function( file ){
 	size <- file.info(file)$size
 	size_MB <- size / 1e6
 	
-	if( requireNamespace("Kmisc", quietly = TRUE)){
+	if( requireNamespace("data.table", quietly = TRUE)){
 		
-		allLines <- Kmisc::readlines(file)
+		allLines <- data.table::fread(file, sep=NULL,colClasses = "character", strip.white=F,
+		                              header=F,fill=T,data.table=F)[,1]
+
 		
 	} else {
 		
 		if( size_MB > 100){
-			warning("Consider installing package Kmisc to speed up file reading")
+			warning("Consider installing package data.table to speed up file reading")
 		}
 		
 		allLines <- readLines(file)
