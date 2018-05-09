@@ -14,6 +14,7 @@ Returns an epanet.rpt S3 object with two data.frame elements.
 
 \item{nodeResults}{data.frame}
 \item{linkResults}{data.frame}
+\item{energyUsage}{data.frame}
 }
 \description{
 reads an Epanet .rpt file into R
@@ -26,8 +27,9 @@ with this function
 In contrast to the treatment of .inp files, data from .rpt
 files is stored using a slightly different structure than the .rpt file.  The
 function returns an object (list) with a data.frame for node results and
-data.frame for link results.  These two data frames contain results from all
-the time periods to facilitate time series plots.
+data.frame for link results and a data.frame for energy usage.  The node and
+link results data frames contain results from all the time periods to
+facilitate time series plots.
 }
 \examples{
 # path to Net1.rpt example file included with this package
@@ -35,7 +37,6 @@ rpt <- file.path( find.package("epanetReader"), "extdata","Net1.rpt")
 n1r <- read.rpt(rpt)
 summary(n1r)
 names(n1r)
-
 
 #Results for a chosen time period can be retrieved using the subset function.
 subset(n1r$nodeResults, Timestamp == "0:00:00")
@@ -49,6 +50,9 @@ plot( Chlorine ~ timeInSeconds,
 inp <- file.path( find.package("epanetReader"), "extdata","Net1.inp") 
 n1 <- read.inp(inp)
 plot( n1r, n1)
+
+# Energy Usage table
+print(n1r$energyUsage)
 }
 \references{
 Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.

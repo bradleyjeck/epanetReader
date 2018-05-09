@@ -140,6 +140,26 @@ test_that(" gui rpt file cleaner on a clean file",{
 		})
 
 
+
+test_that("energy usage table exists",{
+ 
+			allLines <- readLines("Net1.rpt")
+			cleanLines <- cleanRptLines(allLines)
+      df <- getEnergyUsage( cleanLines)
+      expect_true( is.data.frame(df)) 
+      expect_true( grepl( "Mgal", names(df))[4]) 
+   
+})
+
+test_that("energy usage table doesn't exist returns NULL",{
+ 
+			allLines <- readLines("Net2-gui.rpt")
+			cleanLines <- cleanRptLines(allLines)
+      df <- getEnergyUsage( cleanLines)
+      expect_true( is.null(df))  
+   
+})
+
 context("converting timestamps to seconds")
 
 test_that(" two colons parse to HH:MM:SS",{

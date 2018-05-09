@@ -18,8 +18,8 @@
 #' calls Kmisc::readlines if available and base::readLines otherwise 
 read_lines_wrapper <- function( file ){
 	
-	size <- file.info(file)$size
-	size_MB <- size / 1e6
+	sz <- base::file.info(file)$size
+	size_MB <- sz / 1e6
 	
 	if( requireNamespace("data.table", quietly = TRUE)){
 		

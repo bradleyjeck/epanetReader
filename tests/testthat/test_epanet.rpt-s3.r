@@ -30,7 +30,12 @@ Net1res <- read.rpt("Net1.rpt")
 			q <- subset( Net1res$linkResults, Timestamp =="24:00:00" & ID == "9", select = Flow)
 			expect_that(as.numeric(q), equals(1892.24))
 
-   expect_true( is.epanet.rpt( Net1res))
+      expect_true( is.epanet.rpt( Net1res))
+      
+      # Energy Usage is correct 
+      avgpower <- subset( Net1res$energyUsage, Pump == "9", select = avg_kW ) 
+			expect_that(as.numeric(avgpower), equals(96.25))
+      
 })
 
 test_that("net1-gui.rpt reads correctly",
@@ -48,6 +53,10 @@ Net1res <- read.rpt("Net1-gui.rpt")
 			# flow in pump 9 at 24 hrs 
 			q <- subset( Net1res$linkResults, Timestamp =="24:00" & ID == "9", select = Flow)
 			expect_that(as.numeric(q), equals(1892.24))
+      
+			# Energy Usage is correct 
+      avgpower <- subset( Net1res$energyUsage, Pump == "9", select = avg_kW ) 
+			expect_that(as.numeric(avgpower), equals(96.25))
 })
 
 test_that("another version of net1  with page breaks reads ",{
@@ -64,6 +73,10 @@ test_that("another version of net1  with page breaks reads ",{
 			# flow in pump 9 at 24 hrs 
 			q <- subset( Net1res$linkResults, Timestamp =="24:00:00" & ID == "9", select = Flow)
 			expect_that(as.numeric(q), equals(1892.24))
+			
+			# Energy Usage is correct 
+      avgpower <- subset( Net1res$energyUsage, Pump == "9", select = avg_kW ) 
+			expect_that(as.numeric(avgpower), equals(96.25))
 
 })
 test_that("Net1.rpt and Net1-gui.rpt are equivalent",{
@@ -91,12 +104,14 @@ test_that("Net1.rpt and Net1-gui.rpt are equivalent",{
 
 
 test_that("Net2.rpt reads correctly",{
-            net2res <- read.rpt("Net2.rpt")
+            net2res <- read.rpt("Net2.rpt") 
+            expect_true( is.null( net2res$energyUsage) ) 
 		})
 
 test_that("Net2-gui.rpt reads",{
 			
 			Net2res <- read.rpt("Net2-gui.rpt")
+            expect_true( is.null( Net2res$energyUsage) ) 
 		})
 
 test_that("Net2.rpt and Net2-gui.rpt are equivalent",{
@@ -136,13 +151,15 @@ test_that("Net3-nodes.rpt has correct col names",{
 test_that("Net3-gui.rpt reads",{
 			
 			n3r <- read.rpt("Net3-gui.rpt")
-			n3r <- read.rpt("Net3-nodes.rpt")
 			node_result_names <- names(n3r$nodeResults)
 			expect_equal(node_result_names[1], "ID" )
 			expect_equal(node_result_names[2], "Demand" )
 			expect_equal(node_result_names[3], "Head" )
 			expect_equal(node_result_names[4], "Pressure" )
-			expect_equal(node_result_names[5], "Pct_from_Lake" )
+			expect_equal(node_result_names[5], "Quality" )
+			
+		  expect_equal( dim(n3r$energyUsage)[1], 2)	
+			
 		})
 
 test_that("Net3.rpt and Net3-gui.rpt are equivalent",{
@@ -155,6 +172,10 @@ test_that("Net3.rpt and Net3-gui.rpt are equivalent",{
 							 "Component \"Timestamp\": 2425 string mismatches")
 		    expect_equal(length(actual),length( expected))
 		})
+
+
+
+
 context("read.rpt error checking")
 
 
@@ -186,6 +207,7 @@ test_that("net1.rpt summary is ok",
 		   expect_output( print(n1rs), "25 time steps")	
 		   expect_output( print(n1rs), "Median :\\s+113.08" )	
 		   expect_output( print(n1rs), "Max.\\s+:3.210" )	
+		   expect_output( print(n1rs), "usageFactor" )	
 		})
 
 test_that("Net2.rpt summary is ok",{
@@ -193,7 +215,7 @@ test_that("Net2.rpt summary is ok",{
 			Net2res <- read.rpt("Net2.rpt")
 			sn2r <- summary(Net2res)
 			expect_output(print(sn2r), "Fluoride")
-		    expect_output(print(sn2r), "Mean\\s+:0.2767")	
+		  expect_output(print(sn2r), "Mean\\s+:0.2767")	
 			
 			
 		})
