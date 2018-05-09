@@ -1,3 +1,11 @@
+epanetReader version 0.7.0 (released May 2018)
+=============================================
+Changes:
+* added support for reading energy usage table from rpt files 
+* switched from Kmisc::readlines to data.table::fread for faster reading of files
+  due to absence of Kmisc on CRAN 
+
+
 epanetReader version 0.6.2 (released Jan 2018)
 =============================================
 Changes:
