@@ -23,8 +23,8 @@ read_lines_wrapper <- function( file ){
 	
 	if( requireNamespace("data.table", quietly = TRUE)){
 		
-		allLines <- data.table::fread(file, sep=NULL,colClasses = "character",autostart=1,
-		                              header=F,select=1,fill=T,data.table=F)[,1]
+		allLines <- data.table::fread(file, sep=NULL,colClasses = "character", strip.white=F,
+		                              header=F,fill=T,data.table=F)[,1]
 
 		
 	} else {

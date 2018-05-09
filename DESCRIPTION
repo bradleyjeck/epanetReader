@@ -12,7 +12,7 @@ Depends:
 Suggests:
     testthat,
     epanet2toolkit,
-    data.table (>=1.11.2)
+    data.table (>= 1.11.2)
 Description: Reads water network simulation data in 'Epanet' text-based
     '.inp' and '.rpt' formats into R. Also reads results from 'Epanet-msx'.
     Provides basic summary information and plots.  The README file has a 

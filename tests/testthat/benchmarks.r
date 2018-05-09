@@ -32,9 +32,8 @@ read_char_lines <- function( file ){
 
 dtreadlines <- function(file){
 
- x <- fread(file,sep=NULL,data.table=F)
-# ,colClasses="character",autostart=1,header=F,select=1,fill=T,data.table=F)
- x[,1]
+		allLines <- data.table::fread(file, sep=NULL,colClasses = "character", strip.white=F,
+		                              header=F,fill=T,data.table=F)[,1]
 } 
 
 test_that("benchmark file reading",{
@@ -62,3 +61,26 @@ test_that("benchmark file reading",{
 		})
 
 
+test_that("benchmark file reading",{
+		library(Kmisc)
+		library(readr)
+    library(data.table)
+			
+		x <- file.path("Net3-gui.rpt")
+		
+		dtreadlines(x)
+		
+		
+		mb <- microbenchmark(
+				baseReadLines = readLines(x),
+				bje_read_char_lines = read_char_lines(x),
+		        Kmisc_readlines = Kmisc::readlines(x),
+		        readr_read_lines = readr::read_lines(x),
+                        data.table_read_lines = dtreadlines(x),
+				
+				times = 50
+		) 
+		
+		print(mb)	
+			
+		})
