@@ -68,7 +68,7 @@ epanet.rpt <- function( file){
   allLines <- read_lines_wrapper(file)
   checkRptFile( allLines ) 
 	
-	cleanLines <- cleanRptLines(allLines)
+  cleanLines <- cleanRptLines(allLines)
 
   lengthOfCleanLines <- length( cleanLines)
   
@@ -83,7 +83,8 @@ epanet.rpt <- function( file){
   ni <- 0  # node index
   li <- 0  # link index
   
-  # go through the tables  
+  # go through the tables
+  if( numTables > 0 ){  
   for( i in 1:numTables ){
     # get the section  
     sectRange <- .getSectionRange( i, resLines, lengthOfCleanLines)
@@ -108,7 +109,7 @@ epanet.rpt <- function( file){
       li <- li + 1
       linkResList[[ li ]] <- df
     }
-  }
+  }}
   
   # combine all these results together 
   nodeResDF <- do.call("rbind", nodeResList )

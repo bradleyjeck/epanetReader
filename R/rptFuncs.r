@@ -189,6 +189,7 @@ checkRptFile <- function( allLines ){
    # look for node results and link results 
    hasNodeResults <- as.logical( max( grepl("Node Results", allLines)))
    hasLinkResults <- as.logical( max( grepl("Link Results", allLines)))
+   hasEnergyResults <- as.logical( max( grepl("Energy Usage", allLines)))
 
    if( hasNodeResults == FALSE ){
   
@@ -204,9 +205,12 @@ checkRptFile <- function( allLines ){
      warning(msg)
    }
 
+   
+
 
    if( ( hasNodeResults == FALSE )& 
-       ( hasLinkResults == FALSE )  ){
+       ( hasLinkResults == FALSE )&
+       ( hasEnergyResults==FALSE )  ){
        
        # no results to read, give error 
        stop("No results to read")

@@ -179,11 +179,16 @@ test_that("Net3.rpt and Net3-gui.rpt are equivalent",{
 context("read.rpt error checking")
 
 
-test_that("missing both node and link results gives error",{
+test_that("missing node, link, and energy results gives error",{
 
   expect_error( suppressWarnings( read.rpt("Net1-noResult.rpt") ) )
 
 })
+
+test_that("missing node and link results gives warning",{
+  expect_warning( read.rpt("Net1-noLinks-noNodes.rpt") ) 
+
+}) 
 
 test_that("missing node results gives warning",{
 
