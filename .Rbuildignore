@@ -1,6 +1,6 @@
-.travis.yml
-.gitignore
-/img/
-CONTRIBUTING.txt
-/epanetReader.Rcheck/
+^\.travis\.yml$
+^\.gitignore$
+^img$
+^CONTRIBUTING.txt$
+^epanetReader.Rcheck$
 epanetReader_*.tar.gz
