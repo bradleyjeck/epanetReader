@@ -74,7 +74,6 @@ epanet.rpt <- function( file){
   
   resLines <- grep("Results", cleanLines)
   numTables <- length(resLines)
-  print(paste("numTables=",numTables))
   
   #create a lits of empty data frames to store each of these
   nodeResList <- list()  
