@@ -1,4 +1,5 @@
-# epanetReader
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Build
 Status](https://travis-ci.org/bradleyjeck/epanetReader.svg?branch=master)](https://travis-ci.org/bradleyjeck/epanetReader)
@@ -8,6 +9,8 @@ Status](https://codecov.io/gh/bradleyjeck/epanetReader/branch/master/graph/badge
 downloads](http://cranlogs.r-pkg.org/badges/epanetReader)](https://cran.r-project.org/package=epanetReader)
 [![CRAN
 version](http://www.r-pkg.org/badges/version/epanetReader)](https://cran.r-project.org/package=epanetReader)
+
+# epanetReader
 
 epanetReader is an R package for reading water network simulation data
 in Epanet’s .inp and .rpt formats into R. Some basic summary information
@@ -56,12 +59,10 @@ Retrieve summary information about the network.
 summary(n1)
 ```
 
-    ## $Title
-    ## [1] "EPANET Example Network 1"                                  
-    ## [2] "A simple example of modeling chlorine decay. Both bulk and"
-    ## [3] "wall reactions are included."                              
+    ## EPANET Example Network 1
+    ## A simple example of modeling chlorine decay. Both bulk and
+    ## wall reactions are included.
     ## 
-    ## $entryCounts
     ##             Number
     ## Junctions        9
     ## Tanks            1
@@ -71,9 +72,6 @@ summary(n1)
     ## Quality         11
     ## Coordinates     11
     ## Labels           3
-    ## 
-    ## attr(,"class")
-    ## [1] "summary.epanet.inp"
 
 A basic network plot is also available
 
@@ -81,7 +79,8 @@ A basic network plot is also available
 plot(n1)
 ```
 
-![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1inp.png)
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> ![Net 1
+plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1inp.png)
 
 The read.inp function returns an object with structure similar to the
 .inp file itself. A section in the .inp file corresponds to a named
@@ -199,7 +198,11 @@ summary(n1r)
     ##  Median :  113.08   Median :0.5700   Median :0.300  
     ##  Mean   :  245.35   Mean   :0.8070   Mean   :0.644  
     ##  3rd Qu.:  237.23   3rd Qu.:1.0075   3rd Qu.:0.755  
-    ##  Max.   : 1909.42   Max.   :2.7300   Max.   :3.210
+    ##  Max.   : 1909.42   Max.   :2.7300   Max.   :3.210  
+    ## 
+    ## Energy Usage:
+    ##   Pump usageFactor avgEfficiency kWh_per_Mgal avg_kW peak_kW dailyCost
+    ## 1    9       57.71            75       880.42  96.25   96.71         0
 
 The default plot of simulation results is a map for time period
 00:00:00. Note that the object created from the .inp file is a required
@@ -209,7 +212,8 @@ argument to make the plot.
 plot( n1r, n1)
 ```
 
-![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- --> ![Net 1 rpt
+plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
 
 In contrast to the treatment of .inp files described above, data from
 .rpt files is stored using a slightly different structure than the .rpt
@@ -225,7 +229,7 @@ using the names() function.
 names(n1r)
 ```
 
-    ## [1] "nodeResults" "linkResults"
+    ## [1] "nodeResults" "linkResults" "energyUsage"
 
 Results for a chosen time period can be retrieved using the subset
 function.
@@ -306,7 +310,10 @@ qplot( data= n1r$nodeResults,
        facets = ~ID, xlab = "Hour")  
 ```
 
-![Net 1 Cl plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1cl.png)
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+![Net 1 Cl
+plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1cl.png)
 
 ### Animation
 
