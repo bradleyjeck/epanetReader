@@ -3,4 +3,4 @@
 ^img$
 ^CONTRIBUTING.txt$
 ^epanetReader.Rcheck$
-epanetReader_*.tar.gz
+^epanetReader_*.tar.gz$

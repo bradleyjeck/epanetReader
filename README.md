@@ -78,9 +78,7 @@ A basic network plot is also available
 ``` r
 plot(n1)
 ```
-
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> ![Net 1
-plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1inp.png)
+![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1inp.png)
 
 The read.inp function returns an object with structure similar to the
 .inp file itself. A section in the .inp file corresponds to a named
@@ -211,9 +209,7 @@ argument to make the plot.
 ``` r
 plot( n1r, n1)
 ```
-
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- --> ![Net 1 rpt
-plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
+![Net 1 rpt plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
 
 In contrast to the treatment of .inp files described above, data from
 .rpt files is stored using a slightly different structure than the .rpt
@@ -310,10 +306,7 @@ qplot( data= n1r$nodeResults,
        facets = ~ID, xlab = "Hour")  
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
-
-![Net 1 Cl
-plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1cl.png)
+![Net 1 Cl plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1cl.png)
 
 ### Animation
 

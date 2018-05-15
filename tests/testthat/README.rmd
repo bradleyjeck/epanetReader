@@ -50,14 +50,14 @@ summary(n1)
 ```
 
 A basic network plot is also available
-```{r,results='hide'} 
+```{r,eval=FALSE} 
 plot(n1)
 ```
 ![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1inp.png)
 
 The read.inp function returns an object with structure similar to the .inp file
 itself. A section in the .inp file corresponds to a named entry in the list.
-These entries are accessed using the $ syntax of R.
+These entries are accessed using the \$ syntax of R.
 ```{r} 
 names(n1)
 ```
@@ -112,7 +112,7 @@ summary(n1r)
 
 The default plot of simulation results is a map for time period 00:00:00. Note that the
 object created from the .inp file is a required argument to make the plot. 
-```{r,results='hide'}
+```{r,eval=FALSE}
 plot( n1r, n1)
 ```
 ![Net 1 plot](https://github.com/bradleyjeck/epanetReader/blob/master/img/Net1rpt.png)
@@ -173,7 +173,7 @@ The ggplot2 package makes it easy to create complex graphics by allowing users
 to describe the plot in terms of the data. Continuing the Net1 example Here we
 plot chlorine concentration over time at each node in the network.  
 
-```{r,results='hide'}
+```{r,eval=FALSE}
 library(ggplot2)
 qplot( data= n1r$nodeResults,  
        x = timeInSeconds/3600, y = Chlorine, 
