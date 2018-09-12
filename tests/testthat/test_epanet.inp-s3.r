@@ -54,6 +54,14 @@ test_that("icdm.inp",{
 
 })
 
+test_that("read Net4.inp loads correct ids", {
+  Net4  <- suppressWarnings(read.inp("Net4.inp"))
+  
+  expect_equal(Net4$Junctions$ID, c("0022", "3", "004", "5"))
+  
+  expect_equal(Net4$Pipes$Node1, c("N1", "0022", "3", "0022", "004"))
+  expect_equal(Net4$Pipes$Node2, c("0022", "3", "004", "5", "5"))
+})
 
 
 context("summary.epanet.inp s3 object") 

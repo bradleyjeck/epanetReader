@@ -31,3 +31,22 @@ test_that("expanedLinkTable works for Net1",
 			
 		}
 )
+
+test_that("expanedLinkTable handles correctly node ids",
+    {
+      Net4 <- suppressWarnings(read.inp( "Net4.inp"))
+
+      # we expect that source INP contains valid coordinates for all junctions
+      expect_false(any(is.na(Net4$Coordinates$X.coord)))
+      expect_false(any(is.na(Net4$Coordinates$Y.coord)))
+      
+      ept <- expandedLinkTable(Net4$Pipes, Net4$Coordinates)
+      expect_true( is.expandedLinkTable(ept) ) 
+      
+      # assert valid coordinates in expandedLinkTable
+      expect_false(any(is.na(ept$x1)))
+      expect_false(any(is.na(ept$x2)))
+      expect_false(any(is.na(ept$y1)))
+      expect_false(any(is.na(ept$y2)))
+    }
+)
