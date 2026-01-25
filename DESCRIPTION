@@ -3,9 +3,9 @@ Type: Package
 Title: Read Epanet Files into R
 Version: 1.0.0
 Date: 2026-01-25
-Author: Bradley J. Eck [aut, cre]
+Author: Bradley Eck [aut, cre]
 Maintainer: Bradley Eck <brad@bradeck.net>
-Authors@R: c(person(given = "Bradley J.",
+Authors@R: c(person(given = "Bradley",
                     family = "Eck",
                       role = c("aut","cre"),
                       email = "brad@bradeck.net"))
@@ -26,4 +26,5 @@ Description: Reads water network simulation data in 'Epanet' text-based
 License: MIT + file LICENSE
 URL: https://github.com/bradleyjeck/epanetReader
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 7.3.3
+Encoding: UTF-8

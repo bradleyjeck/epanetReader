@@ -279,13 +279,13 @@ print.summary.epanet.rpt <- function(x,...){
 }
 
 
-#' Get link quantity at a timestep
-#'
-#' Extract a table of results for a time step
-#' @param rpt epanet.rpt object
-#' @param linkQty string with quantity to get
-#' @param Timestep string  in h:mm:ss form 
-#' @return data.frame with cols "Link" and linkQty
+# Get link quantity at a timestep
+#
+# Extract a table of results for a time step
+# @param rpt epanet.rpt object
+# @param linkQty string with quantity to get
+# @param Timestep string  in h:mm:ss form 
+# @return data.frame with cols "Link" and linkQty
 .getLinkQtyAtTime <-function( rpt, linkQty, Timestep){
 
   if( is.null(linkQty)){
@@ -324,13 +324,13 @@ print.summary.epanet.rpt <- function(x,...){
 
 
 
-#' Get junc quantity at a timestep
-#'
-#' Extract a table of results for a time step
-#' @param rpt epanet.rpt object
-#' @param juncQty string with quantity to get
-#' @param Timestep string  in h:mm:ss form 
-#' @return data.frame with cols "Node" and juncQty
+# Get junc quantity at a timestep
+#
+# Extract a table of results for a time step
+# @param rpt epanet.rpt object
+# @param juncQty string with quantity to get
+# @param Timestep string  in h:mm:ss form 
+# @return data.frame with cols "Node" and juncQty
 .getNodeQtyAtTime <- function(rpt,juncQty,Timestep){
 # validate juncQty
   if( is.null(juncQty)){ 
@@ -457,10 +457,7 @@ print.summary.epanet.rpt <- function(x,...){
 	}
 }
 
-#' plot legend for results
-#' 
-#' helper function to plot a legend for the simulation results 
-
+# helper function to plot a legend for the simulation results 
 .plotRptLegend <- function(juncQty, juncBinfo, linkQty, linkBinfo, legend2.locn){
 	# use legend with three values  for each qty  
 	if( is.null(juncBinfo)){

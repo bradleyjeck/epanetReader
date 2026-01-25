@@ -4,9 +4,15 @@
 \alias{plot.epanet.inp}
 \title{Plot Method for epanet.inp}
 \usage{
-\method{plot}{epanet.inp}(x, plot.junctions = TRUE,
-  legend.locn = "topright", plot.labels = FALSE, link.lwd = 3,
-  link.col = "black", ...)
+\method{plot}{epanet.inp}(
+  x,
+  plot.junctions = TRUE,
+  legend.locn = "topright",
+  plot.labels = FALSE,
+  link.lwd = 3,
+  link.col = "black",
+  ...
+)
 }
 \arguments{
 \item{x}{object of class epanet.inp}

@@ -4,8 +4,7 @@
 \alias{plot.expandedLinkTable}
 \title{plot an expanded link table}
 \usage{
-\method{plot}{expandedLinkTable}(x, add = FALSE, label = FALSE,
-  linewidths = 3, color = "black", ...)
+\method{plot}{expandedLinkTable}(x, add = FALSE, label = FALSE, linewidths = 3, color = "black", ...)
 }
 \arguments{
 \item{x}{object of type expandedLinkTable}

@@ -4,7 +4,9 @@
 \name{Net1rpt}
 \alias{Net1rpt}
 \title{Epanet's Net1 Example}
-\format{An object of class \code{epanet.rpt} created by \link{read.rpt}.}
+\format{
+An object of class \code{epanet.rpt} created by \link{read.rpt}.
+}
 \usage{
 Net1rpt
 }

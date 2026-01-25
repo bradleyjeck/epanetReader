@@ -1,10 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Build
-Status](https://travis-ci.org/bradleyjeck/epanetReader.svg?branch=master)](https://travis-ci.org/bradleyjeck/epanetReader)
-[![Coverage
-Status](https://codecov.io/gh/bradleyjeck/epanetReader/branch/master/graph/badge.svg)](https://codecov.io/gh/bradleyjeck/epanetReader)
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/epanetReader)](https://cran.r-project.org/package=epanetReader)
 [![CRAN
@@ -23,10 +19,10 @@ tools already existing in R to support analysis and visualization.
 
 In addition to this README page, information about epanetReader is
 available from [Environmental Modelling &
-Software](http://www.sciencedirect.com/science/article/pii/S1364815216302870)
+Software](https://doi.org/10.1016/j.envsoft.2016.06.027)
 [(pdf)](http://bradeck.net/docs/Eck2016epanetReaderEMS.pdf) and [ASCE
 Conference
-Proceedings](http://ascelibrary.org/doi/abs/10.1061/9780784479865.051)
+Proceedings](http://doi.org/10.1061/9780784479865.051)
 [(pdf)](http://bradeck.net/docs/Eck2016epanetReader-ewri.pdf).
 
 ## Installation
@@ -332,5 +328,5 @@ saveHTML(
 ## References
 
 Rossman, L. A. (2000) [Epanet 2 users
-manual](http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf). US EPA,
+manual](https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf). US EPA,
 Cincinnati, Ohio.

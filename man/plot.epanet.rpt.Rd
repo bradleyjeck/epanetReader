@@ -4,9 +4,16 @@
 \alias{plot.epanet.rpt}
 \title{Plot Simulation Results}
 \usage{
-\method{plot}{epanet.rpt}(x, inp, Timestep = "0:00:00", juncQty = "Demand",
-  linkQty = "Velocity", legend1.locn = "topright",
-  legend2.locn = "topleft", ...)
+\method{plot}{epanet.rpt}(
+  x,
+  inp,
+  Timestep = "0:00:00",
+  juncQty = "Demand",
+  linkQty = "Velocity",
+  legend1.locn = "topright",
+  legend2.locn = "topleft",
+  ...
+)
 }
 \arguments{
 \item{x}{epanet.rpt object}
