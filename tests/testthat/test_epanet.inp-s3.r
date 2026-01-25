@@ -109,3 +109,25 @@ test_that("Plot Net 3 labels",{
 			x  <- suppressWarnings(read.inp("Net3.inp"))
 			plot(x , plot.labels=T, link.lwd=1, link.col='red')
 		})
+
+
+context("inp files without [END] work")
+test_that("Net1 works without END",{
+		  n1 <- suppressWarnings(read.inp("Net1.inp"))
+		  n1noEND <- suppressWarnings(read.inp("Net1-noEND.inp"))
+		  expect_true( all.equal(n1, n1noEND))
+		}
+)
+
+test_that("Net2 works without END",{
+		  n2 <- suppressWarnings(read.inp("Net2.inp"))
+		  n2noEND <- suppressWarnings(read.inp("Net2-noEND.inp"))
+		  expect_true( all.equal(n2, n2noEND))
+		}
+)
+test_that("Net3 works without END",{
+		  n3 <- suppressWarnings(read.inp("Net3.inp"))
+		  n3noEND <- suppressWarnings(read.inp("Net3-noEND.inp"))
+		  expect_true( all.equal(n3, n3noEND))
+		}
+)

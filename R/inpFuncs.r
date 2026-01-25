@@ -30,6 +30,9 @@
   }
   # file lines starting with [ aka taglines  
   tl <- grep("\\s*\\[",allLines)
+  # treat the last line of the file as a tagline in case 
+  # the usual [END] is missing from the end of the file
+  tl <- c(tl, length(allLines))
   #choose the first one after begin 
   end <- tl[ which(tl>begin)[1] ] - 1 
 
