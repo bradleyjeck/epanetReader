@@ -18,5 +18,5 @@ Wrapper function for different implementations of
 readlines functions
 }
 \details{
-calls Kmisc::readlines if available and base::readLines otherwise
+calls data.table::fread if available and base::readLines otherwise
 }

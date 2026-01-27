@@ -84,5 +84,5 @@ plot(n1)
 \references{
 Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 
-http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
+https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
 }

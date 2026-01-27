@@ -131,3 +131,12 @@ test_that("Net3 works without END",{
 		  expect_true( all.equal(n3, n3noEND))
 		}
 )
+
+
+context("handle missing file gracefully")
+test_that("error on no file",{
+
+		  expect_error( read.inp("some-random-file.inp") )
+}
+)
+
