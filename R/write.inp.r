@@ -22,6 +22,7 @@
 #' write.inp(Net1, "Net1-fromR.inp")
 #' n1 <- read.inp("Net1-fromR.inp")
 #' all.equal(Net1, n1)
+#' file.remove("Net1-fromR.inp") #clean-up the written file 
 #' 
 
 write.inp <- function(x, file){

@@ -77,7 +77,7 @@
 #' 
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
 #' 
-#' http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
+#' https://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
 #' 
 #' @examples
 #' # path to Net1.inp example file included with this package
@@ -187,12 +187,19 @@ summary.epanet.inp <- function( object, ... ){
 	
 }
 
-print.summary.epanet.inp <- function(object, ...){
+#' Print Method for epanet.inp summaries
+#'
+#' Prints summary info about the network
+#'
+#' @param x object of class summary.epanet.inp
+#' @param ... further arguments
+#' @export
+print.summary.epanet.inp <- function(x, ...){
 	
-  cat( object$Title, sep = "\n")
+  cat( x$Title, sep = "\n")
   cat( "\n")
   
-  print( object$entryCounts)
+  print( x$entryCounts)
 }
 
 #' Plot .inp Links

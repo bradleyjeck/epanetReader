@@ -15,8 +15,13 @@
 #' @return character vector where each entry corresponds to 
 #' a line in the file.  
 #' @details
-#' calls Kmisc::readlines if available and base::readLines otherwise 
+#' calls data.table::fread if available and base::readLines otherwise 
 read_lines_wrapper <- function( file ){
+
+	if (!base::file.exists(file)){
+		msg <- paste0("File '", file, "' does not exist.")
+		stop(msg)
+	}
 	
 	sz <- base::file.info(file)$size
 	size_MB <- sz / 1e6
